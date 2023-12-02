@@ -107,7 +107,7 @@ namespace AdventOfCodeNet8
       this.ResumeLayout(false);
       this.PerformLayout();
 
-      tabControl1.SelectTab(1);
+      tabControl1.SelectTab(8);
     }
 
     private void MainForm_Shown(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace AdventOfCodeNet8
       //  "2015 1 1"  // Year Day Part
       //  "2015 25 2" // Year Day Part
       int day = Int32.Parse(chunks[1]);
-      Type type = Type.GetType(String.Format("AdventOfCode._{0}.Day_{1:00}.Part_{2}", chunks[0], day, chunks[2]));
+      Type type = Type.GetType(String.Format("AdventOfCodeNet8._{0}.Day_{1:00}.Part_{2}", chunks[0], day, chunks[2]));
       RunDay(Activator.CreateInstance(type) as Days, String.Format(@".\{0}\Day_{1:00}\Input.txt", chunks[0], day));
     }
 

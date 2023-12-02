@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -74,9 +75,12 @@ namespace AdventOfCodeNet8._2016.Day_05
 
         foreach (var c in chars)
         {
-          Console.Write(c);
+          Console.WriteLine(c);
+          Debugger.Log(0, "", c.ToString());
         }
+        Debugger.Log(0, "", "\r\n");
         Console.WriteLine();
+
         result = new string(chars);
         if (!(result.Contains("_"))) break;
       }
