@@ -107,7 +107,15 @@ namespace AdventOfCodeNet8
       this.ResumeLayout(false);
       this.PerformLayout();
 
-      tabControl1.SelectTab(8);
+      //tabControl1.SelectTab(0); // 2015
+      //tabControl1.SelectTab(1); // 2016
+      //tabControl1.SelectTab(2); // 2017
+      //tabControl1.SelectTab(3); // 2018
+      //tabControl1.SelectTab(4); // 2019
+      //tabControl1.SelectTab(5); // 2020
+      //tabControl1.SelectTab(6); // 2021
+      //tabControl1.SelectTab(7); // 2022
+      tabControl1.SelectTab(8); // 2023
     }
 
     private void MainForm_Shown(object sender, EventArgs e)

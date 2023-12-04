@@ -77,7 +77,7 @@ namespace AdventOfCodeNet8._2023.Day_01
           }
         }
 
-        //seceond digit
+        //second digit
         for (int i = line.Length - 1; i >= 0; i--)
         {
           if (Int32.TryParse(line[i].ToString(), out var num))
