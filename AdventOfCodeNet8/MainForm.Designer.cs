@@ -32,6 +32,7 @@
       tabPage1 = new TabPage();
       statusStrip1 = new StatusStrip();
       toolStripStatusLabel1 = new ToolStripStatusLabel();
+      tsslConvertInstructions = new ToolStripStatusLabel();
       tabControl1.SuspendLayout();
       statusStrip1.SuspendLayout();
       SuspendLayout();
@@ -59,7 +60,7 @@
       // statusStrip1
       // 
       statusStrip1.ImageScalingSize = new Size(32, 32);
-      statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+      statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, tsslConvertInstructions });
       statusStrip1.Location = new Point(0, 669);
       statusStrip1.Name = "statusStrip1";
       statusStrip1.Size = new Size(947, 42);
@@ -71,6 +72,13 @@
       toolStripStatusLabel1.Name = "toolStripStatusLabel1";
       toolStripStatusLabel1.Size = new Size(237, 32);
       toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+      // 
+      // tsslConvertInstructions
+      // 
+      tsslConvertInstructions.Name = "tsslConvertInstructions";
+      tsslConvertInstructions.Size = new Size(44, 32);
+      tsslConvertInstructions.Text = "(+)";
+      tsslConvertInstructions.Click += tsslConvertInstructions_Click;
       // 
       // MainForm
       // 
@@ -96,5 +104,6 @@
     private TabPage tabPage1;
     private StatusStrip statusStrip1;
     private ToolStripStatusLabel toolStripStatusLabel1;
+    private ToolStripStatusLabel tsslConvertInstructions;
   }
 }

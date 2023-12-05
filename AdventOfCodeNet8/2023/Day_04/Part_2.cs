@@ -147,7 +147,6 @@ namespace AdventOfCodeNet8._2023.Day_04
 
         int winsCount = (from mn in myNumbers where winningNumbers.Contains(mn) select mn).Count();
 
-        int score = 0;
         for (int t = 0; t < tickets[ticketID]; t++)
         {
           int newTicketID = ticketID + 1;

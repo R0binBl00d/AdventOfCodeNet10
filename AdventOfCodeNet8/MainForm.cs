@@ -59,7 +59,7 @@ namespace AdventOfCodeNet8
             btn.Location = new Point(x, y);
 
             btn.Name = String.Format("button{0}_{1}_{2}", year, day, part);
-            btn.Size = new System.Drawing.Size(150,50);
+            btn.Size = new System.Drawing.Size(150, 50);
             btn.TabIndex = 0;
             btn.Tag = String.Format("{0} {1} {2}", year, day, part);
             btn.Text = String.Format("Day {0:00} {1}", day, part);
@@ -145,13 +145,22 @@ namespace AdventOfCodeNet8
       String result = day.Execute();
       sw.Stop();
 
-      MessageBox.Show(result, sw.Elapsed.ToString());
-
       if (!String.IsNullOrEmpty(result))
       {
         Clipboard.Clear();
         Clipboard.SetText(result);
       }
+
+      toolStripStatusLabel1.Text = String.Format("{0}\t Solution:\t \"{1}\"\t Calculation Time: '{2}'",
+        DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss"), result, sw.Elapsed);
+
+      //MessageBox.Show(result, sw.Elapsed.ToString());
+    }
+
+    private void tsslConvertInstructions_Click(object sender, EventArgs e)
+    {
+      var fci = new FormConvertInstructions();
+      fci.ShowDialog();
     }
   }
 }
