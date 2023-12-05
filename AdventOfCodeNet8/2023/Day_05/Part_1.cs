@@ -250,6 +250,9 @@ namespace AdventOfCodeNet8._2023.Day_05
           mapDict[Emaps.humidity_to_location].Convert(humidity);
 
         locationValues.Add(location);
+
+        Debugger.Log(1, "seed-path", String.Format("\nseed-path: '{0}':'{1}':'{2}':'{3}':'{4}':'{5}':'{6}':'{7}'\n",
+          seed, soil, fertilizer, water, light, temperature, humidity, location));
       }
       result = locationValues.Min().ToString();
       return result;

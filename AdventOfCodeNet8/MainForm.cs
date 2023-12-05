@@ -154,7 +154,7 @@ namespace AdventOfCodeNet8
       toolStripStatusLabel1.Text = String.Format("{0}\t Solution:\t \"{1}\"\t Calculation Time: '{2}'",
         DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss"), result, sw.Elapsed);
 
-      //MessageBox.Show(result, sw.Elapsed.ToString());
+      MessageBox.Show(result, sw.Elapsed.ToString());
     }
 
     private void tsslConvertInstructions_Click(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AdventOfCodeNet8._2023.Day_05
 {
@@ -190,6 +191,9 @@ namespace AdventOfCodeNet8._2023.Day_05
     /// </summary>
     /// <returns>
     /// 46440080 answer too high (after 40 minutes)
+    /// 46294175 (after parallel ForEach 10:26 minutes)
+    /// 46294175 (11:48:23 telling him to use all 24cores, will try again without telling him this)
+    /// several test later ... not telling him to use all 24 cores is faster ??!
     /// </returns>
     public override string Execute()
     {
@@ -275,12 +279,21 @@ namespace AdventOfCodeNet8._2023.Day_05
       List<long> locationValues = new List<long>();
       long minLocation = long.MaxValue;
 
-      foreach (var seed in seeds)
+      //int totalSeeds = 0;
+      object minLocationLock = new object();
+
+      //ParallelOptions parallelOptions = new ParallelOptions
+      //{
+      //  MaxDegreeOfParallelism = Environment.ProcessorCount // Or a specific number like 24
+      //};
+
+      //Parallel.ForEach(seeds, parallelOptions, (seed) =>
+      Parallel.ForEach(seeds, (seed) =>
       {
         Debugger.Log(1, "seed", String.Format("\n{0} : {1}\n", seed.Key, seed.Value));
         for (long l = 0; l < seed.Value; l++)
         {
-          long lSeed = seed.Value + l;
+          long lSeed = seed.Key + l;
 
           var soil =
             mapDict[Emaps.seed_to_soil].Convert(lSeed);
@@ -297,9 +310,15 @@ namespace AdventOfCodeNet8._2023.Day_05
           var location =
             mapDict[Emaps.humidity_to_location].Convert(humidity);
 
-          if (location < minLocation) minLocation = location;
+          lock (minLocationLock)
+          {
+            if (location < minLocation) minLocation = location;
+          }
         }
-      }
+      });
+
+      //Debugger.Log(1, "seed", String.Format("\nTotalSeeds: '{0}'\n", totalSeeds));
+
       result = minLocation.ToString();
       return result;
     }
