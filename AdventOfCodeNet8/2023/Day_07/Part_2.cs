@@ -148,8 +148,8 @@ namespace AdventOfCodeNet8._2023.Day_07
     /// </summary>
     /// <returns>
     /// 245693330 answer is too high
-    /// 246046768 can't be is last one was already too high
-    /// 
+    /// 246046768 can't be !! the last one was already too high
+    /// 245576185
     /// </returns>
     public override string Execute()
     {
@@ -193,7 +193,7 @@ namespace AdventOfCodeNet8._2023.Day_07
 
     static Dictionary<char, int> cardScores = new Dictionary<char, int>
     {
-        { 'A', 14 }, { 'K', 13 }, { 'Q', 12 }, { 'J', 1 }, { 'T', 10 },
+        { 'A', 13 }, { 'K', 12 }, { 'Q', 11 }, { 'J', 1 }, { 'T', 10 },
         { '9', 9 }, { '8', 8 }, { '7', 7 }, { '6', 6 }, { '5', 5 },
         { '4', 4 }, { '3', 3 }, { '2', 2 }
     };
@@ -239,32 +239,32 @@ namespace AdventOfCodeNet8._2023.Day_07
         if (counts.Any(c => c.Count == 5))
         {
           HandType = eHandType.Five_of_a_Kind;
-          score = 0x600000 + handScore;
+          score = handScore + cathegory * 6;
         }
         else if (counts.Any(c => c.Count == 4))
         {
           HandType = eHandType.Quad;
-          score = 0x500000 + handScore;
+          score = handScore + cathegory * 5;
         }
         else if (counts.Any(c => c.Count == 3) && counts.Any(c => c.Count == 2))
         {
           HandType = eHandType.Full_House;
-          score = 0x400000 + handScore;
+          score = handScore + cathegory * 4;
         }
         else if (counts.Any(c => c.Count == 3))
         {
           HandType = eHandType.Three_of_a_Kind;
-          score = 0x300000 + handScore;
+          score = handScore + cathegory * 3;
         }
         else if (counts.Count(c => c.Count == 2) == 2)
         {
           HandType = eHandType.Two_Pairs;
-          score = 0x200000 + handScore;
+          score = handScore + cathegory * 2;
         }
         else if (counts.Any(c => c.Count == 2))
         {
           HandType = eHandType.One_Pair;
-          score = 0x100000 + handScore;
+          score = handScore + cathegory * 1;
         }
         else
         {
@@ -314,7 +314,7 @@ namespace AdventOfCodeNet8._2023.Day_07
                 break;
               case eHandType.Two_Pairs:// 1 J
                 this.HandType = eHandType.Full_House;
-                this.Score += cathegory;
+                this.Score += 2 * cathegory;
                 break;
               case eHandType.Three_of_a_Kind:// 1 J
                 this.HandType = eHandType.Quad;
