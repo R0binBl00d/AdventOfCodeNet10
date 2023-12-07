@@ -40,9 +40,11 @@ namespace AdventOfCodeNet8
         while (input.Length > LineLength)
         {
           int spacepos = input.Substring(0, LineLength).LastIndexOf(' ');
+          sb.Append("    ");
           sb.AppendLine(input.Substring(0, spacepos).Trim());
           input = input.Substring(spacepos + 1);
         }
+        sb.Append("    ");
         sb.AppendLine(input);
       }
       rtbOutput.Text = sb.ToString();
