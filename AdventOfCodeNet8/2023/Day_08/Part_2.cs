@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -114,7 +115,10 @@ namespace AdventOfCodeNet8._2023.Day_08
     */
     /// </summary>
     /// <returns>
+    /// https://www.calculatorsoup.com/calculators/math/lcm.php
     /// 
+    /// LCM = calcLCM(12643 14257 15871 18023 19637 16409)
+    /// 11795205644011
     /// </returns>
     public override string Execute()
     {
@@ -122,6 +126,8 @@ namespace AdventOfCodeNet8._2023.Day_08
 
       var instructions = "";
       var locations = new Dictionary<string, KeyValuePair<string, string>>();
+
+      long lcm = 0;
 
       foreach (var line in Lines)
       {
@@ -137,24 +143,43 @@ namespace AdventOfCodeNet8._2023.Day_08
       }
 
       int reachedDestination = 0;
+      //long steps = 3993734991;
       long steps = 0;
 
       var startPoins = from l in locations where l.Key[2] == 'A' select l;
       var endPoins = from l in locations where l.Key[2] == 'Z' select l;
 
       List<string> currentLocation = new List<string>(startPoins.Count());
-      for(int i = 0; i < startPoins.Count(); i++)
+      bool[] bReachZ = new bool[startPoins.Count()];
+      var Cycles = new List<long>(startPoins.Count());
+
+      for (int i = 0; i < startPoins.Count(); i++)
       {
         currentLocation.Add(startPoins.ElementAt(i).Key);
+        Cycles.Add(0);
+        bReachZ[i] = false;
       }
+      //currentLocation.Add("VBT");
+      //currentLocation.Add("LMQ");
+      //currentLocation.Add("KLJ");
+      //currentLocation.Add("MVT");
+      //currentLocation.Add("MND");
+      //currentLocation.Add("FJS");
 
-      while (reachedDestination < startPoins.Count())
+      while (bReachZ.Any(cy => cy == false))
+      //while (reachedDestination < currentLocation.Count)
       {
         foreach (char c in instructions)
         {
           reachedDestination = 0;
-          for (int cl=0; cl < currentLocation.Count; cl++)
+
+          // doing this here, I know its meant to be in the end
+          steps++;
+
+          for (int cl = 0; cl < currentLocation.Count; cl++)
           {
+            //if (bReachZ[cl] == true) continue;
+
             switch (c)
             {
               case 'L':
@@ -164,17 +189,72 @@ namespace AdventOfCodeNet8._2023.Day_08
                 currentLocation[cl] = locations[currentLocation[cl]].Value;
                 break;
             }
-            steps++;
-            if (endPoins.Any(ep => ep.Key == currentLocation[cl]))
+            if (currentLocation[cl][2] == 'Z')
             {
-              reachedDestination ++;
-              break;
+              if (endPoins.Any(ep => ep.Key == currentLocation[cl]))
+              {
+                bReachZ[cl] = true;
+
+                if (Cycles.All(cy => cy != 0) && steps % Cycles[cl] != 0)
+                {
+                  Debugger.Break();
+                }
+                else
+                {
+                  if (Cycles[cl] == 0) Cycles[cl] = steps;
+                }
+                reachedDestination++;
+              }
             }
+          }
+
+          // steps actually are only finished here. to find the cycle, I will alredy count at the start
+          //steps++;
+          if (steps % 10_000_000 == 0)
+          {
+            Debugger.Log(1, "none", String.Format("\nSteps: '{0}'\n", steps));
           }
         }
       }
-      result = steps.ToString();
+      // Calculate LCM
+      /// LCM = calcLCM(12643 14257 15871 18023 19637 16409)
+      /// 11795205644011
+
+      lcm = Cycles.Aggregate((a, b) => LCM(a, b));
+
+      result = lcm.ToString();
       return result;
+    }
+
+    /// <summary>
+    /// method uses the GCD to calculate the least common multiple of two numbers.
+    /// </summary>
+    private long LCM(long a, long b)
+    {
+      long gcd = GCD(a, b);
+      long ret = a / gcd * b;
+      Debugger.Log(1, "lcm", String.Format(
+        "\na '{0}', b '{1}', gcd '{2}', a/gcd '{3}', a/gcd*b '{4}'\n",
+        a, b, gcd, a/gcd, ret));
+      return ret;
+    }
+
+    /// <summary>
+    /// method implements the Euclidean algorithm to find the greatest common divisor.
+    /// 
+    ///  For two numbers, the GCD is the largest number that divides both of them 
+    ///  without leaving a remainder. The Euclidean algorithm is a common method 
+    ///  for finding the GCD.
+    /// </summary>
+    private long GCD(long a, long b)
+    {
+      while (a != 0)
+      {
+        long temp = a;
+        a = b % a;
+        b = temp;
+      }
+      return b;
     }
   }
 }
