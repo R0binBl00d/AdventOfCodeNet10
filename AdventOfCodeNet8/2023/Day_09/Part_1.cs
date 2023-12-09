@@ -117,7 +117,7 @@ namespace AdventOfCodeNet8._2023.Day_09
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 1974913025
     /// </returns>
     public override string Execute()
     {
@@ -149,14 +149,16 @@ namespace AdventOfCodeNet8._2023.Day_09
       return (values.ElementAt(values.Count() - 1) + PredictNextOne(CreateLineBelow(values)));
     }
 
-    private IEnumerable<long> CreateLineBelow(IEnumerable<long> values)
+    private List<long> CreateLineBelow(IEnumerable<long> values)
     {
+      List<long> result = new List<long>();
+
       int vCount = values.Count();
       if (vCount > 1)
       {
         for (int i = 1; i < vCount; i++)
         {
-          yield return (values.ElementAt(i) - values.ElementAt(i - 1));
+          result.Add(values.ElementAt(i) - values.ElementAt(i - 1));
         }
       }
       else
@@ -164,6 +166,7 @@ namespace AdventOfCodeNet8._2023.Day_09
         Debugger.Log(1, "", "why?");
         Debugger.Break();
       }
+      return result;
     }
   }
 }
