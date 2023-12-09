@@ -126,9 +126,9 @@ namespace AdventOfCodeNet8._2023.Day_09
       long totalSum = 0;
       object totalSumLock = new object();
 
-      //Parallel.ForEach(Lines, (line) =>
-      //{
-      foreach (var line in Lines)
+      Parallel.ForEach(Lines, (line) =>
+      {
+        //foreach (var line in Lines)
       {
         var matches = Regex.Matches(line, "-?\\d+");
         var values = from m in matches select long.Parse(m.Value);
@@ -138,7 +138,7 @@ namespace AdventOfCodeNet8._2023.Day_09
           totalSum += nextValue;
         }
       }
-      //});
+      });
       result = totalSum.ToString();
       return result;
     }
