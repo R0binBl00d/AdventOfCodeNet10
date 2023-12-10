@@ -158,6 +158,24 @@ namespace AdventOfCodeNet8._2023.Day_09
       long totalSum = 0;
       object totalSumLock = new object();
 
+      #region test
+
+      var matches = Regex.Matches(Lines[1], "-?\\d+");
+      var values = from m in matches select long.Parse(m.Value);
+
+      Debugger.Log(1, "", "\nCreateLineBelow\n");
+      foreach (var value1 in CreateLineBelow(values))
+      {
+        Debugger.Log(1, "", String.Format("{0}; ", value1));
+      }
+      Debugger.Log(1, "", "\nCreateLineBelowYield\n");
+      foreach (var valueY in CreateLineBelowYield(values))
+      {
+        Debugger.Log(1, "", String.Format("{0}; ", valueY));
+      }
+
+      #endregion test
+
       Parallel.ForEach(Lines, (line) =>
       {
         //foreach (var line in Lines)
@@ -181,24 +199,23 @@ namespace AdventOfCodeNet8._2023.Day_09
       return (values.ElementAt(0) - PredictPreviousOne(CreateLineBelow(values)));
     }
 
-    private List<long> CreateLineBelow(IEnumerable<long> values)
+    private IEnumerable<long> CreateLineBelowYield(IEnumerable<long> values)
     {
-      List<long> result = new List<long>();
-
       int vCount = values.Count();
-      if (vCount > 1)
+      for (int i = 1; i < vCount; i++)
       {
-        for (int i = 1; i < vCount; i++)
-        {
-          result.Add(values.ElementAt(i) - values.ElementAt(i - 1));
-        }
+        yield return (values.ElementAt(i) - values.ElementAt(i - 1));
       }
-      else
+    }
+    private IEnumerable<long> CreateLineBelow(IEnumerable<long> values)
+    {
+      int vCount = values.Count();
+      var list = new List<long>();
+      for (int i = 1; i < vCount; i++)
       {
-        Debugger.Log(1, "", "why?");
-        Debugger.Break();
+        list.Add(values.ElementAt(i) - values.ElementAt(i - 1));
       }
-      return result;
+      return list;
     }
   }
 }

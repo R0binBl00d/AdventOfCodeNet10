@@ -12,7 +12,7 @@ namespace AdventOfCodeNet8._2023.Day_11
   {
     /// <summary>
     /*
-    https://adventofcode.com/2023/day/1
+    https://adventofcode.com/2023/day/11
     */
     /// </summary>
     /// <returns>
