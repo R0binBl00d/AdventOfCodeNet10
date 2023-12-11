@@ -128,7 +128,7 @@ namespace AdventOfCodeNet8._2023.Day_11
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 9329143
     /// </returns>
     public override string Execute()
     {
@@ -142,27 +142,43 @@ namespace AdventOfCodeNet8._2023.Day_11
       // map Space
       for (int y = 0; y < height; y++)
       {
-        space.Add(new List<char>());
+        var row = new List<char>();
         for (int x = 0; x < width; x++)
         {
-          space[y].Add(Lines[y][x]);
+          row.Add(Lines[y][x]);
         }
+        space.Add(row);
         if (!Lines[y].Contains('#')) // expand "horizontal" if no galaxy
         {
-          space.Add(space[y]);
+          space.Add(row);
         }
       }
 
       // Expand "vertical"
-      for (int x = width-1; x >= 0; x--)
+      for (int x = width - 1; x >= 0; x--)
       {
-        if(Lines.All(l => l[x] == '.')) // expand "vertical" if no galaxy
+        if (Lines.All(l => l[x] == '.')) // expand "vertical" if no galaxy
         {
           space.ForEach(w => w.Insert(x, '.'));
         }
       }
 
+      height = space.Count();
+      width = space[0].Count();
+
+      var galaxies = new List<Point>();
+      for (int y = 0; y < height; y++)
+      {
+        for (int x = 0; x < width; x++)
+        {
+          if (space[y][x] == '#') galaxies.Add(new Point(x, y));
+        }
+      }
+
+      int sum = CalcDistance(galaxies);
+
       #region Plot
+      /*
       Debugger.Log(1, "", "\n");
       for (int y = 0; y < height; y++)
       {
@@ -172,9 +188,35 @@ namespace AdventOfCodeNet8._2023.Day_11
         }
         Debugger.Log(1, "", "\n");
       }
+      */
       #endregion Plot
 
+      result = sum.ToString();
       return result;
+    }
+
+    private int index = 1;
+
+    private int CalcDistance(List<Point> galaxies)
+    {
+      int sum = 0;
+      //Debugger.Log(1, "", "\n");
+      for (int i = 1; i < galaxies.Count; i++)
+      {
+        int distance_x = Math.Max(galaxies[i].X, galaxies[0].X) - Math.Min(galaxies[i].X, galaxies[0].X);
+        int distance_y = Math.Max(galaxies[i].Y, galaxies[0].Y) - Math.Min(galaxies[i].Y, galaxies[0].Y);
+        sum += distance_x + distance_y;
+        //Debugger.Log(1, "", String.Format("{0}: Dis_x_y:'{1}:{2}', Point {3:00#}x{4:00#}, Point {5:00#}x{6:00#}\n", index++, distance_x, distance_y,
+        //  galaxies[0].Y, galaxies[0].X,
+        //  galaxies[i].Y, galaxies[i].X));
+      }
+
+      if (galaxies.Count > 2)
+      {
+        galaxies.RemoveAt(0);
+        sum += CalcDistance(galaxies);
+      }
+      return sum;
     }
   }
 }
