@@ -85,7 +85,7 @@ namespace AdventOfCodeNet8._2023.Day_03
 
       int sum = 0;
 
-      string pattern = @"\b\d+\b"; // negative numbers removed -> old ->  @"-?\b\d+\b";
+      string pattern = @"\d+"; // negative numbers removed -> old ->  @"-?\b\d+\b";
       for (int y = 0; y < height; y++)
       {
         MatchCollection matches = Regex.Matches(Lines[y], pattern);
