@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -236,15 +237,25 @@ namespace AdventOfCodeNet8._2023.Day_11
       //Debugger.Log(1, "", "\n");
       for (int i = 1; i < galaxies.Count; i++)
       {
-        long distance_x = Math.Max(galaxies[i].X, galaxies[0].X) - Math.Min(galaxies[i].X, galaxies[0].X);
-        long gap_x = (from v in vertical__Multipliers where v > Math.Min(galaxies[i].X, galaxies[0].X) && v < Math.Max(galaxies[i].X, galaxies[0].X) select v).Count();
+        int distance_x = Math.Max(galaxies[i].X, galaxies[0].X) - Math.Min(galaxies[i].X, galaxies[0].X);
+        int gap_x = (from v in vertical__Multipliers where v > Math.Min(galaxies[i].X, galaxies[0].X) && v < Math.Max(galaxies[i].X, galaxies[0].X) select v).Count();
         distance_x = distance_x - gap_x + (gap_x * multiplier);
 
-        long distance_y = Math.Max(galaxies[i].Y, galaxies[0].Y) - Math.Min(galaxies[i].Y, galaxies[0].Y);
-        long gap_y = (from h in horizontalMultipliers where h > Math.Min(galaxies[i].Y, galaxies[0].Y) && h < Math.Max(galaxies[i].Y, galaxies[0].Y) select h).Count();
+        int distance_y = Math.Max(galaxies[i].Y, galaxies[0].Y) - Math.Min(galaxies[i].Y, galaxies[0].Y);
+        int gap_y = (from h in horizontalMultipliers where h > Math.Min(galaxies[i].Y, galaxies[0].Y) && h < Math.Max(galaxies[i].Y, galaxies[0].Y) select h).Count();
         distance_y = distance_y - gap_y + (gap_y * multiplier);
 
-        sum += distance_x + distance_y;
+        //try
+        //{
+        //  checked
+        //  {
+            sum += distance_x + distance_y;
+        //  }
+        //}
+        //catch (Exception e)
+        //{
+        //  Debugger.Break();
+        //}
         //Debugger.Log(1, "", String.Format("{0}: Dis_x_y:'{1}:{2}', Point {3:00#}x{4:00#}, Point {5:00#}x{6:00#}\n", index++, distance_x, distance_y,
         //  galaxies[0].Y, galaxies[0].X,
         //  galaxies[i].Y, galaxies[i].X));
@@ -253,7 +264,10 @@ namespace AdventOfCodeNet8._2023.Day_11
       if (galaxies.Count > 2)
       {
         galaxies.RemoveAt(0);
-        sum += CalcDistance(galaxies);
+        //checked
+        //{
+          sum += CalcDistance(galaxies);
+        //}
       }
       return sum;
     }
