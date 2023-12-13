@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCodeNet8._2023.Day_12
 {
@@ -135,8 +138,103 @@ namespace AdventOfCodeNet8._2023.Day_12
     {
       string result = "";
 
-      
+      #region Testing
+      Lines.Clear();
+      Lines.Add("???.### 1,1,3");
+      Lines.Add(".??..??...?##. 1,1,3");
+      Lines.Add("?#?#?#?#?#?#?#? 1,3,1,6");
+      Lines.Add("????.#...#... 4,1,1");
+      Lines.Add("????.######..#####. 1,6,5");
+      Lines.Add("?###???????? 3,2,1");
+      #endregion Testing
+
+      var totalVariations = 0;
+
+      foreach (var line in Lines)
+      {
+        var chunks = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string springs = chunks[0];
+        var brokenSprings = from b in chunks[1].Split(',') select Int32.Parse(b);
+
+        if ((brokenSprings.Sum() + brokenSprings.Count() - 1) == springs.Length) // there is only one way to arrange
+        {
+          // check anyway
+          StringBuilder sb = new StringBuilder();
+          foreach (var brs in brokenSprings)
+          {
+            sb.Append('#', brs);
+            sb.Append('.');
+          }
+          string newStr = sb.ToString().Substring(0, sb.Length - 1);
+          if (StringComparesEnaugh(newStr, springs))
+          {
+            totalVariations++;
+          }
+          else
+          {
+            Debugger.Break(); // FAIL!!
+          }
+        }
+        else // there are several ways to arrange
+        {
+          var matches = Regex.Matches(springs, @"[\??+#?+]+");
+          // check if we have the same amount of block
+          if (matches.Count() > brokenSprings.Count())
+          {
+            // TODO some of them need to be discarded
+            Debugger.Break();
+          }
+          else if (matches.Count() == brokenSprings.Count())
+          {
+            int variations = 0;
+
+            // every spring needs to be assigned
+            for (int i = 0; i < brokenSprings.Count(); i++)
+            {
+              if (matches[i].Length < brokenSprings.ElementAt(i))
+              {
+                Debugger.Break(); // FAIL!!
+              }
+              else if (matches[i].Length == brokenSprings.ElementAt(i))
+              {
+                continue;
+              }
+              else
+              {
+                variations += matches[i].Length - brokenSprings.ElementAt(i) + 1;
+              }
+            }
+            if (variations == 0) // all are obvious, so there is only one arrangement 
+            {
+              totalVariations++;
+            }
+            else
+            {
+              totalVariations += variations;
+            }
+          }
+          else if (matches.Count() < brokenSprings.Count())
+          {
+            // TODO this is the most interesting part !! line up the obvious and care about the rest.
+
+            // line up the obvious
+          }
+        }
+      }
+
       return result;
+    }
+
+    private bool StringComparesEnaugh(string newStr, string springs)
+    {
+      if (newStr.Length != springs.Length) return false;
+
+      bool comparisonPassed = true;
+      for (int i = 0; i < newStr.Length; i++)
+      {
+        comparisonPassed &= (newStr[i] == springs[i] || springs[i] == '?');
+      }
+      return comparisonPassed;
     }
   }
 }
