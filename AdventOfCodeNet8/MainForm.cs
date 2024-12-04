@@ -11,6 +11,8 @@ namespace AdventOfCodeNet8
       InitializeComponent();
     }
 
+    private List<TabPage> tabPages;
+
     private void MainForm_Load(object sender, EventArgs e)
     {
       // Create all Buttons !!
@@ -19,7 +21,7 @@ namespace AdventOfCodeNet8
 
       this.tabControl1.Controls.Clear();
 
-      List<TabPage> tabPages = new List<TabPage>();
+      tabPages = new List<TabPage>();
 
       int x, y;
 
@@ -29,7 +31,7 @@ namespace AdventOfCodeNet8
       int y_bottom = 550;
       int y_offset = 60;
 
-      for (int year = 2015; year <= 2023; year++)
+      for (int year = 2015; year <= 2024; year++)
       {
         // new TabPage
         TabPage tp = new System.Windows.Forms.TabPage();
@@ -106,7 +108,11 @@ namespace AdventOfCodeNet8
       this.tabControl1.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
+    }
 
+    private void MainForm_Shown(object sender, EventArgs e)
+    {
+      toolStripStatusLabel1.Text = "";
       //tabControl1.SelectTab(0); // 2015
       //tabControl1.SelectTab(1); // 2016
       //tabControl1.SelectTab(2); // 2017
@@ -115,12 +121,11 @@ namespace AdventOfCodeNet8
       //tabControl1.SelectTab(5); // 2020
       //tabControl1.SelectTab(6); // 2021
       //tabControl1.SelectTab(7); // 2022
-      tabControl1.SelectTab(8); // 2023
-    }
+      //tabControl1.SelectTab(8); // 2023
+      tabControl1.SelectTab(9); // 2024
 
-    private void MainForm_Shown(object sender, EventArgs e)
-    {
-      toolStripStatusLabel1.Text = "";
+      // last tab
+      //this.tabControl1.SelectedTab = tabPages[tabPages.Count - 1];
     }
 
     #endregion not interesting
