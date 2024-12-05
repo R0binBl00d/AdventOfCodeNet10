@@ -44,6 +44,7 @@
       toolStripSeparator2 = new ToolStripSeparator();
       tslRecalculate = new ToolStripLabel();
       toolStripSeparator3 = new ToolStripSeparator();
+      tsslCodeGenerator = new ToolStripLabel();
       ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
       splitContainer1.Panel1.SuspendLayout();
       splitContainer1.Panel2.SuspendLayout();
@@ -135,7 +136,7 @@
       // toolStrip1
       // 
       toolStrip1.ImageScalingSize = new Size(32, 32);
-      toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1, toolStripSeparator1, toolStripTextBox1, toolStripSeparator2, tslRecalculate, toolStripSeparator3 });
+      toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabel1, toolStripSeparator1, toolStripTextBox1, toolStripSeparator2, tslRecalculate, toolStripSeparator3, tsslCodeGenerator });
       toolStrip1.Location = new Point(0, 0);
       toolStrip1.Name = "toolStrip1";
       toolStrip1.Size = new Size(1015, 39);
@@ -177,6 +178,13 @@
       toolStripSeparator3.Name = "toolStripSeparator3";
       toolStripSeparator3.Size = new Size(6, 39);
       // 
+      // tsslCodeGenerator
+      // 
+      tsslCodeGenerator.Name = "tsslCodeGenerator";
+      tsslCodeGenerator.Size = new Size(44, 33);
+      tsslCodeGenerator.Text = "(+)";
+      tsslCodeGenerator.Click += tsslCodeGenerator_Click;
+      // 
       // FormConvertInstructions
       // 
       AutoScaleDimensions = new SizeF(13F, 32F);
@@ -215,5 +223,7 @@
     private ToolStripMenuItem pasteToolStripMenuItem;
     private ContextMenuStrip contextMenuStrip1;
     private ToolStripMenuItem contentToClipboadcopyToolStripMenuItem;
+    private ToolStripLabel toolStripLabel2;
+    private ToolStripLabel tsslCodeGenerator;
   }
 }
