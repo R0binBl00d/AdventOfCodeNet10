@@ -120,7 +120,7 @@ namespace AdventOfCodeNet9._2024.Day_05
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 6034
     /// </returns>
     public override string Execute()
     {
@@ -227,11 +227,6 @@ namespace AdventOfCodeNet9._2024.Day_05
 
       // if we get here there was no return false
       return true;
-    }
-
-    public void sort(List<int> test)
-    {
-
     }
   }
 }
