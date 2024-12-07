@@ -1,4 +1,4 @@
-﻿namespace AdventOfCodeNet9._2020.Day_01
+namespace AdventOfCodeNet9._2020.Day_01
 {
   internal class Part_1 : Days
   {

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,13 +36,25 @@ namespace AdventOfCodeNet9
         {
           GenerateFoldersAndFiles(s, di);
         }
-        MessageBox.Show($"Done generating Files\n\nCheck: {di.FullName}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        var res = MessageBox.Show($"Done generating Files\n\nCheck: {di.FullName}\n\nDo you want me to open the Folder?\n\n" +
+                        $"Yes -> Try to open the Folder\nNo -> Copy Path to Clipboard\nCancel -> do neither", "Success", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+        switch (res)
+        {
+          case DialogResult.Yes:
+            Process.Start("explorer.exe", di.FullName);
+            break;
+          case DialogResult.No:
+            Clipboard.Clear();
+            Clipboard.SetText(di.FullName);
+            break;
+          default:
+            break;
+        }
         this.Close();
       }
       catch (Exception exception)
       {
         string msg = $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}: {exception.Message}";
-
         MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
@@ -61,7 +75,16 @@ namespace AdventOfCodeNet9
     private void GenerateFiles(string year, int day, DirectoryInfo daypath)
     {
       using (StreamWriter srInput = new StreamWriter(Path.Combine(daypath.FullName, "Input.txt"),
-               Encoding.UTF8, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
+               Encoding.ASCII, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
+      {
+        srInput.Write("\n");
+      }
+      using (StreamWriter srInput = new StreamWriter(Path.Combine(daypath.FullName, "Test-Example-Input.txt"),
+               Encoding.ASCII, new FileStreamOptions()
+               {
+                 Mode = FileMode.Create,
+                 Access = FileAccess.Write
+               }))
       {
         srInput.Write("\n");
       }
@@ -69,9 +92,8 @@ namespace AdventOfCodeNet9
       for (int i = 1; i <= 2; i++)
       {
         using (StreamWriter srInput = new StreamWriter(Path.Combine(daypath.FullName, $"Part_{i}.cs"),
-                 Encoding.UTF8, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
+                 Encoding.ASCII, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
         {
-
           string text = """
 namespace AdventOfCodeNet9._##YEAR##.Day_##01##
 {
