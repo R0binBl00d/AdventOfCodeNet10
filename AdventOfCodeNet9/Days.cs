@@ -19,8 +19,18 @@ namespace AdventOfCodeNet9
         }
       }
 
-      Lines = sb.ToString().Split(new char[] { '\r', '\n' },
+      List<string> temp = sb.ToString().Split(new char[] { '\r', '\n' },
         StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+
+      Lines = new List<string>(temp.Count);
+
+      foreach (var line in temp)
+      {
+        var newTrim = line.Trim();
+        newTrim = newTrim.Trim('ï', '»', '¿');
+        Lines.Add(newTrim);
+      }
+      temp.Clear();
     }
 
     public abstract string Execute();
