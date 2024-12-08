@@ -61,19 +61,19 @@ namespace AdventOfCodeNet9._2024.Day_01
     {
       string result = "";
 
-      var l_List = new List<int>();
-      var r_List = new List<int>();
+      var l_List = new List<long>();
+      var r_List = new List<long>();
 
       foreach (var line in Lines)
       {
-        var numbers = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        l_List.Add(int.Parse(numbers[0]));
-        r_List.Add(int.Parse(numbers[1]));
+        var numbers = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).AsInt64s();
+        l_List.Add(numbers[0]);
+        r_List.Add(numbers[1]);
       }
       l_List.Sort();
       r_List.Sort();
 
-      int totalScore = 0;
+      long totalScore = 0;
 
       totalScore = l_List.Sum(l => l * r_List.Count(r => r == l));
 
