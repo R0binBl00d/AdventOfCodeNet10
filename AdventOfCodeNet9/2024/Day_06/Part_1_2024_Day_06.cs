@@ -116,7 +116,7 @@ namespace AdventOfCodeNet9._2024.Day_06
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 5409
     /// </returns>
     public override string Execute()
     {
@@ -226,6 +226,7 @@ namespace AdventOfCodeNet9._2024.Day_06
         }
         else
         {
+          /*
           for (int y = 0; y < Lines.Count; y++)
           {
             Debug.Write("\n");
@@ -234,7 +235,7 @@ namespace AdventOfCodeNet9._2024.Day_06
               Debug.Write($"{movement[x, y]}");
             }
           }
-
+          */
           Debugger.Break();
         }
 
@@ -247,6 +248,8 @@ namespace AdventOfCodeNet9._2024.Day_06
           totalCount += xitem;
         }
       }
+
+      /*//   Debug-Plot of the map "correct Result plot" written below Day_06_Part_2
 
       for (int y = 0; y < Lines.Count; y++)
       {
@@ -268,7 +271,7 @@ namespace AdventOfCodeNet9._2024.Day_06
           Debug.Write($"{locationsVisited[y][x]}");
         }
       }
-
+      */
       result = totalCount.ToString();
       return result;
     }
