@@ -22,6 +22,7 @@ namespace AdventOfCodeNet9
       List<string> temp = sb.ToString().Split(new char[] { '\r', '\n' },
         StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
+      if (Lines != null) Lines.Clear();
       Lines = new List<string>(temp.Count);
 
       foreach (var line in temp)
@@ -31,6 +32,8 @@ namespace AdventOfCodeNet9
         Lines.Add(newTrim);
       }
       temp.Clear();
+      sb.Clear();
+      GC.Collect(GC.MaxGeneration, GCCollectionMode.Optimized, false);
     }
 
     public abstract string Execute();

@@ -77,11 +77,5 @@ namespace AdventOfCodeNet9
       bool bHasText = !String.IsNullOrEmpty(rtbOutput.Text); ;
       contentToClipboadcopyToolStripMenuItem.Enabled = bHasText;
     }
-
-    private void tsslCodeGenerator_Click(object sender, EventArgs e)
-    {
-      var fgt = new FormGenerateTemplatesForSharing();
-      fgt.ShowDialog();
-    }
   }
 }

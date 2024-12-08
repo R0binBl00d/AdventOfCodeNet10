@@ -59,11 +59,11 @@ namespace AdventOfCodeNet9
 
             btn.Location = new Point(x, y);
 
-            btn.Name = String.Format("button{0}_{1}_{2}", year, day, part);
+            btn.Name = $"button{year}_{day}_{part}";
             btn.Size = new System.Drawing.Size(150, 50);
             btn.TabIndex = 0;
-            btn.Tag = String.Format("{0} {1} {2}", year, day, part);
-            btn.Text = String.Format("Day {0:00} {1}", day, part);
+            btn.Tag = $"{year} {day} {part}";
+            btn.Text = $"Day {day:00} {part}";
             btn.UseVisualStyleBackColor = true;
             btn.Click += new System.EventHandler(this.button_Click!);
 
@@ -137,14 +137,29 @@ namespace AdventOfCodeNet9
       //  "2015 1 1"  // Year Day Part
       //  "2015 25 2" // Year Day Part
       int day = Int32.Parse(chunks[1]);
-      Type type = Type.GetType(String.Format("AdventOfCodeNet9._{0}.Day_{1:00}.Part_{2}", chunks[0], day, chunks[2]))!;
+      Type type = Type.GetType($"AdventOfCodeNet9._{chunks[0]}.Day_{day:00}.Part_{chunks[2]}_{chunks[0]}_Day_{day:00}")!;
 #pragma warning disable CS8604 // Possible null reference argument.
-      RunDay(Activator.CreateInstance(type) as Days, String.Format(@".\{0}\Day_{1:00}\Input.txt", chunks[0], day));
+      RunDay(Activator.CreateInstance(type) as Days,
+        $@".\{chunks[0]}\Day_{day:00}\Test-Example-Input_{chunks[0]}_Day_{day:00}.txt",
+        $@".\{chunks[0]}\Day_{day:00}\Input_{chunks[0]}_Day_{day:00}.txt"
+      );
 #pragma warning restore CS8604 // Possible null reference argument.
     }
 
-    private void RunDay(Days day, string input)
+    private void RunDay(Days day, string testExampleInput, string input)
     {
+      String resTestExample = "";
+      try
+      {
+        day.Init(testExampleInput);
+        resTestExample = day.Execute();
+      }
+      catch
+      {
+        resTestExample = "could not execute";
+        throw;
+      }
+
       day.Init(input);
       Stopwatch sw = new Stopwatch();
       sw.Start();
@@ -157,10 +172,10 @@ namespace AdventOfCodeNet9
         Clipboard.SetText(result);
       }
 
-      toolStripStatusLabel1.Text = String.Format("{0}\t Solution:\t \"{1}\"\t Calculation Time: '{2}'",
-        DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss"), result, sw.Elapsed);
+      toolStripStatusLabel1.Text =
+        $"{DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}\t Solution:\t \"{result}\"\t Calculation Time: '{sw.Elapsed}'";
 
-      MessageBox.Show(result, sw.Elapsed.ToString());
+      MessageBox.Show($"Result\t'{result}'\n\n((Test:{resTestExample}))", sw.Elapsed.ToString());
     }
 
     private void tsslConvertInstructions_Click(object sender, EventArgs e)
