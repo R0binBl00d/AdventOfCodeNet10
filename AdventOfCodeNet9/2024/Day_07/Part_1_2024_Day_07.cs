@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using ResolveEventArgs = System.ResolveEventArgs;
 
 namespace AdventOfCodeNet9._2024.Day_07
 {

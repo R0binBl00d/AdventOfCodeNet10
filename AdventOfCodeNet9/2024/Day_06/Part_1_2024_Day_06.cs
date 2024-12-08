@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
+using System.Security.Authentication;
 
 namespace AdventOfCodeNet9._2024.Day_06
 {
