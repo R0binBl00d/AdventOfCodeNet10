@@ -36,80 +36,80 @@ namespace AdventOfCodeNet9._2024.Day_06
     
     Option one, put a printing press next to the guard's starting position:
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ....|..#|.
-    ....|...|.
-    .#.O^---+.
-    ........#.
-    #.........
-    ......#...
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ....|..#|.    ..^>>>>#v.
+    ....|...|.    ..^.^.v.v.
+    .#.O^---+.    .#<<<<v<v.
+    ........#.    .^>>>>>>#.
+    #.........    #<<<<<vv..
+    ......#...    ......#v..
     Option two, put a stack of failed suit prototypes in the bottom right quadrant
     of the mapped area:
     
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ..+-+-+#|.
-    ..|.|.|.|.
-    .#+-^-+-+.
-    ......O.#.
-    #.........
-    ......#...
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ..+-+-+#|.    ..^>>>>#v.
+    ..|.|.|.|.    ..^.^.v.v.
+    .#+-^-+-+.    .#<<<<v<v.
+    ......O.#.    .^>>>>>>#.
+    #.........    #<<<<<vv..
+    ......#...    ......#v..
     Option three, put a crate of chimney-squeeze prototype fabric next to the
     standing desk in the bottom right quadrant:
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ..+-+-+#|.
-    ..|.|.|.|.
-    .#+-^-+-+.
-    .+----+O#.
-    #+----+...
-    ......#...
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ..+-+-+#|.    ..^>>>>#v.
+    ..|.|.|.|.    ..^.^.v.v.
+    .#+-^-+-+.    .#<<<<v<v.
+    .+----+O#.    .^>>>>>>#.
+    #+----+...    #<<<<<vv..
+    ......#...    ......#v..
     Option four, put an alchemical retroencabulator near the bottom left corner:
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ..+-+-+#|.
-    ..|.|.|.|.
-    .#+-^-+-+.
-    ..|...|.#.
-    #O+---+...
-    ......#...
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ..+-+-+#|.    ..^>>>>#v.
+    ..|.|.|.|.    ..^.^.v.v.
+    .#+-^-+-+.    .#<<<<v<v.
+    ..|...|.#.    .^>>>>>>#.
+    #O+---+...    #<<<<<vv..  ???
+    ......#...    ......#v..
     Option five, put the alchemical retroencabulator a bit to the right instead:
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ..+-+-+#|.
-    ..|.|.|.|.
-    .#+-^-+-+.
-    ....|.|.#.
-    #..O+-+...
-    ......#...
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ..+-+-+#|.    ..^>>>>#v.
+    ..|.|.|.|.    ..^.^.v.v.
+    .#+-^-+-+.    .#<<<<v<v.
+    ....|.|.#.    .^>>>>>>#.
+    #..O+-+...    #<<<<<vv..  ???
+    ......#...    ......#v..
     Option six, put a tank of sovereign glue right next to the tank of universal
     solvent:
     
-    ....#.....
-    ....+---+#
-    ....|...|.
-    ..#.|...|.
-    ..+-+-+#|.
-    ..|.|.|.|.
-    .#+-^-+-+.
-    .+----++#.
-    #+----++..
-    ......#O..
+    ....#.....    ....#.....
+    ....+---+#    ....^>>>>#
+    ....|...|.    ....^...v.
+    ..#.|...|.    ..#.^...v.
+    ..+-+-+#|.    ..^>>>>#v.
+    ..|.|.|.|.    ..^.^.v.v.
+    .#+-^-+-+.    .#<<<<v<v.
+    .+----++#.    .^>>>>>>#.
+    #+----++..    #<<<<<vv..
+    ......#O..    ......#v..  ???
     It doesn't really matter what you choose to use as an obstacle so long as you
     and The Historians can put it into position without the guard noticing. The
     important thing is having enough options that you can find one that minimizes
@@ -119,6 +119,33 @@ namespace AdventOfCodeNet9._2024.Day_06
     You need to get the guard stuck in a loop by adding a single new obstruction.
     How many different positions could you choose for this obstruction?
 
+    ########################################################################################################################################################
+
+    my maps build from the example:
+    
+    ....#.....
+    ....^>>>>#
+    ....^...v.
+    ..#.^...v.
+    ..^>>>>#v.
+    ..^.^.v.v.
+    .#<<<<v<v.
+    .^>>>>>>#.
+    #<<<<<vv..
+    ......#v..
+
+
+    0000000000
+    0000111110
+    0000100010
+    0000100010
+    0011111010
+    0010101010
+    0011111110
+    0111111100
+    0111111100
+    0000000100  
+
     */
     /// </summary>
     /// <returns>
@@ -126,6 +153,13 @@ namespace AdventOfCodeNet9._2024.Day_06
     /// </returns>
     public override string Execute()
     {
+
+      // Wenn ich an eine Kreuzung treffe, an der vorher schon mal einer nach rechts gegangen ist ...
+      // -> war schon mal 1 in locationsVisited ...
+      // nope ... anderer Ansatz:
+      //
+      // prinzipiell immer wenn irgendwas rechts auf ein Feld trifft, das schon mal in die selbe Richtung gelaufen ist ...
+
       string result = "";
       int totalCount = 0;
 
