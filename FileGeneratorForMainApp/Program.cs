@@ -44,7 +44,7 @@ try
 
   Console.WriteLine("All the generated Files were placed into the Main ProjectFolder");
   Console.WriteLine("");
-  Console.WriteLine("Also the \".csproj\" File was changed, so it should automatically reload.");
+  Console.WriteLine("Also the \"AdventOfCodeNet9.csproj\" File was changed, so it should automatically reload.");
   Console.WriteLine("");
   Console.WriteLine("");
   Console.WriteLine("#################################################################################");
@@ -140,7 +140,7 @@ namespace AdventOfCodeNet9._##YEAR##.Day_##01##
     public override string Execute()
     {
       string result = "";
-      int totalCount = 0;
+      long totalCount = 0;
 
       //
       // Automatically imported Text !!
