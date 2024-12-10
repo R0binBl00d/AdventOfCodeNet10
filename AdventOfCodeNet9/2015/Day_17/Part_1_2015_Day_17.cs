@@ -5,32 +5,64 @@ namespace AdventOfCodeNet9._2015.Day_17
     /// <summary>
     /*
     https://adventofcode.com/2015/day/17
-    */
+    --- Day 17: No Such Thing as Too Much ---
+    The elves bought too much eggnog again - 150 liters this time. To fit it all
+    into your refrigerator, you'll need to move it into smaller containers. You
+    take an inventory of the capacities of the available containers.
+    
+    For example, suppose you have containers of size 20, 15, 10, 5, and 5 liters.
+    If you need to store 25 liters, there are four ways to do it:
+    
+    15 and 10
+    20 and 5 (the first 5)
+    20 and 5 (the second 5)
+    15, 5, and 5
+    Filling all containers entirely, how many different combinations of containers
+    can exactly fit all 150 liters of eggnog?    */
+
     /// </summary>
     /// <returns>
-    /// 
+    /// Your puzzle answer was 654.
     /// </returns>
     public override string Execute()
     {
+      // if 20 bit -> "just count from 0 - FFFFF
       string result = "";
-      int totalCount = 0;
 
-      //
-      // Automatically imported Text !!
-      //
-      // This code is running twice:
-      //
-      // First (is a try run, no-one really cares if it works)
-      //   with the content of the Test-Example-Input_2015_Day_17.txt already stored in "Lines"
-      //
-      // Second -> THE REAL TEST !! <-
-      // with the content of the Input_2015_Day_17.txt already stored in "Lines"
-      //
-      foreach (var line in Lines)
+      List<int> buckets = new List<int>();
+
+      foreach (string line in Lines)
       {
-        totalCount++;
+        buckets.Add(Int32.Parse(line));
       }
-      result = totalCount.ToString();
+
+      List<string> combintions = new List<string>();
+      long highestNumber = Convert.ToInt64(Math.Pow(2, buckets.Count));
+
+      for (long i = 0; i < highestNumber; i++)
+      {
+        string UseNorUseBuckets = Convert.ToString(i, 2);
+
+        int totalStorage = 0;
+        for (int b = UseNorUseBuckets.Length - 1; b >= 0; b--)
+        {
+          if (UseNorUseBuckets[b] == '1')
+          {
+            // rightmost Character always indox 0
+            totalStorage += buckets[(UseNorUseBuckets.Length - 1) - b];
+          }
+        }
+
+        if (totalStorage == 150)
+        {
+          combintions.Add(UseNorUseBuckets);
+        }
+
+        //if (i == 1000000) Debugger.Break();
+      }
+
+      result = combintions.Count().ToString();
+      // 455 is too low ? bug in 56, used [b]
       return result;
     }
   }
