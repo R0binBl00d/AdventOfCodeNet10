@@ -42,7 +42,7 @@ namespace AdventOfCodeNet9._2024.Day_13
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 75200131617108
     /// </returns>
     public override string Execute()
     {
@@ -75,23 +75,20 @@ namespace AdventOfCodeNet9._2024.Day_13
         Debug.WriteLine($"B.X:{machine.Move_B.X}, B.Y:{machine.Move_B.Y}");
         Debug.WriteLine($"P.X:{machine.prize.X}, P.Y:{machine.prize.Y}");
 
-        long totalposA = 0;
-        long restForB = 0;
-        for (long a = 0; a < max_a_x; a++) // press A
-        {
-          restForB = machine.prize.X - totalposA;
-          if (restForB % machine.Move_B.X == 0)
-          {
-            long b = restForB / machine.Move_B.X;
-            pos.Y = a * machine.Move_A.Y + b * machine.Move_B.Y;
+        long a =
+          ((machine.prize.X * machine.Move_B.Y) - (machine.prize.Y * machine.Move_B.X)) /
+          ((machine.Move_A.X * machine.Move_B.Y) - (machine.Move_A.Y * machine.Move_B.X));
 
-            if ((pos.Y == machine.prize.Y))
-            {
-              machine.candidates.Add((a, b));
-              break;
-            }
+        long restForB = machine.prize.X - a * machine.Move_A.X;
+        if (restForB % machine.Move_B.X == 0)
+        {
+          long b = restForB / machine.Move_B.X;
+          pos.Y = a * machine.Move_A.Y + b * machine.Move_B.Y;
+
+          if ((pos.Y == machine.prize.Y))
+          {
+            machine.candidates.Add((a, b));
           }
-          totalposA += machine.Move_A.X;
         }
       }
 

@@ -153,6 +153,7 @@ namespace AdventOfCodeNet9._2024.Day_06
     /// </summary>
     /// <returns>
     /// 5409 -> part 1
+    /// (6) Test
     /// 475 - too low
     /// 2022 -> from an online solution !!
     /// 
@@ -170,155 +171,38 @@ namespace AdventOfCodeNet9._2024.Day_06
       int totalCount = 0;
 
       char[,] field = new char[Lines[0].Length, Lines.Count];
-      char[,] movement = new char[Lines[0].Length, Lines.Count];
-      char[,] obstical = new char[Lines[0].Length, Lines.Count];
+      int[,] movement = new int[Lines[0].Length, Lines.Count];
 
-      var vectorField = new Dictionary<(int x, int y), List<int>>();
-
-      Point startingPoint = new Point();
+      #region Calculated visited location
       Point currentLocation = new Point();
       //List<string> locationsVisited = new List<string>();
-      List<List<int>> locationObsticals = new List<List<int>>();
+      List<List<int>> locationsVisited = new List<List<int>>();
+
+      var potentialObjects = new List<(int x, int y)>();
 
       for (int y = 0; y < Lines.Count; y++)
       {
-        locationObsticals.Add(new List<int>());
+        locationsVisited.Add(new List<int>());
         for (int x = 0; x < Lines[0].Length; x++)
         {
           field[x, y] = Lines[y][x];
-          movement[x, y] = Lines[y][x];
-          obstical[x, y] = '.';
-
-          vectorField.Add((x, y), new List<int>());
+          movement[x, y] = 0;
 
           if (field[x, y] == '^')
           {
-            startingPoint.X = x;
-            startingPoint.Y = y;
+            currentLocation.X = x;
+            currentLocation.Y = y;
             field[x, y] = '.';
           }
-          locationObsticals[y].Add(0);
+          locationsVisited[y].Add(0);
         }
       }
 
-      // 0 Top
-      // 1 Right
-      // 2 Bottom
-      // 3 Left
-      Point newlocation = new Point();
+      potentialObjects.Clear();
+      DoMove(ref locationsVisited, currentLocation, ref movement, ref field, ref potentialObjects, out var outside, out var loop);
+      #endregion
 
-      for (int lauf = 1; lauf <= 2; lauf++)
-      {
-        int orientation = 0;
-        currentLocation.X = startingPoint.X;
-        currentLocation.Y = startingPoint.Y;
-
-        do // move
-        {
-          switch (orientation)
-          {
-            case 0: // Top
-              movement[currentLocation.X, currentLocation.Y] = '^';
-              break;
-            case 1: // Right
-              movement[currentLocation.X, currentLocation.Y] = '>';
-              break;
-            case 2: // Bottom
-              movement[currentLocation.X, currentLocation.Y] = 'v';
-              break;
-            case 3: // Left
-              movement[currentLocation.X, currentLocation.Y] = '<';
-              break;
-          }
-
-          if (lauf == 1)
-          {
-            vectorField[(currentLocation.X, currentLocation.Y)].Add(orientation);
-          }
-
-          // Initialize
-          newlocation = new Point(currentLocation.X, currentLocation.Y);
-
-          switch (orientation)
-          {
-            case 0: // Top
-              newlocation.Y--;
-              break;
-            case 1: // Right
-              newlocation.X++;
-              break;
-            case 2: // Bottom
-              newlocation.Y++;
-              break;
-            case 3: // Left
-              newlocation.X--;
-              break;
-          }
-
-          if (!NextLocationIsInside(newlocation))
-          {
-            break;
-          }
-
-          if (field[newlocation.X, newlocation.Y] == '.')
-          {
-            if (lauf == 2)
-            {
-              // ##########################################
-              // check here if any of the old Paths
-              // already went in the same direction if I turned right on currentLocation.
-              if (PathToRightLeadsToOldPath(currentLocation, (orientation + 1) % 4, ref vectorField, ref field))
-              {
-                // if, I can place an "O" here !!
-                obstical[newlocation.X, newlocation.Y] = 'O';
-                locationObsticals[newlocation.X][newlocation.Y] = 1;
-              }
-            }
-
-            currentLocation.X = newlocation.X;
-            currentLocation.Y = newlocation.Y;
-            continue;
-          }
-          else if (field[newlocation.X, newlocation.Y] == '#')
-          {
-            orientation++;
-            orientation %= 4;
-
-            switch (orientation)
-            {
-              case 0: // Top
-                currentLocation.Y--;
-                break;
-              case 1: // Right
-                currentLocation.X++;
-                break;
-              case 2: // Bottom
-                currentLocation.Y++;
-                break;
-              case 3: // Left
-                currentLocation.X--;
-                break;
-            }
-          }
-          else
-          {
-            /*
-            for (int y = 0; y < Lines.Count; y++)
-            {
-              Debug.Write("\n");
-              for (int x = 0; x < Lines[0].Length; x++)
-              {
-                Debug.Write($"{movement[x, y]}");
-              }
-            }
-            */
-            Debugger.Break();
-          }
-
-        } while (NextLocationIsInside(currentLocation));
-      }
-      
-      foreach (List<int> yLists in locationObsticals)
+      foreach (List<int> yLists in locationsVisited)
       {
         foreach (var xitem in yLists)
         {
@@ -326,68 +210,126 @@ namespace AdventOfCodeNet9._2024.Day_06
         }
       }
 
-      //   Debug-Plot of the map "correct Result plot" written below Day_06_Part_2
-
-      for (int y = 0; y < Lines.Count; y++)
+      if (totalCount != potentialObjects.Count)
       {
-        Debug.Write("\n");
-        for (int x = 0; x < Lines[0].Length; x++)
-        {
-          Debug.Write($"{obstical[x, y]}");
-        }
+        Debugger.Break();
       }
-      Debug.Write("\n");
-      /*
-      Debug.Write("\n");
-      Debug.Write("\n");
 
-      for (int y = 0; y < Lines.Count; y++)
+      // can't place one at the start
+      potentialObjects.RemoveAt(potentialObjects.IndexOf((currentLocation.X ,currentLocation.Y)));
+
+      totalCount = 0;
+      foreach (var po in potentialObjects)
       {
-        Debug.Write("\n");
-        for (int x = 0; x < Lines[0].Length; x++)
+        var tempField = new char[Lines[0].Length, Lines.Count];
+        int[,] moves = new int[Lines[0].Length, Lines.Count];
+
+        for (int xn = 0; xn < Lines[0].Length; xn++)
         {
-          Debug.Write($"{locationObsticals[y][x]}");
+          for (int yn = 0; yn < Lines.Count; yn++)
+          {
+            tempField[xn, yn] = field[xn, yn];
+            moves[xn, yn] = 0;
+          }
         }
+        tempField[po.x, po.y] = '#';
+
+        var fck = new List<(int x, int y)>();
+        DoMove(ref locationsVisited, currentLocation, ref moves, ref tempField, ref fck, out _, out loop);
+        if (loop) totalCount++;
       }
-      */
+
+
       result = totalCount.ToString();
       return result;
     }
 
-    private bool PathToRightLeadsToOldPath(Point currentLocation, int orientation, ref Dictionary<(int x, int y), List<int>> vectorField, ref char[,] field)
+    private void DoMove(ref List<List<int>> locationsVisited, Point currentLocation, ref int[,] movement, ref char[,] field, ref List<(int x, int y)> potentialObjects, out bool outside, out bool loop)
     {
-      bool pathFound = false;
-      switch (orientation)
-      {
-        case 0: // Top
-          currentLocation.Y--;
-          break;
-        case 1: // Right
-          currentLocation.X++;
-          break;
-        case 2: // Bottom
-          currentLocation.Y++;
-          break;
-        case 3: // Left
-          currentLocation.X--;
-          break;
-      }
+      outside = false;
+      loop = false;
 
-      while
-      (
-        currentLocation.X.InRange(0, field.GetLength(0), IncludeBounds.Lower) &&
-        currentLocation.Y.InRange(0, field.GetLength(1), IncludeBounds.Lower) &&
-        field[currentLocation.X, currentLocation.Y] != '#'
-      )
+      int orientation = 0;
+      // 0 Top
+      // 1 Right
+      // 2 Bottom
+      // 3 Left
+      Point newlocation = new Point();
+      do // move
       {
-        // check for correct Vector
-        if (vectorField[(currentLocation.X, currentLocation.Y)].Contains(orientation))
+        locationsVisited[currentLocation.Y][currentLocation.X] = 1;
+        if (!potentialObjects.Contains((currentLocation.X, currentLocation.Y)))
         {
-          pathFound = true;
+          potentialObjects.Add((currentLocation.X, currentLocation.Y));
+        }
+        switch (orientation)
+        {
+          case 0: // Top
+            if ((movement[currentLocation.X, currentLocation.Y] & 0x1) == 0x1) loop = true;
+            break;
+          case 1: // Right
+            if ((movement[currentLocation.X, currentLocation.Y] & 0x2) == 0x2) loop = true;
+            break;
+          case 2: // Bottom
+            if ((movement[currentLocation.X, currentLocation.Y] & 0x4) == 0x4) loop = true;
+            break;
+          case 3: // Left
+            if ((movement[currentLocation.X, currentLocation.Y] & 0x8) == 0x8) loop = true;
+            break;
+        }
+        if (loop == true) break;
+
+        switch (orientation)
+        {
+          case 0: // Top
+            movement[currentLocation.X, currentLocation.Y] |= 0x1;
+            break;
+          case 1: // Right
+            movement[currentLocation.X, currentLocation.Y] |= 0x2;
+            break;
+          case 2: // Bottom
+            movement[currentLocation.X, currentLocation.Y] |= 0x4;
+            break;
+          case 3: // Left
+            movement[currentLocation.X, currentLocation.Y] |= 0x8;
+            break;
+        }
+
+        newlocation = new Point(currentLocation.X, currentLocation.Y);
+
+        switch (orientation)
+        {
+          case 0: // Top
+            newlocation.Y--;
+            break;
+          case 1: // Right
+            newlocation.X++;
+            break;
+          case 2: // Bottom
+            newlocation.Y++;
+            break;
+          case 3: // Left
+            newlocation.X--;
+            break;
+        }
+
+        if (!NextLocationIsInside(newlocation))
+        {
+          outside = true;
           break;
         }
-        else
+
+        if (field[newlocation.X, newlocation.Y] == '.')
         {
+          currentLocation.X = newlocation.X;
+          currentLocation.Y = newlocation.Y;
+          continue;
+        }
+        else if (field[newlocation.X, newlocation.Y] == '#')
+        {
+          orientation++;
+          orientation %= 4;
+          /*
           switch (orientation)
           {
             case 0: // Top
@@ -403,10 +345,24 @@ namespace AdventOfCodeNet9._2024.Day_06
               currentLocation.X--;
               break;
           }
+          */
         }
-      }
+        else
+        {
+          /*
+          for (int y = 0; y < Lines.Count; y++)
+          {
+            Debug.Write("\n");
+            for (int x = 0; x < Lines[0].Length; x++)
+            {
+              Debug.Write($"{movement[x, y]}");
+            }
+          }
+          */
+          Debugger.Break();
+        }
 
-      return pathFound;
+      } while (true);
     }
 
     private bool NextLocationIsInside(Point currentLocation)
@@ -424,7 +380,6 @@ namespace AdventOfCodeNet9._2024.Day_06
     }
   }
 }
-
 
 
 /*

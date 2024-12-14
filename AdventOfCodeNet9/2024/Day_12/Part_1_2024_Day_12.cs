@@ -54,13 +54,13 @@ namespace AdventOfCodeNet9._2024.Day_12
     +-+-+-+-+
     |A A A A|
     +-+-+-+-+     +-+
-    |D|
+    .             |D|
     +-+-+   +-+   +-+
     |B B|   |C|
     +   +   + +-+
     |B B|   |C C|
     +-+-+   +-+ +
-    |C|
+    .         |C|
     +-+-+-+   +-+
     |E E E|
     +-+-+-+
@@ -126,7 +126,7 @@ namespace AdventOfCodeNet9._2024.Day_12
     /// </summary>
     /// <returns>
     /// (1930) Test
-    /// 
+    /// 1465112
     /// </returns>
     public override string Execute()
     {
