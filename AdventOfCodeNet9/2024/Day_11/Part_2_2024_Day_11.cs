@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection.Metadata.Ecma335;
 using AdventOfCodeNet9.Extensions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AdventOfCodeNet9._2024.Day_11
 {
@@ -107,100 +108,85 @@ namespace AdventOfCodeNet9._2024.Day_11
       string result = "";
       long totalCount = 0;
 
-      var stones = Lines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).AsInt64List();
+      int blinkTimes = 0;
 
-      #region skip test
+      var startingStones = Lines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).AsInt64List();
 
-      //int blinkTimes = 6;
-     // if (stones.Count < 3) return "Test skipped";
+      if (startingStones.Count < 3)
+      {
+        blinkTimes = 25;
+        // skip test ?
+        //return "Test skipped";
+      }
+      else
+      {
+        // real deal
+        blinkTimes = 75;
+      }
 
-      #endregion
-      int blinkTimes = 75;
-      int split = 40;
+      var stones = new List<(long amount, long engrave)>();
+      foreach (var startingStone in startingStones)
+      {
+        stones.Add((1, startingStone));
+      }
 
-      totalCount = RunSeveralIteration(0, blinkTimes, split, ref stones);
+      for (int i = 0; i < blinkTimes; i++)
+      {
+        RunIteration(ref stones);
+        //DebugPrintStuff(ref stones);
+      }
 
+      totalCount = stones.Sum(s => s.amount);
       result = totalCount.ToString();
       return result;
     }
 
-    Int64 RunSeveralIteration(int start, int end, int split, ref List<long> stones)
+    private void DebugPrintStuff(ref List<(long amount, long engrave)> stones)
     {
-      int i = 0;
-      for (i = start; i < start + split; i++)
+      long totalAmount = stones.Sum(s=>s.amount);
+      Debug.Write($"Amount: {totalAmount} | ");
+      foreach (var stone in stones)
       {
+        Debug.Write($"{stone.engrave} "); 
+      }
+      Debug.WriteLine("");
+    }
 
-        if (i == end)
-          break;
-        else if (i < split)
+    private void RunIteration(ref List<(long amount, long engrave)> stones)
+    {
+      var compress = new List<(long amount, long engrave)>();
+      var newStones = new List<(long amount, long engrave)>();
+
+      foreach (var dist in stones.Select(s => s.engrave).Distinct())
+      {
+        compress.Add((
+          stones.Where(s => s.engrave == dist).Sum(s => s.amount),
+          dist));
+      }
+      stones.Clear();
+
+      // run one iteration
+      foreach (var stone in compress)
+      {
+        if (stone.engrave == 0)
         {
-          Debug.WriteLine($"Base - Iteration {i}");
+          newStones.Add((stone.amount, 1L));
         }
-
-        List<long> newStones = new List<long>();
-
-        //for (int sIndex = 0; sIndex < stones.Count; sIndex++)
-        //Parallel.ForEach(stones, stone =>
-        foreach (var stone in stones)
+        else if (stone.engrave.ToString().Length % 2 == 0)
         {
-          if (stone == 0) newStones.Add(1);
-          else if (stone.ToString().Length % 2 == 0)
-          {
-            string strStone = stone.ToString();
-            int length = strStone.Length / 2;
+          string strStone = stone.engrave.ToString();
+          int length = strStone.Length / 2;
 
-            newStones.Add(Int64.Parse(strStone.Substring(0, length)));
-            newStones.Add(Int64.Parse(strStone.Substring(length)));
-          }
-          else
-          {
-            newStones.Add(2024 * stone);
-          }
-          //});
+          newStones.Add((stone.amount, Int64.Parse(strStone.Substring(0, length))));
+          newStones.Add((stone.amount, Int64.Parse(strStone.Substring(length))));
         }
-
-        stones.Clear();
-        stones = newStones;
-        //});
-      }
-
-      long totalCount = 0;
-
-      if (i == end)
-      {
-        totalCount = stones.LongCount();
-        stones.Clear();
-        //GC.Collect();
-        return totalCount;
-      }
-      else if (i == split)
-      {
-        while (stones.Count > 0)
+        else
         {
-          Debug.WriteLine($"{stones.Count}");
-          List<long> tempList;
-          if (stones.Count > 5)
-          {
-            tempList = stones[..5];
-          }
-          else
-          {
-            tempList = new List<long>(stones);
-          }
-
-          totalCount += RunSeveralIteration(split, end, split, ref tempList);
-          if (stones.Count > 5) stones.RemoveRange(0, 5);
-          else stones.Clear();
+          newStones.Add((stone.amount,2024 * stone.engrave));
         }
-        //GC.Collect();
-        return totalCount;
       }
-      else
-      {
-        // we should never get here
-        Debugger.Break();
-        return 0L;
-      }
+      compress.Clear();
+      stones = newStones;
     }
   }
 }
