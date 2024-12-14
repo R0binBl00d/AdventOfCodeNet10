@@ -61,7 +61,7 @@ namespace AdventOfCodeNet9._2024.Day_13
           new point(Int64.Parse(moveA[1]), Int64.Parse(moveA[3])),
           new point(Int64.Parse(moveB[1]), Int64.Parse(moveB[3])),
           //                                 10000000000000                             10000000000000
-          new point(Int64.Parse(prize[1])+ 10000000000000L, Int64.Parse(prize[3])+ 10000000000000L),
+          new point(Int64.Parse(prize[1]) + 10000000000000L, Int64.Parse(prize[3]) + 10000000000000L),
           new List<(long a, long b)>()
         ));
       }
@@ -70,27 +70,28 @@ namespace AdventOfCodeNet9._2024.Day_13
       {
         var pos = new point(0, 0);
         var max_a_x = machine.prize.X / machine.Move_A.X + 1;
-        var max_b_x = machine.prize.X / machine.Move_B.X + 1;
 
         Debug.WriteLine($"A.X:{machine.Move_A.X}, A.Y:{machine.Move_A.Y}");
         Debug.WriteLine($"B.X:{machine.Move_B.X}, B.Y:{machine.Move_B.Y}");
         Debug.WriteLine($"P.X:{machine.prize.X}, P.Y:{machine.prize.Y}");
 
+        long totalposA = 0;
+        long restForB = 0;
         for (long a = 0; a < max_a_x; a++) // press A
         {
-          for (long b = 0; b < max_b_x; b++) // press B
+          restForB = machine.prize.X - totalposA;
+          if (restForB % machine.Move_B.X == 0)
           {
-            pos.X = a * machine.Move_A.X + b * machine.Move_B.X;
+            long b = restForB / machine.Move_B.X;
             pos.Y = a * machine.Move_A.Y + b * machine.Move_B.Y;
 
-            if ((pos.X > machine.prize.X) || (pos.Y > machine.prize.Y)) continue;
-            else if ((pos.X == machine.prize.X) && (pos.Y == machine.prize.Y))
+            if ((pos.Y == machine.prize.Y))
             {
               machine.candidates.Add((a, b));
+              break;
             }
           }
-
-          if ((pos.X > machine.prize.X) || (pos.Y > machine.prize.Y)) continue;
+          totalposA += machine.Move_A.X;
         }
       }
 
