@@ -1,5 +1,6 @@
 using AdventOfCodeNet9.Extensions;
 using System.Diagnostics;
+using AdventOfCodeNet9._2024.Day_07;
 
 namespace AdventOfCodeNet9._2024.Day_14
 {
@@ -21,7 +22,7 @@ namespace AdventOfCodeNet9._2024.Day_14
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 6515 too low
     /// </returns>
     public override string Execute()
     {
@@ -48,8 +49,8 @@ namespace AdventOfCodeNet9._2024.Day_14
         ));
       }
 
-      long i = 0;
-      do
+      var dict = new Dictionary<long, (double, List<point>)>();
+      for(long i=1; i<30000; i++)
       {
         //Advance Robots
         foreach (var robot in robots)
@@ -63,38 +64,46 @@ namespace AdventOfCodeNet9._2024.Day_14
           if (robot.pos.y >= grid.y) robot.pos.y -= grid.y;
         }
 
-        i++;
-      } while (NotAllConnected(ref robots));
-      totalCount = i;
+        dict.Add(i, CalculateMinDistanceToAverageY(ref robots));
+      }
 
-      DebugDrawMap(ref robots, ref grid);
+      var bestItems = dict.OrderBy(d => d.Value.Item1).ToList();
+
+      //foreach (var keyValuePair in bestItems)
+      //{
+      //  var tmp = keyValuePair.Value.Item2.ToList();
+      //  DebugDrawMap(ref tmp, ref grid);
+      //}
+
+      totalCount = bestItems.First().Key;
 
       result = totalCount.ToString();
       return result;
     }
 
-    private bool NotAllConnected(ref List<(point pos, point vel)> robots)
+    private (double, List<point> ) CalculateMinDistanceToAverageY(ref List<(point pos, point vel)> robots)
     {
-      foreach (var robot in robots)
+      double averageX = (double)robots.Sum(r => r.pos.x) / (double)robots.Count;
+      double varianceX = robots.Sum(r => Math.Pow(r.pos.x - averageX, 2)) / (robots.Count - 1);
+
+      double averageY = (double)robots.Sum(r => r.pos.y) / (double)robots.Count;
+      double varianceY = robots.Sum(r => Math.Pow(r.pos.y - averageY, 2)) / (robots.Count - 1);
+
+      double stdVariation = (Math.Sqrt(varianceX) + Math.Sqrt(varianceY)) / 2;
+
+
+      var tmpList = new List<point>();
+      foreach (var rob in robots.Select(r => r.pos).ToList())
       {
-        if ( // this guy has a neigbour, good chance this is a xmas tree after all ??
-          robots.Exists(x => x.pos.x == robot.pos.x + 1 && x.pos.y == robot.pos.y /*right*/) ||
-          robots.Exists(x => x.pos.x == robot.pos.x - 1 && x.pos.y == robot.pos.y /*right*/) ||
-          robots.Exists(x => x.pos.x == robot.pos.x && x.pos.y + 1 == robot.pos.y /*right*/) ||
-          robots.Exists(x => x.pos.x == robot.pos.x && x.pos.y - 1 == robot.pos.y /*right*/))
-        {
-          continue;
-        }
-        else
-        {
-          return true; // NOT all connected
-        }
+        tmpList.Add(new point(rob.x, rob.y));
       }
 
-      return false;
+      (double, List<point>) ret = (stdVariation, tmpList);
+      return ret;
     }
+    
 
-    private void DebugDrawMap(ref List<(point pos, point vel)> robots, ref point grid)
+    private void DebugDrawMap(ref List<point> robots, ref point grid)
     {
       Debug.WriteLine("");
       Debug.WriteLine("");
@@ -102,7 +111,7 @@ namespace AdventOfCodeNet9._2024.Day_14
       {
         for (int x = 0; x < grid.x; x++)
         {
-          int count = robots.Where(r => r.pos.x == x && r.pos.y == y).Count();
+          int count = robots.Where(r => r.x == x && r.y == y).Count();
           Debug.Write((count > 0) ? $"{count}" : ".");
         }
 
