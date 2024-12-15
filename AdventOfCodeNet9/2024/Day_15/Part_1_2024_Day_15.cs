@@ -283,6 +283,7 @@ namespace AdventOfCodeNet9._2024.Day_15
     /// <returns>
     /// (2028)  Test1
     /// (10092) Test2
+    /// 1517819
     /// </returns>
     public override string Execute()
     {
@@ -291,35 +292,19 @@ namespace AdventOfCodeNet9._2024.Day_15
 
       var tempField = new List<char[]>();
       List<char> tempMovement = new List<char>();
-      var tempField2 = new List<char[]>();
-      List<char> tempMovement2 = new List<char>();
 
       #region get Data
       int section = 0;
       foreach (var line in Lines)
       {
-        if (line.Contains('-')) section++;
-        if (section == 0)
+        if (line.Contains('-')) break;
+        if (line.Contains('#'))
         {
-          if (line.Contains('#'))
-          {
-            tempField.Add(line.ToCharArray());
-          }
-          else
-          {
-            tempMovement.AddRange(line.ToCharArray().ToList());
-          }
+          tempField.Add(line.ToCharArray());
         }
         else
         {
-          if (line.Contains('#'))
-          {
-            tempField2.Add(line.ToCharArray());
-          }
-          else
-          {
-            tempMovement2.AddRange(line.ToCharArray().ToList());
-          }
+          tempMovement.AddRange(line.ToCharArray().ToList());
         }
       }
       #endregion get Data
@@ -345,52 +330,27 @@ namespace AdventOfCodeNet9._2024.Day_15
         }
       }
 
-      DebugDrawMap(ref field, ref currentLocation);
 
       foreach (char c in tempMovement)
       {
         DoMoveInDirection(c, ref currentLocation, ref field);
-        DebugDrawMap(ref field, ref currentLocation);
+        //DebugDrawMap(ref field, ref currentLocation);
       }
-      totalCount = CalculatePosionsOfBoxex(ref field);
+      DebugDrawMap(ref field, ref currentLocation);
 
-      #endregion TestRun
-
-      #region 2nd Test??
-
-      if (section > 0)
+      long factor = 100;
+      for (int y = 0; y < field.GetLength(1); y++)
       {
-        result = $"Test 1: '{totalCount}', Test 2: ";
-
-        #region TestRun
-
-        field = new char[tempField2[0].Length, tempField2.Count];
-
-        for (int y = 0; y < tempField2.Count; y++)
+        for (int x = 0; x < field.GetLength(0); x++)
         {
-          for (int x = 0; x < tempField2[0].Length; x++)
+          if (field[x, y] == 'O')
           {
-            char c = tempField2[y][x];
-            if ('c' == '@')
-            {
-              currentLocation = new point(x, y);
-              c = '.';
-            }
-            field[x, y] = c;
+            totalCount += (factor * y) + x;
           }
         }
-
-        foreach (char c in tempMovement2)
-        {
-          DoMoveInDirection(c, ref currentLocation, ref field);
-        }
-        totalCount = CalculatePosionsOfBoxex(ref field);
-
-        #endregion TestRun
-
       }
 
-      #endregion 2nd Test??
+      #endregion TestRun
 
       result += totalCount.ToString();
       return result;
@@ -491,10 +451,6 @@ namespace AdventOfCodeNet9._2024.Day_15
       return firstGap;
     }
 
-    private long CalculatePosionsOfBoxex(ref char[,] field)
-    {
-      throw new NotImplementedException();
-    }
 
     private void DebugDrawMap(ref char[,] field, ref point currentLocation)
     {
