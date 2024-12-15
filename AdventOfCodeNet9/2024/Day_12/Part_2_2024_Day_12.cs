@@ -89,7 +89,8 @@ namespace AdventOfCodeNet9._2024.Day_12
     /// 913182 // too high ... issue with included items ... some were alredy included  with the outlines ...
     /// 895030 // too high ... already counted all borders, not sure what is wrong now ...
     /// 894530 // not the right answer !!!
-    /// 894528 <- remove 2 because of the 6-sided R-field in the V - counts up to 30, so I addded 8 :-/
+    /// 893790 <- remove 740 because of the 6-sided R-field in the V - counts up to 30, so I addded 8 :-/ remove (2x370)
+    /// 893790
     /// </returns>
     public override string Execute()
     {
@@ -404,9 +405,13 @@ namespace AdventOfCodeNet9._2024.Day_12
         {
           if (missingPerimeter != 8)
           {
+            patch.perimeter += missingPerimeter;
             Debugger.Break();
           }
-          patch.perimeter += 8;
+          else
+          {
+            patch.perimeter += 8;
+          }
         }
         else if (PatchFencesRemaining == 45 /* T-Shaped 8 fences ??*/)
         {
