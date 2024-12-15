@@ -330,13 +330,13 @@ namespace AdventOfCodeNet9._2024.Day_15
         }
       }
 
-
+      //DebugDrawMap(ref field, ref currentLocation);
       foreach (char c in tempMovement)
       {
         DoMoveInDirection(c, ref currentLocation, ref field);
         //DebugDrawMap(ref field, ref currentLocation);
       }
-      DebugDrawMap(ref field, ref currentLocation);
+      //DebugDrawMap(ref field, ref currentLocation);
 
       long factor = 100;
       for (int y = 0; y < field.GetLength(1); y++)
@@ -450,7 +450,6 @@ namespace AdventOfCodeNet9._2024.Day_15
       Debug.Assert(firstGap > 0);
       return firstGap;
     }
-
 
     private void DebugDrawMap(ref char[,] field, ref point currentLocation)
     {
