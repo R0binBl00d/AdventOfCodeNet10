@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Linq;
 using AdventOfCodeNet9.Extensions;
 
 namespace AdventOfCodeNet9._2024.Day_12
@@ -82,9 +84,12 @@ namespace AdventOfCodeNet9._2024.Day_12
     /// </summary>
     /// <returns>
     /// (1206) Test
+    /// 1465112 (1st Part)
     /// 874174 // too low ... missing the inside ones !!!
-    /// 913182 // too high ... damn
-    /// 
+    /// 913182 // too high ... issue with included items ... some were alredy included  with the outlines ...
+    /// 895030 // too high ... already counted all borders, not sure what is wrong now ...
+    /// 894530 // not the right answer !!!
+    /// 894528 <- remove 2 because of the 6-sided R-field in the V - counts up to 30, so I addded 8 :-/
     /// </returns>
     public override string Execute()
     {
@@ -111,7 +116,7 @@ namespace AdventOfCodeNet9._2024.Day_12
           ))
           {
             fMap.Add((x, y), (id, Lines[y][x]));
-            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<(int x, int y)>() { (x, y) }));
+            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<point>() { new point(x, y) }));
             id++;
           }
         }
@@ -136,8 +141,8 @@ namespace AdventOfCodeNet9._2024.Day_12
               fPatches[neighbors[0]].area += fPatches[neighbors[1]].area;
               foreach (var p in fPatches[neighbors[1]].points)
               {
-                fMap[(p.x, p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
-                fPatches[neighbors[0]].points.Add((p.x, p.y));
+                fMap[((int)p.x, (int)p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
+                fPatches[neighbors[0]].points.Add(new point(p.x, p.y));
               }
 
               fPatches.Remove(neighbors[1]);
@@ -151,16 +156,71 @@ namespace AdventOfCodeNet9._2024.Day_12
       }
       #endregion filter for connected patches
 
+      foreach (var patch in fPatches.Values)
+      {
+        patch.perimeter = 0;
+        foreach (var p in patch.points)
+        {
+          if (patch.points.Contains(new point(p.x, p.y - 1)))
+          {
+            patch.perimeter += 0;
+          }
+          else
+          {
+            patch.perimeter += 1;
+            p.tag |= 0x01; // top
+          }
+          if (patch.points.Contains(new point(p.x + 1, p.y)))
+          {
+            patch.perimeter += 0;
+          }
+          else
+          {
+            patch.perimeter += 1;
+            p.tag |= 0x02; // right
+          }
+          if (patch.points.Contains(new point(p.x, p.y + 1)))
+          {
+            patch.perimeter += 0;
+          }
+          else
+          {
+            patch.perimeter += 1;
+            p.tag |= 0x04; // bottom
+          }
+          if (patch.points.Contains(new point(p.x - 1, p.y)))
+          {
+            patch.perimeter += 0;
+          }
+          else
+          {
+            patch.perimeter += 1;
+            p.tag |= 0x08; // left
+          }
+        }
+      }
+
+      // Calculate result:
+      //foreach (var patch in fPatches.Values)
+      //{
+      //  totalCount += patch.area * (long)patch.perimeter;
+      //}
+      //totalCount = 0;
+
       #region Walk arround the Edges
       foreach (var patch in fPatches.Values)
       {
-        int orientation = 0; // == Left
+        int orientation = 0; // == Top
         // TopLeftCorner
-        int start_y = patch.points.Select(p => p.y).Order().First();
-        int start_x = patch.points.Where(p => p.y == start_y).Select(p=>p.x).Order().First();
-        int curr_x = start_x;
-        int curr_y = start_y;
-        if(patch.perimeter == null) patch.perimeter = 0;
+        long start_y = patch.points.Select(p => p.y).Order().First();
+        long start_x = patch.points.Where(p => p.y == start_y).Select(p => p.x).Order().First();
+        long curr_x = start_x;
+        long curr_y = start_y;
+
+        // reset perimeter, count long straights now
+        patch.perimeter = 0;
+        // for start orientation top remove the fence
+        patch.points[patch.points.IndexOf(new point(start_x, start_y))].tag &= ~0x01;
 
         var seeWhosArroundUs = new List<int>();
         do
@@ -168,21 +228,23 @@ namespace AdventOfCodeNet9._2024.Day_12
           switch (orientation) // orientation of fence / line
           {
             case 0: // Top
-              (int x, int y) point_r = (curr_x + 1, curr_y);
+              point point_r = new point(curr_x + 1, curr_y);
               if (patch.points.Contains(point_r)) // check right
               {
                 // exists also a diagonal?
-                if (patch.points.Contains((curr_x + 1, curr_y - 1))) // check right top
+                if (patch.points.Contains(new point(curr_x + 1, curr_y - 1))) // check right top
                 {
                   orientation = 3; // left
                   patch.perimeter++;
                   curr_x++;
                   curr_y--;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
                 }
                 else
                 {
                   // still topmost, go there
                   curr_x++;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
                 }
               }
               else
@@ -190,30 +252,33 @@ namespace AdventOfCodeNet9._2024.Day_12
                 // doesn't exist, so we start a new line at the right
                 patch.perimeter++;
                 orientation = 1;
+                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
                 if ((point_r.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_r.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
-                  seeWhosArroundUs.Add(fMap[(point_r.x,point_r.y)].id);
+                  seeWhosArroundUs.Add(fMap[((int)point_r.x, (int)point_r.y)].id);
                 }
               }
 
               break;
             case 1: // Right
-              (int x, int y) point_b = (curr_x, curr_y +1);
+              point point_b = new point(curr_x, curr_y + 1);
               if (patch.points.Contains(point_b)) // check bottom
               {
                 // exists also a diagonal?
-                if (patch.points.Contains((curr_x + 1, curr_y + 1))) // check right bottom
+                if (patch.points.Contains(new point(curr_x + 1, curr_y + 1))) // check right bottom
                 {
                   orientation = 0; // top
                   patch.perimeter++;
                   curr_x++;
                   curr_y++;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
                 }
                 else
                 {
                   // still rightmost, go there
                   curr_y++;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
                 }
               }
               else
@@ -221,30 +286,33 @@ namespace AdventOfCodeNet9._2024.Day_12
                 // doesn't exist, so we start a new line at the bottom
                 patch.perimeter++;
                 orientation = 2;
+                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
                 if ((point_b.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_b.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
-                  seeWhosArroundUs.Add(fMap[(point_b.x, point_b.y)].id);
+                  seeWhosArroundUs.Add(fMap[((int)point_b.x, (int)point_b.y)].id);
                 }
               }
 
               break;
             case 2: // Bottom
-              (int x, int y) point_l = (curr_x -1, curr_y);
+              point point_l = new point(curr_x - 1, curr_y);
               if (patch.points.Contains(point_l)) // check left
               {
                 // exists also a diagonal?
-                if (patch.points.Contains((curr_x - 1, curr_y + 1))) // check left bottom
+                if (patch.points.Contains(new point(curr_x - 1, curr_y + 1))) // check left bottom
                 {
                   orientation = 1; // right
                   patch.perimeter++;
                   curr_x--;
                   curr_y++;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
                 }
                 else
                 {
                   // still bottommost, go there
                   curr_x--;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
                 }
               }
               else
@@ -252,30 +320,33 @@ namespace AdventOfCodeNet9._2024.Day_12
                 // doesn't exist, so we start a new line at the left
                 patch.perimeter++;
                 orientation = 3;
+                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
                 if ((point_l.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_l.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
-                  seeWhosArroundUs.Add(fMap[(point_l.x, point_l.y)].id);
+                  seeWhosArroundUs.Add(fMap[((int)point_l.x, (int)point_l.y)].id);
                 }
               }
 
               break;
             case 3: // Left (start here)
-              (int x, int y) point_t = (curr_x, curr_y - 1);
+              point point_t = new point(curr_x, curr_y - 1);
               if (patch.points.Contains(point_t)) // check top
               {
                 // exists also a diagonal?
-                if (patch.points.Contains((curr_x - 1, curr_y - 1))) // check left top
+                if (patch.points.Contains(new point(curr_x - 1, curr_y - 1))) // check left top
                 {
                   orientation = 2; // bottom
                   patch.perimeter++;
                   curr_x--;
                   curr_y--;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
                 }
                 else
                 {
                   // still leftmost, go there
                   curr_y--;
+                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
                 }
               }
               else
@@ -283,10 +354,11 @@ namespace AdventOfCodeNet9._2024.Day_12
                 // doesn't exist, so we start a new line at the top
                 patch.perimeter++;
                 orientation = 0;
+                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
                 if ((point_t.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_t.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
-                  seeWhosArroundUs.Add(fMap[(point_t.x, point_t.y)].id);
+                  seeWhosArroundUs.Add(fMap[((int)point_t.x, (int)point_t.y)].id);
                 }
               }
 
@@ -294,71 +366,62 @@ namespace AdventOfCodeNet9._2024.Day_12
           }
         } while (!(orientation == 0 && curr_x == start_x && curr_y == start_y) /*not back home*/);
 
-        var eIds = seeWhosArroundUs.Distinct().ToList();
-        if (eIds.Count == 1)
+        int PatchFencesRemaining = patch.points.Sum(p => p.tag);
+        if (PatchFencesRemaining == 0) continue;
+
+
+        var tmpLst = patch.points.Where(p => (p.tag & 4) == 4).ToList();
+        var fTmpPatchLst = new List<KeyValuePair<int, Patch>>();
+        foreach (var point in tmpLst)
         {
-          // I am embedded, so add my fences to the one embedding me
-          if (fPatches[eIds[0]].perimeter == null)
+          //var idList = new List<int>();
+          fTmpPatchLst.AddRange(fPatches.Where(f => f.Value.points.Contains(new point(point.x, point.y + 1))));
+        }
+
+        int missingPerimeter = 0;
+        foreach (var key in fTmpPatchLst.Select(f=>f.Key).Distinct().ToList())
+        {
+          missingPerimeter += (int)fPatches[key].perimeter;
+        }
+
+        if (PatchFencesRemaining == 15/*single items*/)
+        {
+          if (missingPerimeter != 4)
           {
-            fPatches[eIds[0]].perimeter = patch.perimeter;
+            Debugger.Break();
           }
-          else
+          patch.perimeter += 4;
+        }
+        else if (PatchFencesRemaining == 20 /*two horizontal*/ || PatchFencesRemaining == 25 /*two vertical or three horizontal*/)
+        {
+          if (missingPerimeter != 4)
           {
-            fPatches[eIds[0]].perimeter += patch.perimeter;
+            Debugger.Break();
           }
+          patch.perimeter += 4;
+        }
+        else if (PatchFencesRemaining == 30 /* multiple single items or L shaped 3 items*/)
+        {
+          if (missingPerimeter != 8)
+          {
+            Debugger.Break();
+          }
+          patch.perimeter += 8;
+        }
+        else if (PatchFencesRemaining == 45 /* T-Shaped 8 fences ??*/)
+        {
+          if (missingPerimeter != 8)
+          {
+            Debugger.Break();
+          }
+          patch.perimeter += 8;
+        }
+        else
+        {
+          Debugger.Break();
         }
       }
       #endregion
-
-
-      #region check and add internal patches - didn't work
-      /*
-      List<int> embeddedIds = new List<int>();
-      foreach (var patch in fPatches.Values)
-      {
-        int mainId = fMap[(patch.points[0].x, patch.points[0].y)].id;
-        int min_y = patch.points.Select(p => p.y).Order().First();
-        int max_y = patch.points.Select(p => p.y).OrderDescending().First();
-
-        for (int y=min_y; y <= max_y; y++)
-        {
-          int min_x = patch.points.Where(p => p.y == y).Select(p => p.x).Order().First();
-          int max_x = patch.points.Where(p => p.y == y).Select(p => p.x).OrderDescending().First();
-          for (int x = min_x; x <= max_x; x++)
-          {
-            if (mainId != fMap[(x, y)].id)
-            {
-              // check embedded again
-              int min_ex = fPatches[fMap[(x, y)].id].points.Select(p => p.x).Order().First();
-              int max_ex = fPatches[fMap[(x, y)].id].points.Select(p => p.x).OrderDescending().First();
-              int min_ey = fPatches[fMap[(x, y)].id].points.Select(p => p.y).Order().First();
-              int max_ey = fPatches[fMap[(x, y)].id].points.Select(p => p.y).OrderDescending().First();
-
-              if
-              (
-                min_ex >= min_x &&
-                max_ex <= max_x &&
-                min_ey >= min_y &&
-                max_ey <= max_y
-              )
-              {
-                embeddedIds.Add(fMap[(x, y)].id);
-              }
-            }
-          }
-        }
-
-        var eIds = embeddedIds.Distinct().ToList();
-        if (eIds.Count > 0)
-        {
-          foreach (var eId in eIds)
-          {
-            patch.perimeter += fPatches[eId].perimeter;
-          }
-        }
-      }
-      */
-      #endregion check and add internal patches
 
       // Calculate result:
       foreach (var patch in fPatches.Values)
@@ -426,7 +489,7 @@ namespace AdventOfCodeNet9._2024.Day_12
         {
           if (!fMap.ContainsKey((current.x, current.y))) fMap.Add((current.x, current.y), (spot.id, spot.flower));
           fPatches[spot.id].area++;
-          fPatches[spot.id].points.Add((current.x, current.y));
+          fPatches[spot.id].points.Add(new point(current.x, current.y));
           return true;
         }
       }
