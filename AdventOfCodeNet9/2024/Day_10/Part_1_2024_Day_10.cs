@@ -1,14 +1,13 @@
 using System.Security.Cryptography.X509Certificates;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
-namespace AdventOfCodeNet9._2024.Day_10
+namespace AdventOfCodeNet10._2024.Day_10
 {
   internal class Part_1_2024_Day_10 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/10
-
     --- Day 10: Hoof It ---
     You all arrive at a Lava Production Facility on a floating island in the sky.
     As the others begin to search the massive industrial complex, you feel a small
@@ -95,7 +94,6 @@ namespace AdventOfCodeNet9._2024.Day_10
     
     The reindeer gleefully carries over a protractor and adds it to the pile. What
     is the sum of the scores of all trailheads on your topographic map?
-    
     */
     /// </summary>
     /// <returns>

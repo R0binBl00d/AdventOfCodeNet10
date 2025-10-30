@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2024.Day_02
+namespace AdventOfCodeNet10._2024.Day_02
 {
   internal class Part_2_2024_Day_02 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/2
-
     --- Part Two ---
     The engineers are surprised by the low number of safe reports until they
     realize they forgot to tell you about the Problem Dampener.
@@ -29,8 +28,6 @@ namespace AdventOfCodeNet9._2024.Day_02
     
     Update your analysis by handling situations where the Problem Dampener can
     remove a single level from unsafe reports. How many reports are now safe?
-    
-
     */
     /// </summary>
     /// <returns>

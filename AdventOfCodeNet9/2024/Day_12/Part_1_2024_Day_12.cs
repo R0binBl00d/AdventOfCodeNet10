@@ -1,16 +1,15 @@
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
-namespace AdventOfCodeNet9._2024.Day_12
+namespace AdventOfCodeNet10._2024.Day_12
 {
   internal class Part_1_2024_Day_12 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/12
-
-        --- Day 12: Garden Groups ---
+    --- Day 12: Garden Groups ---
     Why not search for the Chief Historian near the gardener and his massive farm?
     There's plenty of food, so The Historians grab something to eat while they
     search.

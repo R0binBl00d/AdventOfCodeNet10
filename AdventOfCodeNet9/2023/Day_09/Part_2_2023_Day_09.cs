@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCodeNet9._2023.Day_09
+namespace AdventOfCodeNet10._2023.Day_09
 {
   internal class Part_2_2023_Day_09 : Days
   {
@@ -109,9 +109,7 @@ namespace AdventOfCodeNet9._2023.Day_09
     is the sum of these extrapolated values?
     
     Your puzzle answer was 1974913025.
-    
-    The first half of this puzzle is complete! It provides one gold star: *
-    
+        
     --- Part Two ---
     Of course, it would be nice to have even more history included in your report.
     Surely it's safe to just extrapolate backwards as well, right?
@@ -142,7 +140,7 @@ namespace AdventOfCodeNet9._2023.Day_09
     */
     /// </summary>
     /// <returns>
-    /// 884
+    /// Your puzzle answer was 884
     /// </returns>
     public override string Execute()
     {

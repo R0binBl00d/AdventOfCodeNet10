@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace AdventOfCodeNet9._2023.Day_06
+namespace AdventOfCodeNet10._2023.Day_06
 {
   internal class Part_1_2023_Day_06 : Days
   {
@@ -82,7 +82,6 @@ namespace AdventOfCodeNet9._2023.Day_06
     
     Determine the number of ways you could beat the record in each race. What do you get if
     you multiply these numbers together?
-
     */
     /// </summary>
     /// <returns>

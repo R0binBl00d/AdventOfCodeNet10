@@ -1,6 +1,6 @@
 using Coordinate = (long x, long y);
 
-namespace AdventOfCodeNet9._2023.Day_11
+namespace AdventOfCodeNet10._2023.Day_11
 {
   internal class Part_2_2023_Day_11 : Days
   {

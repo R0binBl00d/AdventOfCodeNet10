@@ -1,14 +1,13 @@
 using System.Diagnostics;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
-namespace AdventOfCodeNet9._2024.Day_14
+namespace AdventOfCodeNet10._2024.Day_14
 {
   internal class Part_1_2024_Day_14 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/14
-
     --- Day 14: Restroom Redoubt ---
     One of The Historians needs to use the bathroom; fortunately, you know there's
     a bathroom near an unvisited location on their list, and so you're all quickly
@@ -150,7 +149,6 @@ namespace AdventOfCodeNet9._2024.Day_14
     Predict the motion of the robots in your list within a space which is 101 tiles
     wide and 103 tiles tall. What will the safety factor be after exactly 100
     seconds have elapsed?
-
     */
     /// </summary>
     /// <returns>

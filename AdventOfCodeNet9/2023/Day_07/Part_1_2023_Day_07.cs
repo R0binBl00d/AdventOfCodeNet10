@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace AdventOfCodeNet9._2023.Day_07
+namespace AdventOfCodeNet10._2023.Day_07
 {
   internal class Part_1_2023_Day_07 : Days
   {
@@ -101,7 +101,8 @@ namespace AdventOfCodeNet9._2023.Day_07
     + 684 * 4 + 483 * 5). So the total winnings in this example are 6440.
     
     Find the rank of every hand in your set. What are the total winnings?
-
+    
+    Your puzzle answer was 248217452.
     */
     /// </summary>
     /// <returns>

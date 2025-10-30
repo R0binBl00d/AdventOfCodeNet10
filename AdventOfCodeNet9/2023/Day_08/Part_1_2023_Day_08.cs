@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2023.Day_08
+namespace AdventOfCodeNet10._2023.Day_08
 {
   internal class Part_1_2023_Day_08 : Days
   {
@@ -54,10 +54,12 @@ namespace AdventOfCodeNet9._2023.Day_08
     ZZZ = (ZZZ, ZZZ)
     Starting at AAA, follow the left/right instructions. How many steps are
     required to reach ZZZ?
+    
+    Your puzzle answer was 16409.
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// Your puzzle answer was 16409.
     /// </returns>
     public override string Execute()
     {

@@ -1,13 +1,10 @@
-using System.Diagnostics;
-
-namespace AdventOfCodeNet9._2024.Day_07
+namespace AdventOfCodeNet10._2024.Day_07
 {
   internal class Part_1_2024_Day_07 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/7
-
     --- Day 7: Bridge Repair ---
     The Historians take you to a familiar rope bridge over a river in the middle of
     a jungle. The Chief isn't on this side of the bridge, though; maybe he's on the
@@ -61,7 +58,6 @@ namespace AdventOfCodeNet9._2024.Day_07
     
     Determine which equations could possibly be true. What is their total
     calibration result?
-
     */
     /// </summary>
     /// <returns>

@@ -1,13 +1,12 @@
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
-namespace AdventOfCodeNet9._2024.Day_11
+namespace AdventOfCodeNet10._2024.Day_11
 {
   internal class Part_1_2024_Day_11 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/11
-
     --- Day 11: Plutonian Pebbles ---
     The ancient civilization on Pluto was known for its ability to manipulate
     spacetime, and while The Historians explore their infinite corridors, you've
@@ -80,7 +79,6 @@ namespace AdventOfCodeNet9._2024.Day_11
     
     Consider the arrangement of stones in front of you. How many stones will you
     have after blinking 25 times?
-
     */
     /// </summary>
     /// <returns>

@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Security.Authentication;
 
-namespace AdventOfCodeNet9._2024.Day_06
+namespace AdventOfCodeNet10._2024.Day_06
 {
   internal class Part_1_2024_Day_06 : Days
   {

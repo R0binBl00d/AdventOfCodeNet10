@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCodeNet9._2023.Day_09
+namespace AdventOfCodeNet10._2023.Day_09
 {
   internal class Part_1_2023_Day_09 : Days
   {

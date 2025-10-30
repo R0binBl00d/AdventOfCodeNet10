@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace AdventOfCodeNet9._2023.Day_08
+namespace AdventOfCodeNet10._2023.Day_08
 {
   internal class Part_2_2023_Day_08 : Days
   {
@@ -59,8 +59,6 @@ namespace AdventOfCodeNet9._2023.Day_08
     
     Your puzzle answer was 16409.
     
-    The first half of this puzzle is complete! It provides one gold star: *
-    
     --- Part Two ---
     The sandstorm is upon you and you aren't any closer to escaping the wasteland.
     You had the camel follow the instructions, but you've barely left your starting
@@ -105,6 +103,8 @@ namespace AdventOfCodeNet9._2023.Day_08
     
     Simultaneously start on every node that ends with A. How many steps does it
     take before you're only on nodes that end with Z?
+    
+    Your puzzle answer was 11795205644011.
     */
     /// </summary>
     /// <returns>

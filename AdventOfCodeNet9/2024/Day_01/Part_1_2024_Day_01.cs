@@ -1,6 +1,6 @@
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
-namespace AdventOfCodeNet9._2024.Day_01
+namespace AdventOfCodeNet10._2024.Day_01
 {
   internal class Part_1_2024_Day_01 : Days
   {

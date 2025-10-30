@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2024.Day_13
+namespace AdventOfCodeNet10._2024.Day_13
 {
   internal class Part_1_2024_Day_13 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/13
-
     --- Day 13: Claw Contraption ---
     Next up: the lobby of a resort on a tropical island. The Historians take a
     moment to admire the hexagonal floor tiles before spreading out.
@@ -79,7 +78,6 @@ namespace AdventOfCodeNet9._2024.Day_13
     
     Figure out how to win as many prizes as possible. What is the fewest tokens you
     would have to spend to win all possible prizes?
-
     */
     /// </summary>
     /// <returns>

@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2024.Day_03
+namespace AdventOfCodeNet10._2024.Day_03
 {
   internal class Part_1_2024_Day_03 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/3
-
     --- Day 3: Mull It Over ---
     "Our computers are having issues, so I have no idea if we have any Chief
     Historians in stock! You're welcome to check the warehouse, though," says the
@@ -37,7 +36,6 @@ namespace AdventOfCodeNet9._2024.Day_03
     
     Scan the corrupted memory for uncorrupted mul instructions. What do you get if
     you add up all of the results of the multiplications?
-    
     */
     /// </summary>
     /// <returns>

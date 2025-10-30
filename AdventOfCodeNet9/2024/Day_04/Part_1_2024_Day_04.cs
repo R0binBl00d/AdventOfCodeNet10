@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2024.Day_04
+namespace AdventOfCodeNet10._2024.Day_04
 {
   internal class Part_1_2024_Day_04 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2024/day/4
-
     --- Day 4: Ceres Search ---
     "Looks like the Chief's not here. Next!" One of The Historians pulls out a
     device and pushes the only button on it. After a brief flash, you recognize the
@@ -54,8 +53,6 @@ namespace AdventOfCodeNet9._2024.Day_04
     ..M.M.M.MM
     .X.X.XMASX
     Take a look at the little Elf's word search. How many times does XMAS appear?
-
-
     */
     /// </summary>
     /// <returns>

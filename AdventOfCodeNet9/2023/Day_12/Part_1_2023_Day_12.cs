@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCodeNet9._2023.Day_12
+namespace AdventOfCodeNet10._2023.Day_12
 {
   internal class Part_1_2023_Day_12 : Days
   {

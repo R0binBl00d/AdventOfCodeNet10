@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using AdventOfCodeNet9.Extensions;
 using Microsoft.Win32.SafeHandles;
 
-namespace AdventOfCodeNet9._2024.Day_08
+namespace AdventOfCodeNet10._2024.Day_08
 {
   internal class Part_1_2024_Day_08 : Days
   {

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace AdventOfCodeNet9._2024.Day_05
+namespace AdventOfCodeNet10._2024.Day_05
 {
   internal class Part_1_2024_Day_05 : Days
   {
@@ -116,7 +116,6 @@ namespace AdventOfCodeNet9._2024.Day_05
     
     Determine which updates are already in the correct order. What do you get if
     you add up the middle page number from those correctly-ordered updates?
-
     */
     /// </summary>
     /// <returns>

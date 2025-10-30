@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 using AdventOfCodeNet9.Extensions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace AdventOfCodeNet9._2024.Day_11
+namespace AdventOfCodeNet10._2024.Day_11
 {
   internal class Part_2_2024_Day_11 : Days
   {
