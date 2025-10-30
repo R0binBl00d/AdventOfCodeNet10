@@ -5,7 +5,7 @@ using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 int startingFrom = 2015;
-int UntilTheYear = 2024;
+int UntilTheYear = 2025;
 
 try
 {
@@ -18,7 +18,8 @@ try
   var executable = new FileInfo(Assembly.GetExecutingAssembly().Location);
   var diExe = new DirectoryInfo(executable!.DirectoryName!);
 
-  var diTarget = new DirectoryInfo(Path.Combine(diExe.Parent!.Parent!.Parent!.Parent!.FullName, "AdventOfCodeNet9"));
+  // D:\\UserData\\Source\\Repos\\AdventOfCodeNet10\\FileGeneratorForMainApp\\bin\\Debug\\net10.0\\
+  var diTarget = new DirectoryInfo(Path.Combine(diExe.Parent!.Parent!.Parent!.Parent!.FullName, "AdventOfCodeNet10"));
 
   if (!diTarget.Exists)
   {
@@ -30,7 +31,6 @@ try
     return;
   }
 
-  // D:\\UserData\\Source\\Repos\\AdventOfCodeNet9\\FileGeneratorForMainApp\\bin\\Debug\\net9.0\\
 
   foreach (var subfolderYear in input)
   {
@@ -44,11 +44,11 @@ try
 
   Console.WriteLine("All the generated Files were placed into the Main ProjectFolder");
   Console.WriteLine("");
-  Console.WriteLine("Also the \"AdventOfCodeNet9.csproj\" File was changed, so it should automatically reload.");
+  Console.WriteLine("Also the \"AdventOfCodeNet10.csproj\" File was changed, so it should automatically reload.");
   Console.WriteLine("");
   Console.WriteLine("");
   Console.WriteLine("#################################################################################");
-  Console.WriteLine("###   DON'T FORGET to set \"AdventOfCodeNet9.csproj\" as STARTUP Project !!   ###");
+  Console.WriteLine("###   DON'T FORGET to set \"AdventOfCodeNet10.csproj\" as STARTUP Project !!   ###");
   Console.WriteLine("#################################################################################");
   Console.WriteLine("");
 }
@@ -68,7 +68,7 @@ void GenerateFoldersAndFiles(string SubfolderYear, DirectoryInfo di)
 
   StringBuilder sb = new StringBuilder();
 
-  using (StreamReader sr = new StreamReader(Path.Combine(di.FullName, "AdventOfCodeNet9.csproj")))
+  using (StreamReader sr = new StreamReader(Path.Combine(di.FullName, "AdventOfCodeNet10.csproj")))
   {
     sb.Append(sr.ReadToEnd());
   }
@@ -98,7 +98,7 @@ void GenerateFoldersAndFiles(string SubfolderYear, DirectoryInfo di)
   sb.AppendLine("  </ItemGroup>");
   sb.AppendLine("</Project>");
 
-  using (StreamWriter srInput = new StreamWriter(Path.Combine(di.FullName, "AdventOfCodeNet9.csproj"),
+  using (StreamWriter srInput = new StreamWriter(Path.Combine(di.FullName, "AdventOfCodeNet10.csproj"),
            Encoding.ASCII, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
   {
     srInput.Write(sb.ToString());
@@ -125,7 +125,7 @@ void GenerateFiles(string year, int day, DirectoryInfo daypath)
              Encoding.ASCII, new FileStreamOptions() { Mode = FileMode.Create, Access = FileAccess.Write }))
     {
       string text = """
-namespace AdventOfCodeNet9._##YEAR##.Day_##01##
+namespace AdventOfCodeNet10._##YEAR##.Day_##01##
 {
   internal class Part_##PART##_##YEAR##_Day_##01## : Days
   {
