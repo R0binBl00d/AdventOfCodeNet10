@@ -16,7 +16,7 @@ Instructions after unziping the ShareWare:
 - Rebuild both Projects in the Solution
 - Set "FileGeneratorForAocNet10" as Startup Project and run it !!
 
-- If there were no issues, "AdventOfCodeNet9"-Project should have reloaded
+- If there were no issues, "AdventOfCodeNet10"-Project should have reloaded
   On some of my tests the "2020"-Folder looked a bit weird, just restart VS2026 
 - Rebuild both Projects in the Solution
 
