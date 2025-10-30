@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Security.Cryptography.X509Certificates;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 using Microsoft.Win32.SafeHandles;
 
 namespace AdventOfCodeNet10._2024.Day_08

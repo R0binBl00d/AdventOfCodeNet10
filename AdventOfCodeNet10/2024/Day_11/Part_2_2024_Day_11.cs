@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection.Metadata.Ecma335;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AdventOfCodeNet10._2024.Day_11

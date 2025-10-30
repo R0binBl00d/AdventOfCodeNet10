@@ -1,4 +1,4 @@
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 using System.Diagnostics;
 using AdventOfCodeNet10._2024.Day_07;
 

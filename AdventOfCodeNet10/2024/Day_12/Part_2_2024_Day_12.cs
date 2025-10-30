@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Linq;
-using AdventOfCodeNet9.Extensions;
+using AdventOfCodeNet10.Extensions;
 
 namespace AdventOfCodeNet10._2024.Day_12
 {

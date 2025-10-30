@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace AdventOfCodeNet10._2023.Day_05
 {
   internal class Part_2_2023_Day_05 : Days
