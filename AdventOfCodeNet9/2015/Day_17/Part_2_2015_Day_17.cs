@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_17
+namespace AdventOfCodeNet10._2015.Day_17
 {
   internal class Part_2_2015_Day_17 : Days
   {
@@ -35,7 +35,6 @@ namespace AdventOfCodeNet9._2015.Day_17
     
     In the example above, the minimum number of containers was two. There were
     three ways to use that many containers, and so the answer there would be 3.
-    
     */
     /// </summary>
     /// <returns>

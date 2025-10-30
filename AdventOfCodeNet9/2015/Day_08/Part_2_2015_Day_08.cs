@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_08
+namespace AdventOfCodeNet10._2015.Day_08
 {
   internal class Part_2_2015_Day_08 : Days
   {
@@ -61,7 +61,6 @@ namespace AdventOfCodeNet9._2015.Day_08
     literal. For example, for the strings above, the total encoded length (6 + 9 +
     16 + 11 = 42) minus the characters in the original code representation (23,
     just like in the first part of this puzzle) is 42 - 23 = 19.
-    
     */
     /// </summary>
     /// <returns>

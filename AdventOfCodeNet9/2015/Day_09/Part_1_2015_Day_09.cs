@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_09
+namespace AdventOfCodeNet10._2015.Day_09
 {
   internal class Part_1_2015_Day_09 : Days
   {
@@ -30,7 +30,6 @@ namespace AdventOfCodeNet9._2015.Day_09
     is 605 in this example.
     
     What is the distance of the shortest route?
-  
     */
     /// </summary>
     /// <returns>

@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2020.Day_24
+namespace AdventOfCodeNet10._2020.Day_24
 {
   internal class Part_1_2020_Day_24 : Days
   {
@@ -13,7 +13,7 @@ namespace AdventOfCodeNet9._2020.Day_24
     public override string Execute()
     {
       string result = "";
-      int totalCount = 0;
+      long totalCount = 0;
 
       //
       // Automatically imported Text !!

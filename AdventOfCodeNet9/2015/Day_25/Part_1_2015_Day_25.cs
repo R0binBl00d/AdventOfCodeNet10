@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_25
+namespace AdventOfCodeNet10._2015.Day_25
 {
   internal class Part_1_2015_Day_25 : Days
   {
@@ -81,7 +81,6 @@ namespace AdventOfCodeNet9._2015.Day_25
     
     Santa looks nervous. Your puzzle input contains the message on the machine's
     console. What code do you give the machine?
-    
     */
     /// </summary>
     /// <returns>

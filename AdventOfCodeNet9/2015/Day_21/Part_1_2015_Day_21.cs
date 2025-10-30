@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_21
+namespace AdventOfCodeNet10._2015.Day_21
 {
   internal class Part_1_2015_Day_21 : Days
   {
@@ -67,7 +67,6 @@ namespace AdventOfCodeNet9._2015.Day_21
     
     You have 100 hit points. The boss's actual stats are in your puzzle input. What
     is the least amount of gold you can spend and still win the fight?
-    
     */
     /// </summary>
     /// <returns>

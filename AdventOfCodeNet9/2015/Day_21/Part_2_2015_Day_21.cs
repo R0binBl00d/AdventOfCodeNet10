@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_21
+namespace AdventOfCodeNet10._2015.Day_21
 {
   internal class Part_2_2015_Day_21 : Days
   {
@@ -78,11 +78,10 @@ namespace AdventOfCodeNet9._2015.Day_21
     of each item.
     
     What is the most amount of gold you can spend and still lose the fight?
-    
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// Your puzzle answer was 158.
     /// </returns>
     public override string Execute()
     {

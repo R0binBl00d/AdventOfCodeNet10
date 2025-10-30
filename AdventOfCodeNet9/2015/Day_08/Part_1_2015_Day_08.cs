@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_08
+namespace AdventOfCodeNet10._2015.Day_08
 {
   internal class Part_1_2015_Day_08 : Days
   {
@@ -41,8 +41,7 @@ namespace AdventOfCodeNet9._2015.Day_08
     For example, given the four strings above, the total number of characters of
     string code (2 + 5 + 10 + 6 = 23) minus the total number of characters in
     memory for string values (0 + 3 + 7 + 1 = 11) is 23 - 11 = 12.
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 1371.

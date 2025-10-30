@@ -1,10 +1,10 @@
-namespace AdventOfCodeNet9._2015.Day_03
+namespace AdventOfCodeNet10._2015.Day_03
 {
   internal class Part_1_2015_Day_03 : Days
   {
     /// <summary>
     /*
-     https://adventofcode.com/2015/day/3
+    https://adventofcode.com/2015/day/3
     --- Day 3: Perfectly Spherical Houses in a Vacuum ---
     Santa is delivering presents to an infinite two-dimensional grid of houses.
     
@@ -26,8 +26,7 @@ namespace AdventOfCodeNet9._2015.Day_03
     his starting/ending location.
     ^v^v^v^v^v delivers a bunch of presents to some very lucky children at only 2
     houses.
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 2572.

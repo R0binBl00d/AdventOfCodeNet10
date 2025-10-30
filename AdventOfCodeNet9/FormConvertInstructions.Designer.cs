@@ -1,4 +1,4 @@
-﻿namespace AdventOfCodeNet9
+﻿namespace AdventOfCodeNet10
 {
   partial class FormConvertInstructions
   {

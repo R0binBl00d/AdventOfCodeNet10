@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_02
+namespace AdventOfCodeNet10._2015.Day_02
 {
   internal class Part_2_2015_Day_02 : Days
   {
@@ -43,9 +43,8 @@ namespace AdventOfCodeNet9._2015.Day_02
     the present plus 2*3*4 = 24 feet of ribbon for the bow, for a total of 34 feet.
     A present with dimensions 1x1x10 requires 1+1+1+1 = 4 feet of ribbon to wrap
     the present plus 1*1*10 = 10 feet of ribbon for the bow, for a total of 14 feet.
-    How many total feet of ribbon should they order?
-
-    */
+    How many total feet of ribbon should they order?     
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 3842356.

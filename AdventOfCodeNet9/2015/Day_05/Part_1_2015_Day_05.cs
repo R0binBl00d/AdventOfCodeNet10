@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_05
+namespace AdventOfCodeNet10._2015.Day_05
 {
   internal class Part_1_2015_Day_05 : Days
   {
@@ -27,8 +27,7 @@ namespace AdventOfCodeNet9._2015.Day_05
     haegwjzuvuyypxyu is naughty because it contains the string xy.
     dvszwmarrgswjxmb is naughty because it contains only one vowel.
     How many strings are nice?
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 255.

@@ -1,10 +1,10 @@
-namespace AdventOfCodeNet9._2015.Day_03
+namespace AdventOfCodeNet10._2015.Day_03
 {
   internal class Part_2_2015_Day_03 : Days
   {
     /// <summary>
     /*
-https://adventofcode.com/2015/day/3
+    https://adventofcode.com/2015/day/3
     --- Day 3: Perfectly Spherical Houses in a Vacuum ---
     Santa is delivering presents to an infinite two-dimensional grid of houses.
     
@@ -45,9 +45,8 @@ https://adventofcode.com/2015/day/3
     ^>v< now delivers presents to 3 houses, and Santa and Robo-Santa end up back
     where they started.
     ^v^v^v^v^v now delivers presents to 11 houses, with Santa going one direction
-    and Robo-Santa going the other.
-    
-    */
+    and Robo-Santa going the other.     
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 2631.

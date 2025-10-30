@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_13
+namespace AdventOfCodeNet10._2015.Day_13
 {
   internal class Part_1_2015_Day_13 : Days
   {
@@ -49,8 +49,8 @@ namespace AdventOfCodeNet9._2015.Day_13
     find that this one is the most optimal, with a total change in happiness of 330.
     
     What is the total change in happiness for the optimal seating arrangement of
-    the actual guest list?    */
-
+    the actual guest list?    
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 618.

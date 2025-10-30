@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_24
+namespace AdventOfCodeNet10._2015.Day_24
 {
   internal class Part_1_2015_Day_24 : Days
   {
@@ -71,7 +71,6 @@ namespace AdventOfCodeNet9._2015.Day_24
     
     What is the quantum entanglement of the first group of packages in the ideal
     configuration?
-    
     */
     /// </summary>
     /// <returns>

@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_15
+namespace AdventOfCodeNet10._2015.Day_15
 {
   internal class Part_2_2015_Day_15 : Days
   {
@@ -62,7 +62,6 @@ namespace AdventOfCodeNet9._2015.Day_15
     
     Given the ingredients in your kitchen and their properties, what is the total
     score of the highest-scoring cookie you can make with a calorie total of 500?
-    
     */
     /// </summary>
     /// <returns>

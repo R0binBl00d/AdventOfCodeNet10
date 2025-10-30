@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace AdventOfCodeNet9.Extensions
+namespace AdventOfCodeNet10.Extensions
 {
   public enum IncludeBounds
   {

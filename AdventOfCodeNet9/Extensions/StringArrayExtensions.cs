@@ -1,6 +1,9 @@
-﻿namespace AdventOfCodeNet9.Extensions
-{
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
+namespace AdventOfCodeNet10.Extensions
+{
   public static class StringArrayExtensions
   {
     /// <summary>

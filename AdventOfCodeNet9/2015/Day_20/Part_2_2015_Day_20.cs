@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_20
+namespace AdventOfCodeNet10._2015.Day_20
 {
   internal class Part_2_2015_Day_20 : Days
   {
@@ -50,7 +50,6 @@ namespace AdventOfCodeNet9._2015.Day_20
     
     With these changes, what is the new lowest house number of the house to get at
     least as many presents as the number in your puzzle input?
-    
     */
     /// </summary>
     /// <returns>

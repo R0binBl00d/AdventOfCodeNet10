@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_25
+namespace AdventOfCodeNet10._2015.Day_25
 {
   internal class Part_2_2015_Day_25 : Days
   {
@@ -72,28 +72,23 @@ namespace AdventOfCodeNet9._2015.Day_25
     
     Santa looks nervous. Your puzzle input contains the message on the machine's
     console. What code do you give the machine?
-    
-    Your puzzle answer was 19980801.
-    
-    The first half of this puzzle is complete! It provides one gold star: *
-    
+	
     --- Part Two ---
-    The machine springs to life, then falls silent again. It beeps.
-    "Insufficient fuel", the console reads. "Fifty stars are required before
-    proceeding. One star is available."
+    The machine springs to life, then falls silent again. It beeps. "Insufficient
+    fuel", the console reads. "Fifty stars are required before proceeding. One star
+    is available."
     
     ..."one star is available"? You check the fuel tank; sure enough, a lone star
     sits at the bottom, awaiting its friends. Looks like you need to provide 49
     yourself.
     
-    You don't have enough stars to start the machine, though. You need 3 more.
+    If you like, you can .
     
-    Although it hasn't changed, you can still get your puzzle input.
-    
-     */
+    Both parts of this puzzle are complete! They provide two gold stars: **
+    */
     /// </summary>
     /// <returns>
-    /// 19980801
+    /// Your puzzle answer was 19980801.
     /// </returns>
     public override string Execute()
     {

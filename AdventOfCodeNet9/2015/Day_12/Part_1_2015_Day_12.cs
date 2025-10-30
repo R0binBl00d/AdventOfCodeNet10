@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_12
+namespace AdventOfCodeNet10._2015.Day_12
 {
   internal class Part_1_2015_Day_12 : Days
   {
@@ -22,8 +22,8 @@ namespace AdventOfCodeNet9._2015.Day_12
     [] and {} both have a sum of 0.
     You will not encounter any strings containing numbers.
     
-    What is the sum of all numbers in the document?    */
-
+    What is the sum of all numbers in the document?    
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 156366.

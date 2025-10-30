@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_16
+namespace AdventOfCodeNet10._2015.Day_16
 {
   internal class Part_2_2015_Day_16 : Days
   {
@@ -66,7 +66,6 @@ namespace AdventOfCodeNet9._2015.Day_16
     fewer than that many (due to the modial interaction of magnetoreluctance).
     
     What is the number of the real Aunt Sue?
-    
     */
     /// </summary>
     /// <returns>

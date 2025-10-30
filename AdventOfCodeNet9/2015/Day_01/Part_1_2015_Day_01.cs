@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_01
+namespace AdventOfCodeNet10._2015.Day_01
 {
   internal class Part_1_2015_Day_01 : Days
   {
@@ -36,7 +36,7 @@ namespace AdventOfCodeNet9._2015.Day_01
     ()) and ))( both result in floor -1 (the first basement level).
     ))) and )())()) both result in floor -3.
     To what floor do the instructions take Santa?
-    
+
      */
     /// </summary>
     /// <returns>

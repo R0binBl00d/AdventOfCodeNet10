@@ -1,6 +1,5 @@
 using System.Text;
-
-namespace AdventOfCodeNet9._2015.Day_10
+namespace AdventOfCodeNet10._2015.Day_10
 {
   internal class Part_2_2015_Day_10 : Days
   {
@@ -38,7 +37,7 @@ namespace AdventOfCodeNet9._2015.Day_10
     
     Now, starting again with the digits in your puzzle input, apply this process 50
     times. What is the length of the new result?    
-    */
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 5103798.

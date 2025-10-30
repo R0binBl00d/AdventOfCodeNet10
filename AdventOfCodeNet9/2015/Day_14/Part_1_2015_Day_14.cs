@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_14
+namespace AdventOfCodeNet10._2015.Day_14
 {
   internal class Part_1_2015_Day_14 : Days
   {
@@ -30,7 +30,6 @@ namespace AdventOfCodeNet9._2015.Day_14
     
     Given the descriptions of each reindeer (in your puzzle input), after exactly
     2503 seconds, what distance has the winning reindeer traveled?
-    
     */
     /// </summary>
     /// <returns>

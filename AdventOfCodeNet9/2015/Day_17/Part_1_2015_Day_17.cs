@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_17
+namespace AdventOfCodeNet10._2015.Day_17
 {
   internal class Part_1_2015_Day_17 : Days
   {
@@ -18,8 +18,8 @@ namespace AdventOfCodeNet9._2015.Day_17
     20 and 5 (the second 5)
     15, 5, and 5
     Filling all containers entirely, how many different combinations of containers
-    can exactly fit all 150 liters of eggnog?    */
-
+    can exactly fit all 150 liters of eggnog?    
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 654.

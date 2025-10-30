@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
-
-namespace AdventOfCodeNet9._2015.Day_19
+namespace AdventOfCodeNet10._2015.Day_19
 {
   internal class Part_2_2015_Day_19 : Days
   {
@@ -80,7 +79,6 @@ namespace AdventOfCodeNet9._2015.Day_19
     How long will it take to make the medicine? Given the available replacements
     and the medicine molecule in your puzzle input, what is the fewest number of
     steps to go from e to the medicine molecule?
-    
     */
     /// </summary>
     /// <returns>

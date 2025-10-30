@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_11
+namespace AdventOfCodeNet10._2015.Day_11
 {
   internal class Part_2_2015_Day_11 : Days
   {
@@ -47,8 +47,8 @@ namespace AdventOfCodeNet9._2015.Day_11
     The first half of this puzzle is complete! It provides one gold star: *
     
     --- Part Two ---
-    Santa's password expired again. What's the next one?    */
-
+    Santa's password expired again. What's the next one?    
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was heqaabcc.

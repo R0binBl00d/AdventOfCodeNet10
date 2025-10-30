@@ -1,10 +1,10 @@
-namespace AdventOfCodeNet9._2015.Day_13
+namespace AdventOfCodeNet10._2015.Day_13
 {
   internal class Part_2_2015_Day_13 : Days
   {
     /// <summary>
     /*
-    https://adventofcode.com/2015/day/1
+    https://adventofcode.com/2015/day/13
     --- Day 13: Knights of the Dinner Table ---
     In years past, the holiday feast with your family hasn't gone so well. Not
     everyone gets along! This year, you resolve, will be different. You're going to
@@ -66,7 +66,6 @@ namespace AdventOfCodeNet9._2015.Day_13
     
     What is the total change in happiness for the optimal seating arrangement that
     actually includes yourself?
-    
     */
     /// </summary>
     /// <returns>

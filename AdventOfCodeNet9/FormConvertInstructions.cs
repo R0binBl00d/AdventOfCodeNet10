@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text;
 
-namespace AdventOfCodeNet9
+namespace AdventOfCodeNet10
 {
   public partial class FormConvertInstructions : Form
   {

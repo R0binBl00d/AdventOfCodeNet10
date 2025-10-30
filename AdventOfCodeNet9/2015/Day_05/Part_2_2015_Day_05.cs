@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_05
+namespace AdventOfCodeNet10._2015.Day_05
 {
   internal class Part_2_2015_Day_05 : Days
   {
@@ -53,8 +53,7 @@ namespace AdventOfCodeNet9._2015.Day_05
     ieodomkazucvgmuy is naughty because it has a repeating letter with one between
     (odo), but no pair that appears twice.
     How many strings are nice under these new rules?
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 55.

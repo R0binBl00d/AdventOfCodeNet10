@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_19
+namespace AdventOfCodeNet10._2015.Day_19
 {
   internal class Part_1_2015_Day_19 : Days
   {
@@ -48,7 +48,6 @@ namespace AdventOfCodeNet9._2015.Day_19
     bottom, the medicine molecule for which you need to calibrate the machine. How
     many distinct molecules can be created after all the different ways you can do
     one replacement on the medicine molecule?
-    
     */
     /// </summary>
     /// <returns>

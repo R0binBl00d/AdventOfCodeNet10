@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2015.Day_01
+namespace AdventOfCodeNet10._2015.Day_01
 {
   internal class Part_2_2015_Day_01 : Days
   {
     /// <summary>
     /*
-     https://adventofcode.com/2015/day/1
-
+    https://adventofcode.com/2015/day/1
     --- Day 1: Not Quite Lisp ---
     Santa was hoping for a white Christmas, but his weather machine's "snow"
     function is powered by stars, and he's fresh out! To save Christmas, he needs
@@ -50,7 +49,6 @@ namespace AdventOfCodeNet9._2015.Day_01
     ()()) causes him to enter the basement at character position 5.
     What is the position of the character that causes Santa to first enter the
     basement?
-
     */
     /// </summary>
     /// <returns>

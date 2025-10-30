@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Text.Json;
-
-namespace AdventOfCodeNet9._2015.Day_12
+namespace AdventOfCodeNet10._2015.Day_12
 {
   internal class Part_2_2015_Day_12 : Days
   {
@@ -44,7 +43,7 @@ namespace AdventOfCodeNet9._2015.Day_12
     {"d":"red","e":[1,2,3,4],"f":5} now has a sum of 0, because the entire
     structure is ignored.
     [1,"red",5] has a sum of 6, because "red" in an array has no effect.    
-    */
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 96852

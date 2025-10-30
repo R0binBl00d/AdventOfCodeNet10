@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AdventOfCodeNet9
+namespace AdventOfCodeNet10
 {
   public abstract class Days
   {

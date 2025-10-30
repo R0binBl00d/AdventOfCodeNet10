@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_22
+namespace AdventOfCodeNet10._2015.Day_22
 {
   internal class Part_1_2015_Day_22 : Days
   {
@@ -137,7 +137,6 @@ namespace AdventOfCodeNet9._2015.Day_22
     in your puzzle input. What is the least amount of mana you can spend and still
     win the fight? (Do not include mana recharge effects as "spending" negative
     mana.)
-    
     */
     /// </summary>
     /// <returns>

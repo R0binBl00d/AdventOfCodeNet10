@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_11
+namespace AdventOfCodeNet10._2015.Day_11
 {
   internal class Part_1_2015_Day_11 : Days
   {
@@ -41,7 +41,6 @@ namespace AdventOfCodeNet9._2015.Day_11
     the passwords that start with ghi..., since i is not allowed.
     Given Santa's current password (your puzzle input), what should his next
     password be?
-    
     */
     /// </summary>
     /// <returns>

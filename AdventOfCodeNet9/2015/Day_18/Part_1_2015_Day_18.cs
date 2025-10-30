@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_18
+namespace AdventOfCodeNet10._2015.Day_18
 {
   internal class Part_1_2015_Day_18 : Days
   {
@@ -87,7 +87,6 @@ namespace AdventOfCodeNet9._2015.Day_18
     
     In your grid of 100x100 lights, given your initial configuration, how many
     lights are on after 100 steps?
-    
     */
     /// </summary>
     /// <returns>

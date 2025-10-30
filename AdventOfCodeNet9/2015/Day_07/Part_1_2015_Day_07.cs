@@ -1,6 +1,5 @@
 using System.Diagnostics;
-
-namespace AdventOfCodeNet9._2015.Day_07
+namespace AdventOfCodeNet10._2015.Day_07
 {
   internal class Part_1_2015_Day_07 : Days
   {
@@ -58,8 +57,7 @@ namespace AdventOfCodeNet9._2015.Day_07
     y: 456
     In little Bobby's kit's instructions booklet (provided as your puzzle input),
     what signal is ultimately provided to wire a?
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 16076.
@@ -360,7 +358,7 @@ namespace AdventOfCodeNet9._2015.Day_07
             if (first != -1)
             {
               HasResult = true;
-              Result = (ushort)~first;
+              Result = (ushort)(~first & 0xFFFF);
               return;
             }
             else

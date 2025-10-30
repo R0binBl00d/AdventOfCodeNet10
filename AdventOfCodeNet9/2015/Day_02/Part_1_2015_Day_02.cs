@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_02
+namespace AdventOfCodeNet10._2015.Day_02
 {
   internal class Part_1_2015_Day_02 : Days
   {
@@ -27,7 +27,6 @@ namespace AdventOfCodeNet9._2015.Day_02
     wrapping paper plus 1 square foot of slack, for a total of 43 square feet.
     All numbers in the elves' list are in feet. How many total square feet of
     wrapping paper should they order?
-    
     */
     /// </summary>
     /// <returns>

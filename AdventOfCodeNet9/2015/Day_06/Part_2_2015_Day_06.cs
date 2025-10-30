@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_06
+namespace AdventOfCodeNet10._2015.Day_06
 {
   internal class Part_2_2015_Day_06 : Days
   {
@@ -57,7 +57,6 @@ namespace AdventOfCodeNet9._2015.Day_06
     
     turn on 0,0 through 0,0 would increase the total brightness by 1.
     toggle 0,0 through 999,999 would increase the total brightness by 2000000.
-    
     */
     /// </summary>
     /// <returns>

@@ -1,6 +1,5 @@
 using System.Diagnostics;
-
-namespace AdventOfCodeNet9._2015.Day_07
+namespace AdventOfCodeNet10._2015.Day_07
 {
   internal class Part_2_2015_Day_07 : Days
   {
@@ -65,8 +64,7 @@ namespace AdventOfCodeNet9._2015.Day_07
     Now, take the signal you got on wire a, override wire b to that signal, and
     reset the other wires (including wire a). What new signal is ultimately
     provided to wire a?
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 2797.
@@ -380,7 +378,7 @@ namespace AdventOfCodeNet9._2015.Day_07
             if (first != -1)
             {
               HasResult = true;
-              Result = (ushort)~first;
+              Result = (ushort)(~first & 0xFFFF);
               return;
             }
             else

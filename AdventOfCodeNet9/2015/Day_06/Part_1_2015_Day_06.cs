@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_06
+namespace AdventOfCodeNet10._2015.Day_06
 {
   internal class Part_1_2015_Day_06 : Days
   {
@@ -31,8 +31,7 @@ namespace AdventOfCodeNet9._2015.Day_06
     turn off 499,499 through 500,500 would turn off (or leave off) the middle four
     lights.
     After following the instructions, how many lights are lit?
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 543903.

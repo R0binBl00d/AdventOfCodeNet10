@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_20
+namespace AdventOfCodeNet10._2015.Day_20
 {
   internal class Part_1_2015_Day_20 : Days
   {
@@ -39,7 +39,6 @@ namespace AdventOfCodeNet9._2015.Day_20
     as the number in your puzzle input?
     
     Your puzzle input is 36000000.
-    
     */
     /// </summary>
     /// <returns>

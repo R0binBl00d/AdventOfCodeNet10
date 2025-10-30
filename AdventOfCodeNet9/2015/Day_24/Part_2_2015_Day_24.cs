@@ -1,11 +1,10 @@
-namespace AdventOfCodeNet9._2015.Day_24
+namespace AdventOfCodeNet10._2015.Day_24
 {
   internal class Part_2_2015_Day_24 : Days
   {
     /// <summary>
     /*
     https://adventofcode.com/2015/day/24
-
     --- Day 24: It Hangs in the Balance ---
     It's Christmas Eve, and Santa is loading up the sleigh for this year's
     deliveries. However, there's one small problem: he can't get the sleigh to
@@ -92,7 +91,6 @@ namespace AdventOfCodeNet9._2015.Day_24
     
     Now, what is the quantum entanglement of the first group of packages in the
     ideal configuration?
-    
     */
     /// </summary>
     /// <returns>

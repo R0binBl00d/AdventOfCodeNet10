@@ -1,6 +1,5 @@
 using System.Text;
-
-namespace AdventOfCodeNet9._2015.Day_10
+namespace AdventOfCodeNet10._2015.Day_10
 {
   internal class Part_1_2015_Day_10 : Days
   {
@@ -26,9 +25,8 @@ namespace AdventOfCodeNet9._2015.Day_10
     1211 becomes 111221 (one 1, one 2, and two 1s).
     111221 becomes 312211 (three 1s, two 2s, and one 1).
     Starting with the digits in your puzzle input, apply this process 40 times.
-    What is the length of the result?
-    
-    */
+    What is the length of the result?    
+	*/
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 360154.

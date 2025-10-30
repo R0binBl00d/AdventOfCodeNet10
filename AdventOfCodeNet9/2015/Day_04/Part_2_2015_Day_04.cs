@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
-
-namespace AdventOfCodeNet9._2015.Day_04
+namespace AdventOfCodeNet10._2015.Day_04
 {
   internal class Part_2_2015_Day_04 : Days
   {
@@ -28,12 +27,10 @@ namespace AdventOfCodeNet9._2015.Day_04
     our puzzle answer was 117946.
     
     --- Part Two ---
-    Now find one that starts with six zeroes.
-
-    */
+    Now find one that starts with six zeroes.     
+	*/
     /// </summary>
     /// <returns>
-    /// (Test: 6742839)
     /// Your puzzle answer was 3938038.
     /// </returns>
     public override string Execute()

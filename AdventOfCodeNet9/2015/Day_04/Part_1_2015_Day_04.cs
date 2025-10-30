@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
-
-namespace AdventOfCodeNet9._2015.Day_04
+namespace AdventOfCodeNet10._2015.Day_04
 {
   internal class Part_1_2015_Day_04 : Days
   {
@@ -25,8 +24,7 @@ namespace AdventOfCodeNet9._2015.Day_04
     If your secret key is pqrstuv, the lowest number it combines with to make an
     MD5 hash starting with five zeroes is 1048970; that is, the MD5 hash of
     pqrstuv1048970 looks like 000006136ef....
-    
-     */
+    */
     /// </summary>
     /// <returns>
     /// Your puzzle answer was 117946.

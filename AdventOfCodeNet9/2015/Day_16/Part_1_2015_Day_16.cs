@@ -1,4 +1,4 @@
-namespace AdventOfCodeNet9._2015.Day_16
+namespace AdventOfCodeNet10._2015.Day_16
 {
   internal class Part_1_2015_Day_16 : Days
   {
@@ -49,7 +49,6 @@ namespace AdventOfCodeNet9._2015.Day_16
     missing from your list aren't zero - you simply don't remember the value.
     
     What is the number of the Sue that got you the gift?
-    
     */
     /// </summary>
     /// <returns>
