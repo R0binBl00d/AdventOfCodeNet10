@@ -1,25 +1,30 @@
 To create an empty Solution/Template to solve your puzzles,
 you only need to download the 
 
-	AdventOfCodeNet9_ShareWare.zip
+	AdventOfCodeNet10_ShareWare.zip
 
 Instructions after unziping the ShareWare:
 
-- Open Solution in VS2022 >= Version 17.12
-  Solution uses .NET9 release on 22.Nov 2024
+- Open Solution in VS2026 Insiders >= Version 18 (27. Oktober 2025 - [11123.170])
+  Solution uses .NET 10 C# 14 release on 11.Nov 2025
+
+- Tools -> Options => Languages -> Default -> Tabs => 
+  Tab size      = 2
+  Indent size   = 2
+  Tab character = Insert spaces 
 
 - Rebuild both Projects in the Solution
-- Set "FileGeneratorForMainApp" as Startup Project and run it !!
+- Set "FileGeneratorForAocNet10" as Startup Project and run it !!
 
-- If there were no issues, "AdventOfCodeNet9"-Project should have reloaded.
-  (On some of my tests the "2020"-Folder looked a bit weird, just restart VS2022)
+- If there were no issues, "AdventOfCodeNet10"-Project should have reloaded
+  On some of my tests the "2020"-Folder looked a bit weird, just restart VS2026 
 - Rebuild both Projects in the Solution
 
-- Set "AdventOfCodeNet9" as Startup Project !!
-- Start "AdventOfCodeNet9"
+- Set "AdventOfCodeNet10" as Startup Project !!
+- Start "AdventOfCodeNet10"
 
 - Press some random buttons on the GUI to see if you get "0" everywhere.
-- You can now delete the FileGeneratorForMainApp-Project from the solution, 
+- You can now delete the FileGeneratorForAocNet10-Project from the solution, 
   we'll never need it again.
 
 Info:
