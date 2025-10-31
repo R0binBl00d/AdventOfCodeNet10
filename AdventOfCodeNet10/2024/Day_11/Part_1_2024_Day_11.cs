@@ -89,7 +89,6 @@ namespace AdventOfCodeNet10._2024.Day_11
     public override string Execute()
     {
       string result = "";
-      long totalCount = 0;
 
       var stones = Lines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).AsInt64List();
       //int blinkTimes = 6;

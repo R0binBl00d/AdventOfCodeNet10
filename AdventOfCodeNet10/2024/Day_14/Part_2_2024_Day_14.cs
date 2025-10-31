@@ -1,6 +1,5 @@
 using AdventOfCodeNet10.Extensions;
 using System.Diagnostics;
-using AdventOfCodeNet10._2024.Day_07;
 
 namespace AdventOfCodeNet10._2024.Day_14
 {
@@ -146,24 +145,24 @@ Your puzzle answer was 6516.
       //Real(x,y) = (101,103)
       //100 sec -> multiply quadrants
 
-      point testGrid = new point(11, 7);
-      point grid = new point(101, 103);
+      LongPoint testGrid = new LongPoint(11, 7);
+      LongPoint grid = new LongPoint(101, 103);
 
       //Test(x,y) = (11,7)
       if (Lines.Count < 15) return "Skip Test"; // grid = testGrid;
 
-      var robots = new List<(point pos, point vel)>();
+      var robots = new List<(LongPoint pos, LongPoint vel)>();
 
       foreach (var line in Lines)
       {
         var chunks = line.Split(new[] { ' ', ',', '=' }, StringSplitOptions.RemoveEmptyEntries);
         robots.Add((
-          new point(Int64.Parse(chunks[1]), Int64.Parse(chunks[2])),
-          new point(Int64.Parse(chunks[4]), Int64.Parse(chunks[5]))
+          new LongPoint(Int64.Parse(chunks[1]), Int64.Parse(chunks[2])),
+          new LongPoint(Int64.Parse(chunks[4]), Int64.Parse(chunks[5]))
         ));
       }
 
-      var dict = new Dictionary<long, (double, List<point>)>();
+      var dict = new Dictionary<long, (double, List<LongPoint>)>();
       for(long i=1; i<30000; i++)
       {
         //Advance Robots
@@ -195,7 +194,7 @@ Your puzzle answer was 6516.
       return result;
     }
 
-    private (double, List<point> ) CalculateMinDistanceToAverageY(ref List<(point pos, point vel)> robots)
+    private (double, List<LongPoint> ) CalculateMinDistanceToAverageY(ref List<(LongPoint pos, LongPoint vel)> robots)
     {
       double averageX = (double)robots.Sum(r => r.pos.x) / (double)robots.Count;
       double varianceX = robots.Sum(r => Math.Pow(r.pos.x - averageX, 2)) / (robots.Count - 1);
@@ -206,18 +205,18 @@ Your puzzle answer was 6516.
       double stdVariation = (Math.Sqrt(varianceX) + Math.Sqrt(varianceY)) / 2;
 
 
-      var tmpList = new List<point>();
+      var tmpList = new List<LongPoint>();
       foreach (var rob in robots.Select(r => r.pos).ToList())
       {
-        tmpList.Add(new point(rob.x, rob.y));
+        tmpList.Add(new LongPoint(rob.x, rob.y));
       }
 
-      (double, List<point>) ret = (stdVariation, tmpList);
+      (double, List<LongPoint>) ret = (stdVariation, tmpList);
       return ret;
     }
     
 
-    private void DebugDrawMap(ref List<point> robots, ref point grid)
+    private void DebugDrawMap(ref List<LongPoint> robots, ref LongPoint grid)
     {
       Debug.WriteLine("");
       Debug.WriteLine("");

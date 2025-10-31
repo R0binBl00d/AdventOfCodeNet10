@@ -50,30 +50,30 @@ namespace AdventOfCodeNet10._2015.Day_23
     {
       string result = "";
 
-      List<KeyValuePair<command, int[]>> commands = new List<KeyValuePair<command, int[]>>();
+      List<KeyValuePair<Command, int[]>> commands = new List<KeyValuePair<Command, int[]>>();
 
       foreach (var line in Lines)
       {
         var chunks = line.Split(new char[] { ' ', ',', '+' }, StringSplitOptions.RemoveEmptyEntries);
 
-        command c = (command)Enum.Parse(typeof(command), chunks[0]);
+        Command c = (Command)Enum.Parse(typeof(Command), chunks[0]);
 
         int[] vals;
 
         switch (c)
         {
-          case command.jmp:
+          case Command.jmp:
             vals = new int[] { Int32.Parse(chunks[1]) };
             break;
-          case command.jie:
-          case command.jio:
+          case Command.jie:
+          case Command.jio:
             vals = new int[] { chunks[1] == "a" ? 0 : 1, Int32.Parse(chunks[2]) };
             break;
           default:
             vals = new int[] { chunks[1] == "a" ? 0 : 1 };
             break;
         }
-        commands.Add(new KeyValuePair<command, int[]>(c, vals));
+        commands.Add(new KeyValuePair<Command, int[]>(c, vals));
       }
 
       // execute commands
@@ -84,27 +84,27 @@ namespace AdventOfCodeNet10._2015.Day_23
       {
         switch (commands[executionpointer].Key)
         {
-          case command.hlf:
+          case Command.hlf:
             Register[commands[executionpointer].Value[0]] /= 2;
             executionpointer++;
             break;
-          case command.tpl:
+          case Command.tpl:
             Register[commands[executionpointer].Value[0]] *= 3;
             executionpointer++;
             break;
-          case command.inc:
+          case Command.inc:
             Register[commands[executionpointer].Value[0]]++;
             executionpointer++;
             break;
-          case command.jmp:
+          case Command.jmp:
             executionpointer += commands[executionpointer].Value[0];
             break;
-          case command.jie:
+          case Command.jie:
             executionpointer = Register[commands[executionpointer].Value[0]] % 2 == 0 ?
               executionpointer + commands[executionpointer].Value[1] :
               executionpointer + 1;
             break;
-          case command.jio:
+          case Command.jio:
             executionpointer = Register[commands[executionpointer].Value[0]] == 1 ?
               executionpointer + commands[executionpointer].Value[1] :
               executionpointer + 1;
@@ -117,7 +117,7 @@ namespace AdventOfCodeNet10._2015.Day_23
       return result;
     }
 
-    private enum command
+    private enum Command
     {
       hlf,//r sets register r to half its current value, then continues with the next instruction.
       tpl,//r sets register r to triple its current value, then continues with the next instruction.

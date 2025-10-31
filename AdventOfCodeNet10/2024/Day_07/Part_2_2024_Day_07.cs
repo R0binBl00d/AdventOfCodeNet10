@@ -99,7 +99,7 @@ namespace AdventOfCodeNet10._2024.Day_07
       string result = "";
       long totalCount = 0;
 
-      List<calc> allEquasions = new List<calc>();
+      List<Calc> allEquasions = new List<Calc>();
 
       foreach (var line in Lines)
       {
@@ -111,7 +111,7 @@ namespace AdventOfCodeNet10._2024.Day_07
         {
           lNumbers.Add(long.Parse(s));
         }
-        var cRecord = new calc(long.Parse(chunks1[0]), lNumbers);
+        var cRecord = new Calc(long.Parse(chunks1[0]), lNumbers);
         var cClass2 = new Calculate2(cRecord);
         totalCount += cClass2.TestCalculation();
       }
@@ -123,9 +123,9 @@ namespace AdventOfCodeNet10._2024.Day_07
 
   internal class Calculate2
   {
-    private calc _calc;
+    private Calc _calc;
 
-    public Calculate2(calc aCalc)
+    public Calculate2(Calc aCalc)
     {
       _calc = aCalc;
     }

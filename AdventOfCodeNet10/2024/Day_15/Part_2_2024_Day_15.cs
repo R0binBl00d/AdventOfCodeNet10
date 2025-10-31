@@ -1,3 +1,4 @@
+using AdventOfCodeNet10.Extensions;
 using System.Diagnostics;
 using System.Text;
 
@@ -478,7 +479,6 @@ namespace AdventOfCodeNet10._2024.Day_15
 
       #region get Data
 
-      int section = 0;
       foreach (var line in Lines)
       {
         if (line.Contains('-')) break;
@@ -496,7 +496,7 @@ namespace AdventOfCodeNet10._2024.Day_15
 
       #region TestRun
 
-      point currentLocation = new point(0, 0);
+      LongPoint currentLocation = new LongPoint(0, 0);
 
       char[,] field = new char[tempField[0].Length * 2, tempField.Count];
 
@@ -557,10 +557,10 @@ namespace AdventOfCodeNet10._2024.Day_15
       return result;
     }
 
-    private void DoMoveInDirection(char pointer, ref point cl, ref char[,] field)
+    private void DoMoveInDirection(char pointer, ref LongPoint cl, ref char[,] field)
     {
       StringBuilder path = new StringBuilder();
-      long x, y, firstGap;
+      long x, firstGap;
 
       switch (pointer) // ^ > v <
       {
@@ -686,8 +686,8 @@ namespace AdventOfCodeNet10._2024.Day_15
       public long xl { get; init; }
       public long xr { get; init; }
 
-      private point next_xl;
-      private point next_xr;
+      private LongPoint next_xl;
+      private LongPoint next_xr;
 
       public boxPile(char boxEdge, long xc, long yc)
       {
@@ -713,12 +713,12 @@ namespace AdventOfCodeNet10._2024.Day_15
         switch (dir)
         {
           case '^':
-            next_xl = new point(xl, y - 1);
-            next_xr = new point(xr, y - 1);
+            next_xl = new LongPoint(xl, y - 1);
+            next_xr = new LongPoint(xr, y - 1);
             break;
           case 'v':
-            next_xl = new point(xl, y + 1);
-            next_xr = new point(xr, y + 1);
+            next_xl = new LongPoint(xl, y + 1);
+            next_xr = new LongPoint(xr, y + 1);
             break;
         }
 
@@ -781,7 +781,7 @@ namespace AdventOfCodeNet10._2024.Day_15
       return firstGap;
     }
 
-    private void DebugDrawMap(char move, ref char[,] field, ref point currentLocation)
+    private void DebugDrawMap(char move, ref char[,] field, ref LongPoint currentLocation)
     {
       var s = new StringBuilder();
 

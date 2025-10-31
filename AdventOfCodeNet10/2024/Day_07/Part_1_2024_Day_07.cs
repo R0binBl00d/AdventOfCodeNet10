@@ -70,19 +70,19 @@ namespace AdventOfCodeNet10._2024.Day_07
       string result = "";
       long totalCount = 0;
 
-      List<calc> allEquasions = new List<calc>();
+      List<Calc> allEquasions = new List<Calc>();
 
       foreach (var line in Lines)
       {
         var chunks1 = line.Split(':');
-        var chunks2 = chunks1[1].Split(' ',StringSplitOptions.RemoveEmptyEntries);
+        var chunks2 = chunks1[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
         List<long> lNumbers = new List<long>();
 
         foreach (var s in chunks2)
         {
           lNumbers.Add(long.Parse(s));
         }
-        var cRecord = new calc(long.Parse(chunks1[0]),lNumbers);
+        var cRecord = new Calc(long.Parse(chunks1[0]), lNumbers);
         var cClass = new Calculate(cRecord);
         totalCount += cClass.TestCalculation();
       }
@@ -92,12 +92,12 @@ namespace AdventOfCodeNet10._2024.Day_07
     }
   }
 
-  record calc(long res, List<long> numbers);
+  internal record Calc(long res, List<long> numbers);
   internal class Calculate
   {
-    private calc _calc;
+    private Calc _calc;
 
-    public Calculate(calc aCalc)
+    public Calculate(Calc aCalc)
     {
       _calc = aCalc;
     }

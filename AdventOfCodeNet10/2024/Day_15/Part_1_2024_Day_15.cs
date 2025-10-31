@@ -1,3 +1,4 @@
+using AdventOfCodeNet10.Extensions;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -294,7 +295,6 @@ namespace AdventOfCodeNet10._2024.Day_15
       List<char> tempMovement = new List<char>();
 
       #region get Data
-      int section = 0;
       foreach (var line in Lines)
       {
         if (line.Contains('-')) break;
@@ -311,7 +311,7 @@ namespace AdventOfCodeNet10._2024.Day_15
 
       #region TestRun
 
-      point currentLocation = new point(0, 0);
+      LongPoint currentLocation = new LongPoint(0, 0);
 
       char[,] field = new char[tempField[0].Length, tempField.Count];
 
@@ -356,7 +356,7 @@ namespace AdventOfCodeNet10._2024.Day_15
       return result;
     }
 
-    private void DoMoveInDirection(char pointer, ref point cl, ref char[,] field)
+    private void DoMoveInDirection(char pointer, ref LongPoint cl, ref char[,] field)
     {
       StringBuilder path = new StringBuilder();
       long x, y, firstGap;
@@ -451,7 +451,7 @@ namespace AdventOfCodeNet10._2024.Day_15
       return firstGap;
     }
 
-    private void DebugDrawMap(ref char[,] field, ref point currentLocation)
+    private void DebugDrawMap(ref char[,] field, ref LongPoint currentLocation)
     {
       Debug.WriteLine("");
       Debug.WriteLine("");
@@ -473,37 +473,6 @@ namespace AdventOfCodeNet10._2024.Day_15
 
       Debug.WriteLine("");
       Debug.WriteLine("");
-    }
-  }
-
-  class point
-  {
-    public point(long X, long Y, int obj = 0)
-    {
-      this.x = X;
-      this.y = Y;
-      this.tag = obj;
-    }
-
-    public long x { get; set; }
-    public long y { get; set; }
-    public int tag { get; set; }
-
-    public void Deconstruct(out long X, out long Y)
-    {
-      X = this.x;
-      Y = this.y;
-    }
-
-    public override bool Equals(object obj)
-    {
-      point other = obj as point;
-      return other.x == this.x && other.y == this.y;
-    }
-
-    public override int GetHashCode()
-    {
-      return this.x.GetHashCode() ^ this.y.GetHashCode();
     }
   }
 }

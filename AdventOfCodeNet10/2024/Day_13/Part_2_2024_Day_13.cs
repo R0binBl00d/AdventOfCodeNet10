@@ -1,3 +1,4 @@
+using AdventOfCodeNet10.Extensions;
 using System.Diagnostics;
 
 namespace AdventOfCodeNet10._2024.Day_13
@@ -126,7 +127,7 @@ namespace AdventOfCodeNet10._2024.Day_13
       long totalCount = 0;
 
       var machines =
-        new List<(point Move_A, point Move_B, point prize, List<(long a, long b)> candidates)>();
+        new List<(LongPoint Move_A, LongPoint Move_B, LongPoint prize, List<(long a, long b)> candidates)>();
 
       for (int line = 0; line < Lines.Count; line += 3)
       {
@@ -134,34 +135,34 @@ namespace AdventOfCodeNet10._2024.Day_13
         var moveB = Lines[line + 1].Split(new[] { ',', '+', '=' });
         var prize = Lines[line + 2].Split(new[] { ',', '+', '=' });
         machines.Add((
-          new point(Int64.Parse(moveA[1]), Int64.Parse(moveA[3])),
-          new point(Int64.Parse(moveB[1]), Int64.Parse(moveB[3])),
+          new LongPoint(Int64.Parse(moveA[1]), Int64.Parse(moveA[3])),
+          new LongPoint(Int64.Parse(moveB[1]), Int64.Parse(moveB[3])),
           //                                 10000000000000                             10000000000000
-          new point(Int64.Parse(prize[1]) + 10000000000000L, Int64.Parse(prize[3]) + 10000000000000L),
+          new LongPoint(Int64.Parse(prize[1]) + 10000000000000L, Int64.Parse(prize[3]) + 10000000000000L),
           new List<(long a, long b)>()
         ));
       }
 
       foreach (var machine in machines)
       {
-        var pos = new point(0, 0);
-        var max_a_x = machine.prize.X / machine.Move_A.X + 1;
+        var pos = new LongPoint(0, 0);
+        var max_a_x = machine.prize.x / machine.Move_A.x + 1;
 
-        Debug.WriteLine($"A.X:{machine.Move_A.X}, A.Y:{machine.Move_A.Y}");
-        Debug.WriteLine($"B.X:{machine.Move_B.X}, B.Y:{machine.Move_B.Y}");
-        Debug.WriteLine($"P.X:{machine.prize.X}, P.Y:{machine.prize.Y}");
+        Debug.WriteLine($"A.x:{machine.Move_A.x}, A.y:{machine.Move_A.y}");
+        Debug.WriteLine($"B.x:{machine.Move_B.x}, B.y:{machine.Move_B.y}");
+        Debug.WriteLine($"P.x:{machine.prize.x}, P.y:{machine.prize.y}");
 
         long a =
-          ((machine.prize.X * machine.Move_B.Y) - (machine.prize.Y * machine.Move_B.X)) /
-          ((machine.Move_A.X * machine.Move_B.Y) - (machine.Move_A.Y * machine.Move_B.X));
+          ((machine.prize.x * machine.Move_B.y) - (machine.prize.y * machine.Move_B.x)) /
+          ((machine.Move_A.x * machine.Move_B.y) - (machine.Move_A.y * machine.Move_B.x));
 
-        long restForB = machine.prize.X - a * machine.Move_A.X;
-        if (restForB % machine.Move_B.X == 0)
+        long restForB = machine.prize.x - a * machine.Move_A.x;
+        if (restForB % machine.Move_B.x == 0)
         {
-          long b = restForB / machine.Move_B.X;
-          pos.Y = a * machine.Move_A.Y + b * machine.Move_B.Y;
+          long b = restForB / machine.Move_B.x;
+          pos.y = a * machine.Move_A.y + b * machine.Move_B.y;
 
-          if ((pos.Y == machine.prize.Y))
+          if ((pos.y == machine.prize.y))
           {
             machine.candidates.Add((a, b));
           }
@@ -176,24 +177,6 @@ namespace AdventOfCodeNet10._2024.Day_13
 
       result = totalCount.ToString();
       return result;
-    }
-  }
-
-  class point
-  {
-    public point(long X, long Y)
-    {
-      this.X = X;
-      this.Y = Y;
-    }
-
-    public long X { get; set; }
-    public long Y { get; set; }
-
-    public void Deconstruct(out long X, out long Y)
-    {
-      X = this.X;
-      Y = this.Y;
     }
   }
 }

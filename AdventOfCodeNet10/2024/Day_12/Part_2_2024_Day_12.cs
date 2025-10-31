@@ -231,7 +231,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           ))
           {
             fMap.Add((x, y), (id, Lines[y][x]));
-            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<point>() { new point(x, y) }));
+            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<LongPoint>() { new LongPoint(x, y) }));
             id++;
           }
         }
@@ -257,7 +257,7 @@ namespace AdventOfCodeNet10._2024.Day_12
               foreach (var p in fPatches[neighbors[1]].points)
               {
                 fMap[((int)p.x, (int)p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
-                fPatches[neighbors[0]].points.Add(new point(p.x, p.y));
+                fPatches[neighbors[0]].points.Add(new LongPoint(p.x, p.y));
               }
 
               fPatches.Remove(neighbors[1]);
@@ -276,7 +276,7 @@ namespace AdventOfCodeNet10._2024.Day_12
         patch.perimeter = 0;
         foreach (var p in patch.points)
         {
-          if (patch.points.Contains(new point(p.x, p.y - 1)))
+          if (patch.points.Contains(new LongPoint(p.x, p.y - 1)))
           {
             patch.perimeter += 0;
           }
@@ -285,7 +285,7 @@ namespace AdventOfCodeNet10._2024.Day_12
             patch.perimeter += 1;
             p.tag |= 0x01; // top
           }
-          if (patch.points.Contains(new point(p.x + 1, p.y)))
+          if (patch.points.Contains(new LongPoint(p.x + 1, p.y)))
           {
             patch.perimeter += 0;
           }
@@ -294,7 +294,7 @@ namespace AdventOfCodeNet10._2024.Day_12
             patch.perimeter += 1;
             p.tag |= 0x02; // right
           }
-          if (patch.points.Contains(new point(p.x, p.y + 1)))
+          if (patch.points.Contains(new LongPoint(p.x, p.y + 1)))
           {
             patch.perimeter += 0;
           }
@@ -303,7 +303,7 @@ namespace AdventOfCodeNet10._2024.Day_12
             patch.perimeter += 1;
             p.tag |= 0x04; // bottom
           }
-          if (patch.points.Contains(new point(p.x - 1, p.y)))
+          if (patch.points.Contains(new LongPoint(p.x - 1, p.y)))
           {
             patch.perimeter += 0;
           }
@@ -335,7 +335,7 @@ namespace AdventOfCodeNet10._2024.Day_12
         // reset perimeter, count long straights now
         patch.perimeter = 0;
         // for start orientation top remove the fence
-        patch.points[patch.points.IndexOf(new point(start_x, start_y))].tag &= ~0x01;
+        patch.points[patch.points.IndexOf(new LongPoint(start_x, start_y))].tag &= ~0x01;
 
         var seeWhosArroundUs = new List<int>();
         do
@@ -343,23 +343,23 @@ namespace AdventOfCodeNet10._2024.Day_12
           switch (orientation) // orientation of fence / line
           {
             case 0: // Top
-              point point_r = new point(curr_x + 1, curr_y);
+              LongPoint point_r = new LongPoint(curr_x + 1, curr_y);
               if (patch.points.Contains(point_r)) // check right
               {
                 // exists also a diagonal?
-                if (patch.points.Contains(new point(curr_x + 1, curr_y - 1))) // check right top
+                if (patch.points.Contains(new LongPoint(curr_x + 1, curr_y - 1))) // check right top
                 {
                   orientation = 3; // left
                   patch.perimeter++;
                   curr_x++;
                   curr_y--;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x08;
                 }
                 else
                 {
                   // still topmost, go there
                   curr_x++;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x01;
                 }
               }
               else
@@ -367,7 +367,7 @@ namespace AdventOfCodeNet10._2024.Day_12
                 // doesn't exist, so we start a new line at the right
                 patch.perimeter++;
                 orientation = 1;
-                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
+                patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x02;
                 if ((point_r.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_r.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
@@ -377,23 +377,23 @@ namespace AdventOfCodeNet10._2024.Day_12
 
               break;
             case 1: // Right
-              point point_b = new point(curr_x, curr_y + 1);
+              LongPoint point_b = new LongPoint(curr_x, curr_y + 1);
               if (patch.points.Contains(point_b)) // check bottom
               {
                 // exists also a diagonal?
-                if (patch.points.Contains(new point(curr_x + 1, curr_y + 1))) // check right bottom
+                if (patch.points.Contains(new LongPoint(curr_x + 1, curr_y + 1))) // check right bottom
                 {
                   orientation = 0; // top
                   patch.perimeter++;
                   curr_x++;
                   curr_y++;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x01;
                 }
                 else
                 {
                   // still rightmost, go there
                   curr_y++;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x02;
                 }
               }
               else
@@ -401,7 +401,7 @@ namespace AdventOfCodeNet10._2024.Day_12
                 // doesn't exist, so we start a new line at the bottom
                 patch.perimeter++;
                 orientation = 2;
-                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
+                patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x04;
                 if ((point_b.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_b.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
@@ -411,23 +411,23 @@ namespace AdventOfCodeNet10._2024.Day_12
 
               break;
             case 2: // Bottom
-              point point_l = new point(curr_x - 1, curr_y);
+              LongPoint point_l = new LongPoint(curr_x - 1, curr_y);
               if (patch.points.Contains(point_l)) // check left
               {
                 // exists also a diagonal?
-                if (patch.points.Contains(new point(curr_x - 1, curr_y + 1))) // check left bottom
+                if (patch.points.Contains(new LongPoint(curr_x - 1, curr_y + 1))) // check left bottom
                 {
                   orientation = 1; // right
                   patch.perimeter++;
                   curr_x--;
                   curr_y++;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x02;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x02;
                 }
                 else
                 {
                   // still bottommost, go there
                   curr_x--;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x04;
                 }
               }
               else
@@ -435,7 +435,7 @@ namespace AdventOfCodeNet10._2024.Day_12
                 // doesn't exist, so we start a new line at the left
                 patch.perimeter++;
                 orientation = 3;
-                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
+                patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x08;
                 if ((point_l.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_l.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
@@ -445,23 +445,23 @@ namespace AdventOfCodeNet10._2024.Day_12
 
               break;
             case 3: // Left (start here)
-              point point_t = new point(curr_x, curr_y - 1);
+              LongPoint point_t = new LongPoint(curr_x, curr_y - 1);
               if (patch.points.Contains(point_t)) // check top
               {
                 // exists also a diagonal?
-                if (patch.points.Contains(new point(curr_x - 1, curr_y - 1))) // check left top
+                if (patch.points.Contains(new LongPoint(curr_x - 1, curr_y - 1))) // check left top
                 {
                   orientation = 2; // bottom
                   patch.perimeter++;
                   curr_x--;
                   curr_y--;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x04;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x04;
                 }
                 else
                 {
                   // still leftmost, go there
                   curr_y--;
-                  patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x08;
+                  patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x08;
                 }
               }
               else
@@ -469,7 +469,7 @@ namespace AdventOfCodeNet10._2024.Day_12
                 // doesn't exist, so we start a new line at the top
                 patch.perimeter++;
                 orientation = 0;
-                patch.points[patch.points.IndexOf(new point(curr_x, curr_y))].tag &= ~0x01;
+                patch.points[patch.points.IndexOf(new LongPoint(curr_x, curr_y))].tag &= ~0x01;
                 if ((point_t.x).InRange(0, Lines[0].Length, IncludeBounds.Lower) &&
                     (point_t.y).InRange(0, Lines.Count, IncludeBounds.Lower))
                 {
@@ -490,7 +490,7 @@ namespace AdventOfCodeNet10._2024.Day_12
         foreach (var point in tmpLst)
         {
           //var idList = new List<int>();
-          fTmpPatchLst.AddRange(fPatches.Where(f => f.Value.points.Contains(new point(point.x, point.y + 1))));
+          fTmpPatchLst.AddRange(fPatches.Where(f => f.Value.points.Contains(new LongPoint(point.x, point.y + 1))));
         }
 
         int missingPerimeter = 0;
@@ -608,7 +608,7 @@ namespace AdventOfCodeNet10._2024.Day_12
         {
           if (!fMap.ContainsKey((current.x, current.y))) fMap.Add((current.x, current.y), (spot.id, spot.flower));
           fPatches[spot.id].area++;
-          fPatches[spot.id].points.Add(new point(current.x, current.y));
+          fPatches[spot.id].points.Add(new LongPoint(current.x, current.y));
           return true;
         }
       }

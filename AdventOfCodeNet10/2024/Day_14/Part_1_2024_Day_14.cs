@@ -163,20 +163,20 @@ namespace AdventOfCodeNet10._2024.Day_14
       //Real(x,y) = (101,103)
       //100 sec -> multiply quadrants
 
-      point testGrid = new point(11, 7);
-      point grid = new point(101, 103);
+      LongPoint testGrid = new LongPoint(11, 7);
+      LongPoint grid = new LongPoint(101, 103);
 
       //Test(x,y) = (11,7)
       if (Lines.Count < 15) grid = testGrid;
 
-      var robots = new List<(point pos, point vel)>();
+      var robots = new List<(LongPoint pos, LongPoint vel)>();
 
       foreach (var line in Lines)
       {
         var chunks = line.Split(new[] { ' ', ',', '=' }, StringSplitOptions.RemoveEmptyEntries);
         robots.Add((
-          new point(Int64.Parse(chunks[1]), Int64.Parse(chunks[2])),
-          new point(Int64.Parse(chunks[4]), Int64.Parse(chunks[5]))
+          new LongPoint(Int64.Parse(chunks[1]), Int64.Parse(chunks[2])),
+          new LongPoint(Int64.Parse(chunks[4]), Int64.Parse(chunks[5]))
           ));
       }
 
@@ -240,7 +240,7 @@ namespace AdventOfCodeNet10._2024.Day_14
       return result;
     }
 
-    private void DebugDrawMap(ref List<(point pos, point vel)> robots, ref point grid)
+    private void DebugDrawMap(ref List<(LongPoint pos, LongPoint vel)> robots, ref LongPoint grid)
     {
       Debug.WriteLine("");
       Debug.WriteLine("");
@@ -255,24 +255,6 @@ namespace AdventOfCodeNet10._2024.Day_14
       }
       Debug.WriteLine("");
       Debug.WriteLine("");
-    }
-  }
-
-  class point
-  {
-    public point(long X, long Y)
-    {
-      this.x = X;
-      this.y = Y;
-    }
-
-    public long x { get; set; }
-    public long y { get; set; }
-
-    public void Deconstruct(out long X, out long Y)
-    {
-      X = this.x;
-      Y = this.y;
     }
   }
 }

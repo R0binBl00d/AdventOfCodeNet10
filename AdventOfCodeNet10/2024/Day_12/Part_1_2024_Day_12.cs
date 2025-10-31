@@ -152,7 +152,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           ))
           {
             fMap.Add((x, y), (id, Lines[y][x]));
-            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<point>() { new point(x, y) }));
+            fPatches.Add(id, new Patch(Lines[y][x], 1, null, new List<LongPoint>() { new LongPoint(x, y) }));
             id++;
           }
         }
@@ -178,7 +178,7 @@ namespace AdventOfCodeNet10._2024.Day_12
               foreach (var p in fPatches[neighbors[1]].points)
               {
                 fMap[((int)p.x, (int) p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
-                fPatches[neighbors[0]].points.Add(new point(p.x, p.y));
+                fPatches[neighbors[0]].points.Add(new LongPoint(p.x, p.y));
               }
 
               fPatches.Remove(neighbors[1]);
@@ -197,10 +197,10 @@ namespace AdventOfCodeNet10._2024.Day_12
         patch.perimeter = 0;
         foreach (var p in patch.points)
         {
-          patch.perimeter += patch.points.Contains(new point(p.x, p.y - 1)) ? 0 : 1;
-          patch.perimeter += patch.points.Contains(new point(p.x + 1, p.y)) ? 0 : 1;
-          patch.perimeter += patch.points.Contains(new point(p.x - 1, p.y)) ? 0 : 1;
-          patch.perimeter += patch.points.Contains(new point(p.x, p.y + 1)) ? 0 : 1;
+          patch.perimeter += patch.points.Contains(new LongPoint(p.x, p.y - 1)) ? 0 : 1;
+          patch.perimeter += patch.points.Contains(new LongPoint(p.x + 1, p.y)) ? 0 : 1;
+          patch.perimeter += patch.points.Contains(new LongPoint(p.x - 1, p.y)) ? 0 : 1;
+          patch.perimeter += patch.points.Contains(new LongPoint(p.x, p.y + 1)) ? 0 : 1;
         }
       }
 
@@ -270,7 +270,7 @@ namespace AdventOfCodeNet10._2024.Day_12
         {
           if (!fMap.ContainsKey((current.x, current.y))) fMap.Add((current.x, current.y), (spot.id, spot.flower));
           fPatches[spot.id].area++;
-          fPatches[spot.id].points.Add(new point(current.x, current.y));
+          fPatches[spot.id].points.Add(new LongPoint(current.x, current.y));
           return true;
         }
       }
@@ -280,7 +280,7 @@ namespace AdventOfCodeNet10._2024.Day_12
 
   class Patch
   {
-    public Patch(char flower, int area, int? perimeter, List<point> points)
+    public Patch(char flower, int area, int? perimeter, List<LongPoint> points)
     {
       this.flower = flower;
       this.area = area;
@@ -291,45 +291,14 @@ namespace AdventOfCodeNet10._2024.Day_12
     public char flower { get; init; }
     public int area { get; set; }
     public int? perimeter { get; set; }
-    public List<point> points { get; set; }
+    public List<LongPoint> points { get; set; }
 
-    public void Deconstruct(out char flower, out int area, out int? perimeter, out List<point> points)
+    public void Deconstruct(out char flower, out int area, out int? perimeter, out List<LongPoint> points)
     {
       flower = this.flower;
       area = this.area;
       perimeter = this.perimeter;
       points = this.points;
-    }
-  }
-
-  class point
-  {
-    public point(long X, long Y, int obj = 0)
-    {
-      this.x = X;
-      this.y = Y;
-      this.tag = obj;
-    }
-
-    public long x { get; set; }
-    public long y { get; set; }
-    public int tag { get; set; }
-
-    public void Deconstruct(out long X, out long Y)
-    {
-      X = this.x;
-      Y = this.y;
-    }
-
-    public override bool Equals(object obj)
-    {
-      point other = obj as point;
-      return other.x == this.x && other.y == this.y;
-    }
-
-    public override int GetHashCode()
-    {
-      return this.x.GetHashCode() ^ this.y.GetHashCode();
     }
   }
 }

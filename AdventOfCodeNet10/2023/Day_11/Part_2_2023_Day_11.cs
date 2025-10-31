@@ -1,3 +1,4 @@
+using AdventOfCodeNet10.Extensions;
 using Coordinate = (long x, long y);
 
 namespace AdventOfCodeNet10._2023.Day_11
@@ -188,12 +189,12 @@ namespace AdventOfCodeNet10._2023.Day_11
       height = space.Count();
       width = space[0].Count();
 
-      var galaxies = new List<Point>();
+      var galaxies = new List<LongPoint>();
       for (int y = 0; y < height; y++)
       {
         for (int x = 0; x < width; x++)
         {
-          if (space[y][x] == '#') galaxies.Add(new Point(x, y));
+          if (space[y][x] == '#') galaxies.Add(new LongPoint(x, y));
         }
       }
 
@@ -220,20 +221,19 @@ namespace AdventOfCodeNet10._2023.Day_11
     private int multiplier = 1000000;
     private List<int> horizontalMultipliers = new List<int>();
     private List<int> vertical__Multipliers = new List<int>();
-    private int index = 1;
 
-    private long CalcDistance(List<Point> galaxies)
+    private long CalcDistance(List<LongPoint> galaxies)
     {
       long sum = 0;
       //Debugger.Log(1, "", "\n");
       for (int i = 1; i < galaxies.Count; i++)
       {
-        int distance_x = Math.Max(galaxies[i].X, galaxies[0].X) - Math.Min(galaxies[i].X, galaxies[0].X);
-        int gap_x = (from v in vertical__Multipliers where v > Math.Min(galaxies[i].X, galaxies[0].X) && v < Math.Max(galaxies[i].X, galaxies[0].X) select v).Count();
+        long distance_x = Math.Max(galaxies[i].x, galaxies[0].x) - Math.Min(galaxies[i].x, galaxies[0].x);
+        long gap_x = (from v in vertical__Multipliers where v > Math.Min(galaxies[i].x, galaxies[0].x) && v < Math.Max(galaxies[i].x, galaxies[0].x) select v).Count();
         distance_x = distance_x - gap_x + (gap_x * multiplier);
 
-        int distance_y = Math.Max(galaxies[i].Y, galaxies[0].Y) - Math.Min(galaxies[i].Y, galaxies[0].Y);
-        int gap_y = (from h in horizontalMultipliers where h > Math.Min(galaxies[i].Y, galaxies[0].Y) && h < Math.Max(galaxies[i].Y, galaxies[0].Y) select h).Count();
+        long distance_y = Math.Max(galaxies[i].y, galaxies[0].y) - Math.Min(galaxies[i].y, galaxies[0].y);
+        long gap_y = (from h in horizontalMultipliers where h > Math.Min(galaxies[i].y, galaxies[0].y) && h < Math.Max(galaxies[i].y, galaxies[0].y) select h).Count();
         distance_y = distance_y - gap_y + (gap_y * multiplier);
 
         //try
@@ -248,8 +248,8 @@ namespace AdventOfCodeNet10._2023.Day_11
         //  Debugger.Break();
         //}
         //Debugger.Log(1, "", String.Format("{0}: Dis_x_y:'{1}:{2}', Point {3:00#}x{4:00#}, Point {5:00#}x{6:00#}\n", index++, distance_x, distance_y,
-        //  galaxies[0].Y, galaxies[0].X,
-        //  galaxies[i].Y, galaxies[i].X));
+        //  galaxies[0].y, galaxies[0].x,
+        //  galaxies[i].y, galaxies[i].x));
       }
 
       if (galaxies.Count > 2)
