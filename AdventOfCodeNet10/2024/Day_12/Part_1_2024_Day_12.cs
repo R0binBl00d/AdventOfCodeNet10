@@ -177,7 +177,7 @@ namespace AdventOfCodeNet10._2024.Day_12
               fPatches[neighbors[0]].area += fPatches[neighbors[1]].area;
               foreach (var p in fPatches[neighbors[1]].points)
               {
-                fMap[((int)p.x, (int) p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
+                fMap[((int)p.x, (int)p.y)] = (neighbors[0], fPatches[neighbors[0]].flower);
                 fPatches[neighbors[0]].points.Add(new LongPoint(p.x, p.y));
               }
 
@@ -207,6 +207,8 @@ namespace AdventOfCodeNet10._2024.Day_12
       // Calculate result:
       foreach (var patch in fPatches.Values)
       {
+        if (patch.perimeter == null)
+          throw new Exception("perimeter is null");
         totalCount += patch.area * (long)patch.perimeter;
       }
 

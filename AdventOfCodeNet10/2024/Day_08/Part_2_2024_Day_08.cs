@@ -190,7 +190,7 @@ Your puzzle answer was 1017.
       return result;
     }
 
-    private char[,] map;
+    private char[,]? map;
 
     private void SetAntinodes((int x, int y) reference, List<(int x, int y)> against, ref int[,] antinodeLocations)
     {
@@ -205,7 +205,9 @@ Your puzzle answer was 1017.
           pos1.y.InRange(0, antinodeLocations.GetLength(1), IncludeBounds.Lower)
         )
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
           map[pos1.x, pos1.y] = 'X';
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
           antinodeLocations[pos1.x, pos1.y] = 1;
 
           pos1 = ((pos1.x + distance.x, pos1.y + distance.y));
@@ -218,7 +220,9 @@ Your puzzle answer was 1017.
           pos2.y.InRange(0, antinodeLocations.GetLength(1), IncludeBounds.Lower)
         )
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
           map[pos2.x, pos2.y] = 'X';
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
           antinodeLocations[pos2.x, pos2.y] = 1;
 
           pos2 = ((pos2.x - distance.x, pos2.y - distance.y));

@@ -91,33 +91,33 @@ namespace AdventOfCodeNet10._2015.Day_21
 
       List<Item> weapons = new List<Item>()
       {
-        new Item() { Name = "Dagger", Cost = 8, Damage = 4, Armor = 0 },
-        new Item() { Name = "Shortsword", Cost = 10, Damage = 5, Armor = 0 },
-        new Item() { Name = "Warhammer", Cost = 25, Damage = 6, Armor = 0 },
-        new Item() { Name = "Longsword", Cost = 40, Damage = 7, Armor = 0 },
-        new Item() { Name = "Greataxe", Cost = 74, Damage = 8, Armor = 0 }
+        new Item( Name : "Dagger", Cost : 8, Damage : 4, Armor : 0 ),
+        new Item( Name : "Shortsword", Cost : 10, Damage : 5, Armor : 0 ),
+        new Item( Name : "Warhammer", Cost : 25, Damage : 6, Armor : 0 ),
+        new Item( Name : "Longsword", Cost : 40, Damage : 7, Armor : 0 ),
+        new Item( Name : "Greataxe", Cost : 74, Damage : 8, Armor : 0 )
       };
 
       List<Item> armor = new List<Item>()
       {
-        new Item() { Name = "none", Cost = 0, Damage = 0, Armor = 0 },
-        new Item() { Name = "Leather", Cost = 13, Damage = 0, Armor = 1 },
-        new Item() { Name = "Chainmail", Cost = 31, Damage = 0, Armor = 2 },
-        new Item() { Name = "Splintmail", Cost = 53, Damage = 0, Armor = 3 },
-        new Item() { Name = "Bandedmail", Cost = 75, Damage = 0, Armor = 4 },
-        new Item() { Name = "Platemail", Cost = 102, Damage = 0, Armor = 5 }
+        new Item( Name : "none", Cost : 0, Damage : 0, Armor : 0 ),
+        new Item( Name : "Leather", Cost : 13, Damage : 0, Armor : 1 ),
+        new Item( Name : "Chainmail", Cost : 31, Damage : 0, Armor : 2 ),
+        new Item( Name : "Splintmail", Cost : 53, Damage : 0, Armor : 3 ),
+        new Item( Name : "Bandedmail", Cost : 75, Damage : 0, Armor : 4 ),
+        new Item( Name : "Platemail", Cost : 102, Damage : 0, Armor : 5 )
       };
 
       List<Item> rings = new List<Item>()
       {
-        new Item() { Name = "none1", Cost = 0, Damage = 0, Armor = 0 },
-        new Item() { Name = "none2", Cost = 0, Damage = 0, Armor = 0 },
-        new Item() { Name = "Damage +1", Cost = 25, Damage = 1, Armor = 0 },
-        new Item() { Name = "Damage +2", Cost = 50, Damage = 2, Armor = 0 },
-        new Item() { Name = "Damage +3", Cost = 100, Damage = 3, Armor = 0 },
-        new Item() { Name = "Defense +1", Cost = 20, Damage = 0, Armor = 1 },
-        new Item() { Name = "Defense +2", Cost = 40, Damage = 0, Armor = 2 },
-        new Item() { Name = "Defense +3", Cost = 80, Damage = 0, Armor = 3 }
+        new Item( Name : "none1", Cost : 0, Damage : 0, Armor : 0 ),
+        new Item( Name : "none2", Cost : 0, Damage : 0, Armor : 0 ),
+        new Item( Name : "Damage +1", Cost : 25, Damage : 1, Armor : 0 ),
+        new Item( Name : "Damage +2", Cost : 50, Damage : 2, Armor : 0 ),
+        new Item( Name : "Damage +3", Cost : 100, Damage : 3, Armor : 0 ),
+        new Item( Name : "Defense +1", Cost : 20, Damage : 0, Armor : 1 ),
+        new Item( Name : "Defense +2", Cost : 40, Damage : 0, Armor : 2 ),
+        new Item( Name : "Defense +3", Cost : 80, Damage : 0, Armor : 3 )
       };
 
       #region GameLoop
@@ -208,6 +208,14 @@ namespace AdventOfCodeNet10._2015.Day_21
 
     private class Item
     {
+      public Item(string Name, int Cost, int Damage, int Armor)
+      {
+        this.Name = Name;
+        this.Cost = Cost;
+        this.Damage = Damage;
+        this.Armor = Armor;
+      }
+
       public string Name { get; set; }
       public int Cost { get; set; }
       public int Damage { get; set; }

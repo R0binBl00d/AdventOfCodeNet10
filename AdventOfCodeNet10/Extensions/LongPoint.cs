@@ -23,10 +23,14 @@ namespace AdventOfCodeNet10.Extensions
       Y = this.y;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-      LongPoint other = obj as LongPoint;
-      return other.x == this.x && other.y == this.y;
+      if (obj is LongPoint other) return other.x == this.x && other.y == this.y;
+      return false;
+
+      //LongPoint? other = obj as LongPoint;
+      //if (other == null) return false;
+      //return other.x == this.x && other.y == this.y;
     }
 
     public override int GetHashCode()

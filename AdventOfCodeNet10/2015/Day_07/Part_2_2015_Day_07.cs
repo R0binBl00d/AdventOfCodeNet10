@@ -279,7 +279,7 @@ namespace AdventOfCodeNet10._2015.Day_07
         }
       }
 
-      Node b = null;
+      Node? b = null;
       if (signals.ContainsKey("b"))
       {
         b = signals["b"];
@@ -287,12 +287,13 @@ namespace AdventOfCodeNet10._2015.Day_07
       else
       {
         Debugger.Break();
+        return "error";
       }
 
       b.HasResult = true;
       b.Result = 16076;
       
-      Node a = null;
+      Node? a = null;
       if (signals.ContainsKey("a"))
       {
         a = signals["a"];
@@ -321,8 +322,8 @@ namespace AdventOfCodeNet10._2015.Day_07
 
     private class Node
     {
-      public Node firstNumber;
-      public Node secondNumber;
+      public Node? firstNumber;
+      public Node? secondNumber;
 
       public string Name;
       public string Operation;

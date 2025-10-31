@@ -159,13 +159,15 @@ namespace AdventOfCodeNet10._2023.Day_07
       public int Bid { get; private set; }
       public int Rank { get; set; }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+      // HandType is set in the Constructor using CalcPokerHand, compiler just can't figure it out
       public Hand(string hand, int bid)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
       {
         Cards = hand;
         Bid = bid;
         // HandType is done in CalcPokerHand 
         Score = CalcPokerHand(hand);
-
         // Rank .. tbd
       }
 

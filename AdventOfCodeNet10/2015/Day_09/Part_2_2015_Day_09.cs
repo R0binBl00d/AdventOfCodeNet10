@@ -82,7 +82,7 @@ namespace AdventOfCodeNet10._2015.Day_09
       return result;
     }
 
-    public List<int> resultLengths;
+    public List<int> resultLengths = new List<int>();
 
     private void OnCalculate(List<string> combination, object itemtoworkon)
     {
@@ -104,7 +104,9 @@ namespace AdventOfCodeNet10._2015.Day_09
       resultLengths.Add(lengthOfRoute);
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public event DoSomethingWithTheList Calculate;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     private void CreateSequence(List<string> sequence, List<string> modify, object itemToWorkOn)
     {

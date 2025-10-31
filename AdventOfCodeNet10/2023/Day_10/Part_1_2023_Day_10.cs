@@ -196,9 +196,11 @@ namespace AdventOfCodeNet10._2023.Day_10
       return result;
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private char[,] input;
     private char[,] cPath;
     private int[,] iPath;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     private void GoStep(ref Point pathLocation, int step, ref Headings heading, int width, int height)
     {

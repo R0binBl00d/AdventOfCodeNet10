@@ -43,7 +43,6 @@ namespace AdventOfCodeNet10._2016.Day_05
     public override string Execute()
     {
       string result = "";
-      md5 = MD5.Create();
 
       int index = 0;
       foreach (string hash in GetHashes(Int32.MaxValue))
@@ -60,7 +59,7 @@ namespace AdventOfCodeNet10._2016.Day_05
       return result;
     }
 
-    private MD5 md5;
+    private MD5 md5 = MD5.Create();
 
     IEnumerable<string> GetHashes(int max)
     {

@@ -494,9 +494,13 @@ namespace AdventOfCodeNet10._2024.Day_12
         }
 
         int missingPerimeter = 0;
-        foreach (var key in fTmpPatchLst.Select(f=>f.Key).Distinct().ToList())
+        foreach (var key in fTmpPatchLst.Select(f => f.Key).Distinct().ToList())
         {
+          if (fPatches[key].perimeter == null)
+            throw new Exception("perimeter is null");
+#pragma warning disable CS8629 // Nullable value type may be null.
           missingPerimeter += (int)fPatches[key].perimeter;
+#pragma warning restore CS8629 // Nullable value type may be null.
         }
 
         if (PatchFencesRemaining == 15/*single items*/)
@@ -545,6 +549,8 @@ namespace AdventOfCodeNet10._2024.Day_12
       // Calculate result:
       foreach (var patch in fPatches.Values)
       {
+        if (patch.perimeter == null)
+          throw new Exception("perimeter is null");
         totalCount += patch.area * (long)patch.perimeter;
       }
 

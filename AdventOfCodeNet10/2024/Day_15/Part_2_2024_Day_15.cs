@@ -678,16 +678,16 @@ namespace AdventOfCodeNet10._2024.Day_15
 
     internal class boxPile
     {
-      public boxPile lPile { get; set; }
-      public boxPile rPile { get; set; }
+      public boxPile? lPile { get; set; }
+      public boxPile? rPile { get; set; }
 
       public bool hasSpaceInFront { get; set; }
       public long y { get; set; }
       public long xl { get; init; }
       public long xr { get; init; }
 
-      private LongPoint next_xl;
-      private LongPoint next_xr;
+      private LongPoint? next_xl;
+      private LongPoint? next_xr;
 
       public boxPile(char boxEdge, long xc, long yc)
       {
@@ -722,8 +722,10 @@ namespace AdventOfCodeNet10._2024.Day_15
             break;
         }
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         var cl = field[next_xl.x, next_xl.y];
         var cr = field[next_xr.x, next_xr.y];
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         hasSpaceInFront = cl == '.' && cr == '.';
         if (hasSpaceInFront) return true;
@@ -750,6 +752,7 @@ namespace AdventOfCodeNet10._2024.Day_15
         if (rPile != null) rPile.MoveFullPile(dir, ref field);
 
         // multiple branches can contain the same items 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         if (field[next_xl.x, next_xl.y] == '.' && field[next_xr.x, next_xr.y] == '.')
         {
           // only move if it hasn't already
@@ -758,6 +761,7 @@ namespace AdventOfCodeNet10._2024.Day_15
           field[xl, y] = '.';
           field[xr, y] = '.';
         }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
       }
 
       public void Clear()

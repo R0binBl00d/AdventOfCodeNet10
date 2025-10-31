@@ -87,7 +87,6 @@ namespace AdventOfCodeNet10._2015.Day_13
         sequence.Add(person);
       }
       Calculate += OnCalculate;
-      OverallHappyness = new List<int>();
 
       CreateSequence(new List<string>(), new List<string>(sequence), happyness);
 
@@ -95,7 +94,7 @@ namespace AdventOfCodeNet10._2015.Day_13
       return result;
     }
 
-    public List<int> OverallHappyness;
+    public List<int> OverallHappyness = new List<int>();
 
     private void OnCalculate(List<string> combination, object itemtoworkon)
     {
@@ -133,7 +132,9 @@ namespace AdventOfCodeNet10._2015.Day_13
       OverallHappyness.Add(totalHappyness);
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public event DoSomethingWithTheList Calculate;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     private void CreateSequence(List<string> sequence, List<string> modify, object itemToWorkOn)
     {

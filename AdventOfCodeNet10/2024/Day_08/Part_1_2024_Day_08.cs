@@ -166,7 +166,9 @@ namespace AdventOfCodeNet10._2024.Day_08
       return result;
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private char[,] map;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     private void SetAntinodes((int x, int y) reference, List<(int x, int y)> against, ref int[,] antinodeLocations)
     {

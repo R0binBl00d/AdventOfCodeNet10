@@ -168,7 +168,7 @@ namespace AdventOfCodeNet10._2015.Day_22
     public override string Execute()
     {
       string returns = "";
-      Player me = new Player(new Player.PlayerInitial { Hp = 50, Mana = 500 }, true);
+      Player me = new Player(new Player.PlayerInitial { Hp = 50, Mana = 500 }, isWizard: true);
       Player boss = new Player(new Player.PlayerInitial { Hp = 55, DamageAmt = 8 });
 
       PlayAllGames(me, boss);
@@ -181,7 +181,10 @@ namespace AdventOfCodeNet10._2015.Day_22
 
     public void PlayAllGames(Player me, Player boss)
     {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+      // me is wizard, so Spells is never null, compiler just can't figure it out
       for (int i = 0; i < me.Spells.Count; i++)
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
       {
         // Check if the spell is already active
         bool spellMatch = me.ActiveSpells.Any(activeSpell => activeSpell.RemainingDuration > 1 && i == me.Spells.IndexOf(activeSpell));
@@ -225,7 +228,7 @@ namespace AdventOfCodeNet10._2015.Day_22
       public List<int> History { get; private set; }
       public PlayerInitial Initial { get; private set; }
       public bool IsWizard { get; private set; }
-      public List<Spell> Spells { get; private set; }
+      public List<Spell>? Spells { get; private set; }
       public int Hp { get; set; }
       public int Mana { get; set; }
       public int Armor { get; set; }
@@ -271,7 +274,10 @@ namespace AdventOfCodeNet10._2015.Day_22
         }
         else
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+          // Spells is never null for wizards, compiler just can't figure it out
           Spell spell = Spells[spellIdx];
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
           History.Add(spellIdx);
           Spent += spell.Cost;
           Mana -= spell.Cost;
@@ -361,18 +367,18 @@ namespace AdventOfCodeNet10._2015.Day_22
       public class Spell
       {
         public int Cost { get; set; }
-        public Action<Player, Player> Effect { get; set; }
-        public Action<Player, Player> Start { get; set; }
-        public Action<Player, Player> End { get; set; }
+        public Action<Player, Player>? Effect { get; set; }
+        public Action<Player, Player>? Start { get; set; }
+        public Action<Player, Player>? End { get; set; }
         public int Duration { get; set; }
 
         // Additional properties for active spells
         public int RemainingDuration { get; set; }
 
         public Spell(int cost,
-          Action<Player, Player> effect,
-          Action<Player, Player> start = null,
-          Action<Player, Player> end = null,
+          Action<Player, Player>? effect,
+          Action<Player, Player>? start = null,
+          Action<Player, Player>? end = null,
           int duration = 0,
           int remainingDuration = 0)
         {
