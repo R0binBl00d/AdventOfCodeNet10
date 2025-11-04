@@ -275,7 +275,10 @@ namespace AdventOfCodeNet10._2024.Day_12
       {
         patch.perimeter = 0;
         foreach (var p in patch.points)
+        //for (int i = 0; i < patch.points.Count; i++)
         {
+          //var p = patch.points[i];
+
           if (patch.points.Contains(new LongPoint(p.x, p.y - 1)))
           {
             patch.perimeter += 0;
@@ -284,6 +287,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           {
             patch.perimeter += 1;
             p.tag |= 0x01; // top
+            //patch.points[i] = p with { tag = p.tag | 0x01 }; // top
           }
           if (patch.points.Contains(new LongPoint(p.x + 1, p.y)))
           {
@@ -293,6 +297,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           {
             patch.perimeter += 1;
             p.tag |= 0x02; // right
+            //patch.points[i] = p with { tag = p.tag | 0x02 }; // right
           }
           if (patch.points.Contains(new LongPoint(p.x, p.y + 1)))
           {
@@ -302,6 +307,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           {
             patch.perimeter += 1;
             p.tag |= 0x04; // bottom
+            //patch.points[i] = p with { tag = p.tag | 0x04 }; // bottom
           }
           if (patch.points.Contains(new LongPoint(p.x - 1, p.y)))
           {
@@ -311,6 +317,7 @@ namespace AdventOfCodeNet10._2024.Day_12
           {
             patch.perimeter += 1;
             p.tag |= 0x08; // left
+            //patch.points[i] = p with { tag = p.tag | 0x08 }; // left
           }
         }
       }

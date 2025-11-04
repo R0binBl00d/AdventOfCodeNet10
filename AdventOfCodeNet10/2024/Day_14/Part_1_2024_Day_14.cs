@@ -193,6 +193,23 @@ namespace AdventOfCodeNet10._2024.Day_14
           if (robot.pos.y < 0) robot.pos.y += grid.y;
           if (robot.pos.y >= grid.y) robot.pos.y -= grid.y;
         }
+        //for (int r = 0; r < robots.Count; r++)
+        //{
+        //  var robot = robots[r];
+        //  robots[r] = (robot.pos with
+        //  {
+        //    x =
+        //      (robot.pos.x + robot.vel.x) < 0 ? robot.pos.x + grid.x :      // if less than 0, wrap to other side
+        //      (robot.pos.x + robot.vel.x) >= grid.x ? robot.pos.x - grid.x :// else if greater than grid, wrap to other side
+        //      robot.pos.x + robot.vel.x                                     // else normal move
+        //  } with
+        //  {
+        //    y =
+        //      (robot.pos.y + robot.vel.y) < 0 ? robot.pos.y + grid.y :      // if less than 0, wrap to other side
+        //      (robot.pos.y >= grid.y) ? robot.pos.y - grid.y :              // else if greater than grid, wrap to other side
+        //      robot.pos.y + robot.vel.y                                     // else normal move
+        //  }, robot.vel);
+        //}
       }
 
       //split into quadrants
@@ -212,7 +229,7 @@ namespace AdventOfCodeNet10._2024.Day_14
             //Add to Q1 (tl)
             totalCountQ[0]++;
           }
-          else if (robot.pos.x.InRange(q2_starts_x , grid.x, IncludeBounds.Lower))
+          else if (robot.pos.x.InRange(q2_starts_x, grid.x, IncludeBounds.Lower))
           {
             //Add to Q2 (tr)
             totalCountQ[1]++;

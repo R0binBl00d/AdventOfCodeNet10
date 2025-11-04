@@ -135,7 +135,7 @@ Your puzzle answer was 6516.
     /// </summary>
     /// <returns>
     /// 6515 too low
-	/// 6516
+    /// 6516
     /// </returns>
     public override string Execute()
     {
@@ -163,7 +163,7 @@ Your puzzle answer was 6516.
       }
 
       var dict = new Dictionary<long, (double, List<LongPoint>)>();
-      for(long i=1; i<30000; i++)
+      for (long i = 1; i < 30000; i++)
       {
         //Advance Robots
         foreach (var robot in robots)
@@ -176,7 +176,23 @@ Your puzzle answer was 6516.
           if (robot.pos.y < 0) robot.pos.y += grid.y;
           if (robot.pos.y >= grid.y) robot.pos.y -= grid.y;
         }
-
+        //for (int r = 0; r < robots.Count; r++)
+        //{
+        //  var robot = robots[r];
+        //  robots[r] = (robot.pos with
+        //  {
+        //    x =
+        //      (robot.pos.x + robot.vel.x) < 0 ? robot.pos.x + grid.x :      // if less than 0, wrap to other side
+        //      (robot.pos.x + robot.vel.x) >= grid.x ? robot.pos.x - grid.x :// else if greater than grid, wrap to other side
+        //      robot.pos.x + robot.vel.x                                     // else normal move
+        //  } with
+        //  {
+        //    y =
+        //      (robot.pos.y + robot.vel.y) < 0 ? robot.pos.y + grid.y :      // if less than 0, wrap to other side
+        //      (robot.pos.y >= grid.y) ? robot.pos.y - grid.y :              // else if greater than grid, wrap to other side
+        //      robot.pos.y + robot.vel.y                                     // else normal move
+        //  }, robot.vel);
+        //}
         dict.Add(i, CalculateMinDistanceToAverageY(ref robots));
       }
 
@@ -194,7 +210,7 @@ Your puzzle answer was 6516.
       return result;
     }
 
-    private (double, List<LongPoint> ) CalculateMinDistanceToAverageY(ref List<(LongPoint pos, LongPoint vel)> robots)
+    private (double, List<LongPoint>) CalculateMinDistanceToAverageY(ref List<(LongPoint pos, LongPoint vel)> robots)
     {
       double averageX = (double)robots.Sum(r => r.pos.x) / (double)robots.Count;
       double varianceX = robots.Sum(r => Math.Pow(r.pos.x - averageX, 2)) / (robots.Count - 1);
@@ -214,7 +230,7 @@ Your puzzle answer was 6516.
       (double, List<LongPoint>) ret = (stdVariation, tmpList);
       return ret;
     }
-    
+
 
     private void DebugDrawMap(ref List<LongPoint> robots, ref LongPoint grid)
     {

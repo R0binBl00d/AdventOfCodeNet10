@@ -25,7 +25,7 @@ namespace AdventOfCodeNet10._2017.Day_01
   //}
   #endregion Alternative Definitions
 
-  #region 2. Define the extension container for the underlying type (C# 10-13) // no Properties possible !!
+  #region Define the extension container for the underlying type (C# 10-13) // no Properties possible !!
   //public static class CardExtension
   //{
   //  // The C# compiler sees 'Card' as '(string Rank, int Number, string Color, List<int> CurrentHand)'
