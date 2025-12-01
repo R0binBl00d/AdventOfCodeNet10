@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace AdventOfCodeNet10._2025.Day_01
 {
   internal class Part_1_2025_Day_01 : Days
@@ -94,6 +96,7 @@ namespace AdventOfCodeNet10._2025.Day_01
     /// <returns>
     /// password in this example is 3
     /// 273 -> too low
+    /// 1029 -> because we rotate several hundreds at a time
     /// </returns>
     public override string Execute()
     {
@@ -117,19 +120,32 @@ namespace AdventOfCodeNet10._2025.Day_01
             dialPosition += distance;
             if (dialPosition > 99)
             {
-              dialPosition -= 100;
+              dialPosition %= 100;
             }
             break;
           case 'L':
             dialPosition -= distance;
             if (dialPosition < 0)
             {
-              dialPosition += 100;
+              dialPosition %= 100;
+              if (dialPosition < 0)
+              {
+                dialPosition += 100;
+              }
             }
             break;
+          default:
+            throw new Exception("Invalid direction");
         }
 
-        if(dialPosition == 0)
+        // sanity check:
+        if (dialPosition < 0 || dialPosition > 99)
+        {
+          Debugger.Break();
+          throw new Exception("Dial position out of range");
+        }
+
+        if (dialPosition == 0)
         {
           totalCount++;
         }
