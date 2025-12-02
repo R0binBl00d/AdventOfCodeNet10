@@ -17,11 +17,13 @@
   /// <param name="x"></param>
   /// <param name="y"></param>
   /// <param name="tag"></param>
-  public record LongPoint(long x, long y, int tag = 0)
+  public class LongPoint(long x, long y, object? tag)
   {
+    public LongPoint(long x, long y) : this(x, y, 0) { }
+
     public long x { get; set; } = x;
     public long y { get; set; } = y;
-    public int tag { get; set; } = tag;
+    public object? tag { get; set; } = tag;
 
     // add an additional Deconstruct method to ignore the tag field
     // one already exists automatically that includes all fields because this is a record
