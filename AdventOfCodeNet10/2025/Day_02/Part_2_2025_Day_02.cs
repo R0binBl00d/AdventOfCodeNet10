@@ -122,7 +122,7 @@ namespace AdventOfCodeNet10._2025.Day_02
       //Debug.WriteLine($"");
 
       result = wrongIDs.Sum().ToString();
-      Debugger.Break();
+      //Debugger.Break();
       return result;
     }
 

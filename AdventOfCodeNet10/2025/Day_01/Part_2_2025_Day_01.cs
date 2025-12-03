@@ -209,7 +209,7 @@ namespace AdventOfCodeNet10._2025.Day_01
               {
                 // nothing
               }
-              //  dial at 99 and goes R 102 would count 2 times - but every R >= 100 counts passes through zero 
+              // dial at 99 and goes R 102 would count 2 times - but every R >= 100 counts passes through zero 
               // so don't bother checking passedTheZero here
               else if (distance >= 100)
               {
@@ -251,7 +251,7 @@ namespace AdventOfCodeNet10._2025.Day_01
               // zero from zero in 100 steps is already 1 !!!
               totalCount += (distance / 100);
             }
-            else if (startsAtZero & !endAtZero)
+            else if (startsAtZero && !endAtZero)
             {
               totalCount += (distance / 100);
             }
@@ -259,7 +259,7 @@ namespace AdventOfCodeNet10._2025.Day_01
             {
               totalCount += (distance / 100) + 1;
             }
-            else if (!startsAtZero & !endAtZero)
+            else if (!startsAtZero && !endAtZero)
             {
               if (passedTheZero && (distance < 100))
               {
