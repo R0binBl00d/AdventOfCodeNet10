@@ -25,6 +25,8 @@
     public long y { get; set; } = y;
     public object? tag { get; set; } = tag;
 
+    public static LongPoint Default => new LongPoint(0, 0);
+
     // add an additional Deconstruct method to ignore the tag field
     // one already exists automatically that includes all fields because this is a record
     public void Deconstruct(out long X, out long Y)

@@ -218,7 +218,7 @@ namespace AdventOfCodeNet10
       catch
       {
         resTestExample = "could not execute";
-        //throw;
+        throw;
       }
 
       day.Init(input);
