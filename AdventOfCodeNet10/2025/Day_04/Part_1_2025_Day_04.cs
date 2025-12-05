@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using AdventOfCodeNet10.Extensions;
+
 namespace AdventOfCodeNet10._2025.Day_04
 {
   internal class Part_1_2025_Day_04 : Days
@@ -62,27 +65,40 @@ namespace AdventOfCodeNet10._2025.Day_04
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 1467
     /// </returns>
     public override string Execute()
     {
       string result = "";
       long totalCount = 0;
 
-      //
-      // Automatically imported Text !!
-      //
-      // This code is running twice:
-      //
-      // First (is a try run, no-one really cares if it works)
-      //   with the content of the Test-Example-Input_2025_Day_04.txt already stored in "Lines"
-      //
-      // Second -> THE REAL TEST !! <-
-      // with the content of the Input_2025_Day_04.txt already stored in "Lines"
-      //
-      foreach (var line in Lines)
+      MapOrGrid map = new MapOrGrid(Lines[0].Length, Lines.Count);
+      map.SetTiles(Lines);
+
+      //List<LongPoint> paperRollsHeCanAccess = new List<LongPoint>();
+      
+      foreach ((LongPoint, char) tile in map.TilesList)
       {
-        totalCount++;
+        if (tile.Item2 == '.') continue;
+        if (tile.Item2 != '@') Debugger.Break();
+
+        //map.GetNeighborsIncludingDiagonals(tile.Item1)
+        //  .Aggregate(0, (i, point) => map.GetTile(point) == '@' ? i + 1 : i);
+        var count = map.GetNeighborsIncludingDiagonals(tile.Item1)
+          .Count(point => map.GetTile(point) == '@');
+
+        if (count <= 3) totalCount++;
+
+        //List<LongPoint> temp = map.GetNeighborsIncludingDiagonals(tile.Item1)
+        //  .Where(point => map.GetTile(point) == '.')
+        //  .ToList();
+
+        //foreach (var longPoint in temp)
+        //{
+        //  if(!paperRollsHeCanAccess.Contains(longPoint))
+        //    paperRollsHeCanAccess.Add(longPoint);
+        //}
+
       }
       result = totalCount.ToString();
       return result;

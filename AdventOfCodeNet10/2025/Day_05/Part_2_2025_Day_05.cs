@@ -122,7 +122,7 @@ namespace AdventOfCodeNet10._2025.Day_05
       {
         var currentRange = freshRanges[i];
         
-        var previousRange = mergedRanges.Peek(); // [mergedRanges.Count - 1]; //mergedRanges[^1];
+        var previousRange = mergedRanges.Peek(); // mergedRanges[mergedRanges.Count - 1]; //mergedRanges[^1];
 
         // check if the current range overlaps or is adjacent to the last merged range
         if (previousRange.end + 1 >= currentRange.start)
