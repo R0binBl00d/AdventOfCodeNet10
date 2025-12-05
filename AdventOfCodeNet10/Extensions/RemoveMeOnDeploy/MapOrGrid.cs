@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using AdventOfCodeNet10.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,8 +22,13 @@ using System.Diagnostics;
 
 internal class MapOrGrid
 {
-  public long Width { get; }
-  public long Height { get; }
+  private int width;
+  private int height;
+
+  public int Width => width;
+  public int Height => height;
+
+  public char[,] Tiles { get; set; }
 
   public LongPoint Location { get; set; }
 
@@ -34,8 +40,10 @@ internal class MapOrGrid
 
   public MapOrGrid(long width, long height)
   {
-    this.Width = width;
-    this.Height = height;
+    this.width = (int)width;
+    this.height = (int)height;
+
+    Tiles = new char[width, height];
   }
 
   public MapOrGrid(long width, long height, LongPoint startPosition, LongPoint endPosition) :
@@ -69,6 +77,96 @@ internal class MapOrGrid
   public bool IsValidLocation(LongPoint point)
   {
     return point.x >= 0 && point.x < this.Width && point.y >= 0 && point.y < this.Height;
+  }
+
+  public void InitializeMap(List<string> map)
+  {
+    if (map == null || !map.Any())
+    {
+      throw new ArgumentException("Map cannot be null or empty.", nameof(map));
+    }
+
+    this.height = map.Count;
+    this.width = map[0].Length;
+
+    SetTiles(map);
+  }
+
+  /// <summary>
+  /// Gets the total number of units represented by the width and height.
+  /// </summary>
+  public long Size => this.Width * this.Height;
+
+  public bool SetTiles(List<string> map)
+  {
+    if (map == null || !map.Any())
+    {
+      return false;
+    }
+
+    this.Tiles = new char[this.Width, this.Height];
+
+
+    if (map.Count != this.Height)
+    {
+      // The input map does not match the specified width
+      throw new ArgumentException($"List has an incorrect number of rows.\r\nExpected {this.Width}, got {map.Count}.\r\nIf this was intensionally, try InitializeMap instead",
+        nameof(map));
+      return false;
+    }
+
+    for (long y = 0; y < this.Height; y++)
+    {
+      var row = map[(int)y];
+      if (row.Length != this.Width)
+      {
+        // The input map does not match the specified width
+        throw new ArgumentException($"Row {y} has an incorrect length.\r\nExpected {this.Width}, got {row.Length}.\r\nIf this was intensionally, try InitializeMap instead",
+          nameof(map));
+        return false;
+      }
+
+      for (long x = 0; x < this.Width; x++)
+      {
+        this.Tiles[x, y] = row[(int)x];
+      }
+    }
+
+    return true;
+  }
+
+  public IEnumerable<(LongPoint, char)> TilesList
+  {
+    get
+    {
+      for (long y = 0; y < this.Height; y++)
+      {
+        for (long x = 0; x < this.Width; x++)
+        {
+          yield return (new LongPoint(x, y), this.Tiles[(int)x, (int)y]);
+        }
+      }
+    }
+  }
+
+  public char GetTile(LongPoint point)
+  {
+    if (!IsValidLocation(point))
+    {
+      throw new ArgumentOutOfRangeException(nameof(point), "Point is outside the grid boundaries.");
+    }
+
+    return this.Tiles[(int)point.x, (int)point.y];
+  }
+
+  public void SetTile(LongPoint point, char tile)
+  {
+    if (!IsValidLocation(point))
+    {
+      throw new ArgumentOutOfRangeException(nameof(point), "Point is outside the grid boundaries.");
+    }
+
+    this.Tiles[(int)point.x, (int)point.y] = tile;
   }
 
   #endregion Controls
@@ -144,7 +242,7 @@ internal class MapOrGrid
         neighbors.Add(wrappedNeighbor);
       }
     }
-    
+
     // sanity check, default should be 4 cardinal
     if (PacManMode)
     {
@@ -188,7 +286,7 @@ internal class MapOrGrid
 
     // Add the cardinal neighbors as well
     neighbors.AddRange(GetNeighbors(point, PacManMode));
-    
+
     // sanity check, default should be 4 cardinal + 4 diagonal = 8 total
     if (PacManMode)
     {
@@ -199,14 +297,14 @@ internal class MapOrGrid
       // it goes from 3 in corners, 5 on borders to 8 in the middle
       if (neighbors.Count < 3 || neighbors.Count > 8) Debugger.Break();
     }
-    
+
     return neighbors;
   }
 
   #endregion Neighbors
 
   #region Move Methods
-  
+
   /// <summary>
   /// PacManMode makes the movement wrap around the edges
   /// otherwise it does not move if it would go out of bounds
@@ -288,9 +386,4 @@ internal class MapOrGrid
   }
 
   #endregion Move Methods
-
-  /// <summary>
-  /// Gets the total number of units represented by the width and height.
-  /// </summary>
-  public long Size => this.Width * this.Height;
 }
