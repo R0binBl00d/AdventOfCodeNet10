@@ -207,7 +207,7 @@ namespace AdventOfCodeNet10._2025.Day_04
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 8484
     /// </returns>
     public override string Execute()
     {
@@ -219,29 +219,43 @@ namespace AdventOfCodeNet10._2025.Day_04
 
       //List<LongPoint> paperRollsHeCanAccess = new List<LongPoint>();
 
-      foreach ((LongPoint, char) tile in map.TilesList)
+      bool removed = false;
+      var itemsToRemove = new List<LongPoint>();
+      
+      do
       {
-        if (tile.Item2 == '.') continue;
-        if (tile.Item2 != '@') Debugger.Break();
+        removed = false; // reset for this round
+        itemsToRemove.Clear();
+        
+        foreach ((LongPoint, char) tile in map.TilesList)
+        {
+          if (tile.Item2 == '.') continue;
+          if (tile.Item2 != '@') Debugger.Break();
 
-        //map.GetNeighborsIncludingDiagonals(tile.Item1)
-        //  .Aggregate(0, (i, point) => map.GetTile(point) == '@' ? i + 1 : i);
-        var count = map.GetNeighborsIncludingDiagonals(tile.Item1)
-          .Count(point => map.GetTile(point) == '@');
+          //map.GetNeighborsIncludingDiagonals(tile.Item1)
+          //  .Aggregate(0, (i, point) => map.GetTile(point) == '@' ? i + 1 : i);
+          var neighbors = map.GetNeighborsIncludingDiagonals(tile.Item1);
+            
+          int count = neighbors.Count(point => map.GetTile(point) == '@');
 
-        if (count <= 3) totalCount++;
+          if (count <= 3)
+          {
+            //map.SetTile(tile.Item1, '.');
+            itemsToRemove.Add(tile.Item1);
+            totalCount++;
+            removed = true; // we removed at least one this round
+          }
+        }
 
-        //List<LongPoint> temp = map.GetNeighborsIncludingDiagonals(tile.Item1)
-        //  .Where(point => map.GetTile(point) == '.')
-        //  .ToList();
+        //map.PlotTheMapUsingTiles();
+        foreach (var point in itemsToRemove)
+        {
+          map.SetTile(point, '.');
+        }
+        //map.PlotTheMapUsingTiles();
 
-        //foreach (var longPoint in temp)
-        //{
-        //  if(!paperRollsHeCanAccess.Contains(longPoint))
-        //    paperRollsHeCanAccess.Add(longPoint);
-        //}
+      } while (removed);
 
-      }
       result = totalCount.ToString();
       return result;
     }
