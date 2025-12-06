@@ -3,6 +3,7 @@ using System.Collections;
 using AdventOfCodeNet10.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 /// Define the 'Card' as a global using alias for a tuple
 /// This needs to be at the top of the file
@@ -148,6 +149,25 @@ internal class MapOrGrid
       }
     }
   }
+  
+  public void PlotTheMapUsingTiles()
+  {
+    StringBuilder sb = new StringBuilder();
+    
+    for (var y = 0; y < Height; y++)
+    {
+      for (var x = 0; x < Width; x++)
+      {
+        var point = new LongPoint(x, y);
+        var tile = GetTile(point);
+        sb.Append(tile);
+      }
+      sb.AppendLine();
+    }
+    sb.AppendLine();
+    Debug.Write(sb.ToString());
+    sb.Clear();
+  }  
 
   public char GetTile(LongPoint point)
   {
