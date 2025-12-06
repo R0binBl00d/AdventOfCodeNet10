@@ -5,31 +5,98 @@ namespace AdventOfCodeNet10._2025.Day_06
     /// <summary>
     /*
     https://adventofcode.com/2025/day/6
+    --- Day 6: Trash Compactor ---
+    After helping the Elves in the kitchen, you were taking a break and helping
+    them re-enact a movie scene when you over-enthusiastically jumped into the
+    garbage chute!
+    
+    A brief fall later, you find yourself in a garbage smasher. Unfortunately, the
+    door's been magnetically sealed.
+    
+    As you try to find a way out, you are approached by a family of cephalopods!
+    They're pretty sure they can get the door open, but it will take some time.
+    While you wait, they're curious if you can help the youngest cephalopod with
+    her math homework.
+    
+    Cephalopod math doesn't look that different from normal math. The math
+    worksheet (your puzzle input) consists of a list of problems; each problem has
+    a group of numbers that need to be either added (+) or multiplied (*) together.
+    
+    However, the problems are arranged a little strangely; they seem to be
+    presented next to each other in a very long horizontal list. For example:
+    
+    123 328  51 64
+    45 64  387 23
+    6 98  215 314
+    *   +   *   +
+    Each problem's numbers are arranged vertically; at the bottom of the problem is
+    the symbol for the operation that needs to be performed. Problems are separated
+    by a full column of only spaces. The left/right alignment of numbers within
+    each problem can be ignored.
+    
+    So, this worksheet contains four problems:
+    
+    123 * 45 * 6 = 33210
+    328 + 64 + 98 = 490
+    51 * 387 * 215 = 4243455
+    64 + 23 + 314 = 401
+    To check their work, cephalopod students are given the grand total of adding
+    together all of the answers to the individual problems. In this worksheet, the
+    grand total is 33210 + 490 + 4243455 + 401 = 4277556.
+    
+    Of course, the actual worksheet is much wider. You'll need to make sure to
+    unroll it completely so that you can read the problems clearly.
+    
+    Solve the problems on the math worksheet. What is the grand total found by
+    adding together all of the answers to the individual problems?
     */
     /// </summary>
     /// <returns>
-    /// 
+    /// 5784380717354
     /// </returns>
     public override string Execute()
     {
       string result = "";
       long totalCount = 0;
 
-      //
-      // Automatically imported Text !!
-      //
-      // This code is running twice:
-      //
-      // First (is a try run, no-one really cares if it works)
-      //   with the content of the Test-Example-Input_2025_Day_06.txt already stored in "Lines"
-      //
-      // Second -> THE REAL TEST !! <-
-      // with the content of the Input_2025_Day_06.txt already stored in "Lines"
-      //
+      // get Input
+      string[] operators = Array.Empty<string>();
+      var numbers = new List<List<long>>();
+
       foreach (var line in Lines)
       {
-        totalCount++;
+        if (line.ContainsAny(['+', '*']))
+        {
+          operators = line.Split([' '], StringSplitOptions.RemoveEmptyEntries);
+        }
+        else
+        {
+          numbers.Add(new List<long>());
+          foreach (var n in line.Split([' '], StringSplitOptions.RemoveEmptyEntries))
+          {
+            numbers.Last().Add(long.Parse(n));
+          }
+        }
       }
+        
+      for (int i = 0; i < operators.Length; i++)
+      {
+        long currentProblemResult = numbers[0][i];
+        for (int j = 1; j < numbers.Count; j++)
+        {
+          if (operators[i] == "+")
+          {
+            currentProblemResult += numbers[j][i];
+          }
+          else if (operators[i] == "*")
+          {
+            currentProblemResult *= numbers[j][i];
+          }
+        }
+
+        totalCount += currentProblemResult;
+      }
+      
       result = totalCount.ToString();
       return result;
     }

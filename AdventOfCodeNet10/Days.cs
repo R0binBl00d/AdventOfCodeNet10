@@ -5,6 +5,7 @@ namespace AdventOfCodeNet10
   public abstract class Days
   {
     public required List<string> Lines;
+    public required List<string> LinesRaw;
     private StringBuilder sb = null!;
 
     public void Init(string input)
@@ -19,6 +20,7 @@ namespace AdventOfCodeNet10
         }
       }
 
+      #region traditional Lines
       List<string> temp = sb.ToString().Split(new char[] { '\r', '\n' },
         StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
@@ -32,6 +34,14 @@ namespace AdventOfCodeNet10
         Lines.Add(newTrim);
       }
       temp.Clear();
+      #endregion traditional Lines
+
+      #region Raw not trimmed Lines
+
+      LinesRaw = sb.ToString().Split(new char[] { '\r', '\n' }).ToList<string>();
+
+      #endregion Raw not trimmed Lines
+
       sb.Clear();
       GC.Collect(GC.MaxGeneration, GCCollectionMode.Optimized, false);
     }
